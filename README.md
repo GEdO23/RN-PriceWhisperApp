@@ -1,8 +1,6 @@
-<div align="center">
-  <img src="https://github.com/om-corp/PriceWhisper-App/blob/build/assets/icons/pricewhisper-logo-color_white.png" height=100 />
-</div>
+<img align="left" src="https://github.com/om-corp/PriceWhisper-App/blob/build/assets/icons/pricewhisper-logo-color_white.png" height=80 />
 
-<h1 align="center">Price Whisper</h1>
+<h1>Price Whisper</h1>
 
 ## Instalação
 Para instalar o PriceWhisper, siga estas etapas:
