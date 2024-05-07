@@ -1,6 +1,6 @@
 {
-  "name": "the-one",
-  "version": "1.0.0",
+  "name": "pricewhisper-app",
+  "version": "0.0.1",
   "scripts": {
     "android": "expo start --android",
     "lint": "eslint \"**/*.{js,jsx,ts,tsx}\" && prettier -c \"**/*.{js,jsx,ts,tsx,json}\"",

@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "the-one",
-    "slug": "the-one",
-    "version": "1.0.0",
+    "name": "pricewhisper-app",
+    "slug": "pricewhisper-app",
+    "version": "0.0.1",
 
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./src/assets/logo/PriceWhisper/pricewhisper-logo-color_black.png"
     },
 
     "experiments": {
@@ -30,7 +30,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./src/assets/logo/PriceWhisper/pricewhisper-logo-color_black.png",
         "backgroundColor": "#ffffff"
       }
     }
