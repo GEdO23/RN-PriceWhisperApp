@@ -1,5 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { BackButton } from '~/components/BackButton';
 import { Cadastro } from '~/screens/Cadastro';
 import { Inicio } from '~/screens/Inicio';
 import { Login } from '~/screens/Login';
@@ -21,10 +22,28 @@ const Stack = createStackNavigator<RootStackParamList>();
 export default function RootStack() {
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="Inicio">
-                <Stack.Screen name="Inicio" component={Inicio} />
-                <Stack.Screen name="Cadastro" component={Cadastro} />
-                <Stack.Screen name="Login" component={Login} />
+            <Stack.Navigator initialRouteName="Inicio" >
+                <Stack.Screen
+                    name="Inicio"
+                    component={Inicio}
+                    options={{
+                        headerShown: false
+                    }}
+                />
+                <Stack.Screen
+                    name="Cadastro"
+                    component={Cadastro}
+                    options={({ navigation }) => ({
+                        headerLeft: () => <BackButton onPress={navigation.goBack} />
+                    })}
+                />
+                <Stack.Screen
+                    name="Login"
+                    component={Login}
+                    options={({ navigation }) => ({
+                        headerLeft: () => <BackButton onPress={navigation.goBack} />
+                    })}
+                />
             </Stack.Navigator>
         </NavigationContainer>
     );
