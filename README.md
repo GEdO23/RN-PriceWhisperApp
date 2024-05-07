@@ -1,6 +1,8 @@
-# PriceWhisper
+<div align="center">
+  <img src="https://github.com/om-corp/PriceWhisper-App/blob/build/assets/icons/pricewhisper-logo-color_white.png" height=100 />
+</div>
 
-O PriceWhisper é uma ferramenta estratégica para empresas de varejo, projetada para oferecer uma análise precisa e em tempo real do preço de cada produto em seu catálogo. Utilizando um avançado modelo de machine learning, o PriceWhisper não apenas analisa os dados dos produtos, mas também incorpora o histórico de vendas anteriormente registrado, proporcionando insights valiosos para decisões de preços e estratégias de vendas.
+<h1 align="center">Price Whisper</h1>
 
 ## Instalação
 Para instalar o PriceWhisper, siga estas etapas:
