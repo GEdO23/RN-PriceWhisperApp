@@ -1,8 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-native'
 import { Button } from '~/components/Button'
 
 export function Cadastro() {
+    const [nome, setNome] = useState("");
+    const [email, setEmail] = useState("");
+    const [cnpj, setCnpj] = useState("");
+    const [senha, setSenha] = useState("");
+
+    const handleCadastro = () => {
+        alert('Cadastrado com sucesso!');
+    }
+
     return (
         <SafeAreaView style={styles.container}>
             <Text style={styles.title}>PriceWhisper</Text>
@@ -11,22 +20,22 @@ export function Cadastro() {
                 <View style={styles.inputList}>
                     <View style={styles.inputContainer}>
                         <Text style={styles.label}>Nome</Text>
-                        <TextInput placeholder='Seu nome...' style={styles.input} />
+                        <TextInput placeholder='Seu nome...' style={styles.input} value={nome} onChangeText={(text) => setNome(text)} />
                     </View>
 
                     <View style={styles.inputContainer}>
                         <Text style={styles.label}>E-mail</Text>
-                        <TextInput placeholder='Seu e-mail...' style={styles.input} inputMode='email' />
+                        <TextInput placeholder='Seu e-mail...' style={styles.input} value={email} onChangeText={(text) => setEmail(text)} />
                     </View>
 
                     <View style={styles.inputContainer}>
                         <Text style={styles.label}>CNPJ</Text>
-                        <TextInput placeholder='Seu CNPJ...' style={styles.input} />
+                        <TextInput placeholder='Seu CNPJ...' style={styles.input} value={cnpj} onChangeText={(text) => setCnpj(text)} />
                     </View>
 
                     <View style={styles.inputContainer}>
                         <Text style={styles.label}>Senha</Text>
-                        <TextInput placeholder='Sua senha...' style={styles.input} />
+                        <TextInput placeholder='Sua senha...' style={styles.input} value={senha} onChangeText={(text) => setSenha(text)} />
                     </View>
 
                     <View style={styles.inputContainer}>
@@ -35,7 +44,7 @@ export function Cadastro() {
                     </View>
                 </View>
 
-                <Button title='Criar conta' />
+                <Button title='Criar conta' onPress={handleCadastro} disabled />
             </View>
         </SafeAreaView>
     )
