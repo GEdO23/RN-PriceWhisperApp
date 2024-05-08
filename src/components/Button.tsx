@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     padding: 16,
+    width: '100%'
   },
   buttonText: {
     color: '#000000',

@@ -34,6 +34,7 @@ export default function RootStack() {
                     name="Cadastro"
                     component={Cadastro}
                     options={({ navigation }) => ({
+                        headerShown: false,
                         headerLeft: () => <BackButton onPress={navigation.goBack} />
                     })}
                 />
