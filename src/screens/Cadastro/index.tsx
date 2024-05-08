@@ -1,8 +1,15 @@
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useState } from 'react'
 import { SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-native'
 import { Button } from '~/components/Button'
+import { RootStackParamList } from '~/navigation';
+
+type CadastroScreenNavigationProps = StackNavigationProp<RootStackParamList, 'Cadastro'>;
 
 export function Cadastro() {
+    const navigation = useNavigation<CadastroScreenNavigationProps>();
+
     const [nome, setNome] = useState("");
     const [email, setEmail] = useState("");
     const [cnpj, setCnpj] = useState("");
@@ -10,7 +17,7 @@ export function Cadastro() {
     const [confirmSenha, setConfirmSenha] = useState("");
 
     const handleCadastro = () => {
-        alert('Cadastrado com sucesso!');
+        navigation.push('Produtos')
     }
 
     return (
@@ -78,7 +85,10 @@ export function Cadastro() {
                     </View>
                 </View>
 
-                <Button title='Criar conta' onPress={handleCadastro} disabled />
+                <Button
+                    title='Criar conta'
+                    onPress={handleCadastro}
+                />
             </View>
         </SafeAreaView>
     )
