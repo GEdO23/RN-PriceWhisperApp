@@ -7,6 +7,7 @@ export function Cadastro() {
     const [email, setEmail] = useState("");
     const [cnpj, setCnpj] = useState("");
     const [senha, setSenha] = useState("");
+    const [confirmSenha, setConfirmSenha] = useState("");
 
     const handleCadastro = () => {
         alert('Cadastrado com sucesso!');
@@ -20,27 +21,60 @@ export function Cadastro() {
                 <View style={styles.inputList}>
                     <View style={styles.inputContainer}>
                         <Text style={styles.label}>Nome</Text>
-                        <TextInput placeholder='Seu nome...' style={styles.input} value={nome} onChangeText={(text) => setNome(text)} />
+                        <TextInput
+                            placeholder='Seu nome...'
+                            spellCheck={false}
+                            value={nome}
+                            onChangeText={(text) => setNome(text)}
+                            style={styles.input}
+                        />
                     </View>
 
                     <View style={styles.inputContainer}>
                         <Text style={styles.label}>E-mail</Text>
-                        <TextInput placeholder='Seu e-mail...' style={styles.input} value={email} onChangeText={(text) => setEmail(text)} />
+                        <TextInput
+                            placeholder='Seu e-mail...'
+                            spellCheck={false}
+                            value={email}
+                            onChangeText={(text) => setEmail(text)}
+                            style={styles.input}
+                        />
                     </View>
 
                     <View style={styles.inputContainer}>
                         <Text style={styles.label}>CNPJ</Text>
-                        <TextInput placeholder='Seu CNPJ...' style={styles.input} value={cnpj} onChangeText={(text) => setCnpj(text)} />
+                        <TextInput
+                            placeholder='Seu CNPJ...'
+                            secureTextEntry
+                            spellCheck={false}
+                            value={cnpj}
+                            onChangeText={(text) => setCnpj(text)}
+                            style={styles.input}
+                        />
                     </View>
 
                     <View style={styles.inputContainer}>
                         <Text style={styles.label}>Senha</Text>
-                        <TextInput placeholder='Sua senha...' style={styles.input} value={senha} onChangeText={(text) => setSenha(text)} />
+                        <TextInput
+                            placeholder='Sua senha...'
+                            secureTextEntry
+                            spellCheck={false}
+                            value={senha}
+                            onChangeText={(text) => setSenha(text)}
+                            style={styles.input}
+                        />
                     </View>
 
                     <View style={styles.inputContainer}>
                         <Text style={styles.label}>Confirmar senha</Text>
-                        <TextInput placeholder='Confirmar senha...' style={styles.input} />
+                        <TextInput
+                            placeholder='Confirmar senha...'
+                            secureTextEntry
+                            spellCheck={false}
+                            value={confirmSenha}
+                            onChangeText={(text) => setConfirmSenha(text)}
+                            style={styles.input}
+                        />
                     </View>
                 </View>
 
