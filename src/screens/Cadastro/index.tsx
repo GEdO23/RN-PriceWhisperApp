@@ -1,8 +1,10 @@
+import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useState } from 'react'
 import { SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-native'
 import { Button } from '~/components/Button'
+import { SecureInput } from '~/components/SecureInput';
 import { RootStackParamList } from '~/navigation';
 
 type CadastroScreenNavigationProps = StackNavigationProp<RootStackParamList, 'Cadastro'>;
@@ -50,37 +52,28 @@ export function Cadastro() {
 
                     <View style={styles.inputContainer}>
                         <Text style={styles.label}>CNPJ</Text>
-                        <TextInput
-                            placeholder='Seu CNPJ...'
-                            secureTextEntry
-                            spellCheck={false}
+                        <SecureInput
+                            placeholder='Seu cnpj...'
                             value={cnpj}
-                            onChangeText={(text) => setCnpj(text)}
-                            style={styles.input}
+                            setValue={setCnpj}
                         />
                     </View>
 
                     <View style={styles.inputContainer}>
                         <Text style={styles.label}>Senha</Text>
-                        <TextInput
+                        <SecureInput
                             placeholder='Sua senha...'
-                            secureTextEntry
-                            spellCheck={false}
                             value={senha}
-                            onChangeText={(text) => setSenha(text)}
-                            style={styles.input}
+                            setValue={setSenha}
                         />
                     </View>
 
                     <View style={styles.inputContainer}>
                         <Text style={styles.label}>Confirmar senha</Text>
-                        <TextInput
-                            placeholder='Confirmar senha...'
-                            secureTextEntry
-                            spellCheck={false}
+                        <SecureInput
+                            placeholder='Sua senha...'
                             value={confirmSenha}
-                            onChangeText={(text) => setConfirmSenha(text)}
-                            style={styles.input}
+                            setValue={setConfirmSenha}
                         />
                     </View>
                 </View>
@@ -110,6 +103,8 @@ const styles = StyleSheet.create({
         borderBottomColor: '#9D9D9D',
         borderBottomWidth: 1,
         paddingVertical: 5,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
     },
     inputContainer: {
         gap: 10,
