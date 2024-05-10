@@ -3,10 +3,10 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { RootTabParamList } from "~/navigation";
 
-type ProdutosScreenNavigationProps = StackNavigationProp<RootTabParamList, 'Produtos'>;
+type DashboardScreenNavigationProps = StackNavigationProp<RootTabParamList, 'Dashboard'>;
 
-export function Produtos() {
-    const navigation = useNavigation<ProdutosScreenNavigationProps>();
+export function Dashboard() {
+    const navigation = useNavigation<DashboardScreenNavigationProps>();
 
     return (
         <SafeAreaView>
