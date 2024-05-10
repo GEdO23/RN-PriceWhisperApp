@@ -1,10 +1,18 @@
+import { useState } from 'react'
+
+// Navegação
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import React, { useState } from 'react'
+import { RootStackParamList } from '~/navigation';
+
+// Componentes
 import { SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-native'
 import { Button } from '~/components/Button'
 import { Input, SecureInput } from '~/components/Input';
-import { RootStackParamList } from '~/navigation';
+
+// Firebase
+import { FIREBASE_DATABASE } from 'utils/firebase';
+import { addDoc, collection, doc } from 'firebase/firestore';
 
 type CadastroScreenNavigationProps = StackNavigationProp<RootStackParamList, 'Cadastro'>;
 
@@ -17,8 +25,21 @@ export function Cadastro() {
     const [senha, setSenha] = useState("");
     const [confirmSenha, setConfirmSenha] = useState("");
 
-    const handleCadastro = () => {
-        navigation.push('Produtos')
+    const handleCadastro = async () => {
+        try {
+            await addDoc(collection(FIREBASE_DATABASE, 'usuarios'), {
+                nome: nome,
+                email: email,
+                cnpj: cnpj,
+                senha: senha,
+                foto: 'assets/favicon.png',
+                timestamp: new Date(),
+            });
+            navigation.push('App')
+
+        } catch (error) {
+            console.log("Erro ao cadastrar: " + error);
+        }
     }
 
     return (
