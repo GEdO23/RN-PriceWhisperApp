@@ -6,13 +6,14 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '~/navigation';
 
 // Componentes
-import { SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-native'
+import { KeyboardAvoidingView, SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-native'
 import { Button } from '~/components/Button'
 import { Input, SecureInput } from '~/components/Input';
 
 // Firebase
 import { FIREBASE_DATABASE } from 'utils/firebase';
 import { addDoc, collection, doc } from 'firebase/firestore';
+import { ButtonListAtributes, Form, InputListAtributes } from '~/components/Form';
 
 type CadastroScreenNavigationProps = StackNavigationProp<RootStackParamList, 'Cadastro'>;
 
@@ -42,50 +43,61 @@ export function Cadastro() {
         }
     }
 
+    const cadastroForm: InputListAtributes & ButtonListAtributes = {
+        inputList: [
+            {
+                label: 'Nome',
+                placeholder: 'Insira seu nome',
+                value: nome,
+                setValue: setNome,
+                isSecured: false
+            },
+            {
+                label: 'Email',
+                placeholder: 'Insira seu email',
+                value: email,
+                setValue: setEmail,
+                isSecured: false
+            },
+            {
+                label: 'CNPJ',
+                placeholder: 'XX.XXX.XXX/XXXX-XX',
+                value: cnpj,
+                setValue: setCnpj,
+                isSecured: true
+            },
+            {
+                label: 'Senha',
+                placeholder: 'Insira sua senha',
+                value: senha,
+                setValue: setSenha,
+                isSecured: true
+            },
+            {
+                label: 'Confirmar senha',
+                placeholder: 'Repetir senha',
+                value: confirmSenha,
+                setValue: setConfirmSenha,
+                isSecured: true
+            }
+        ],
+        buttonList: [
+            {
+                title: 'Criar conta',
+                onPress: handleCadastro
+            }
+        ]
+    }
+
     return (
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
             <Text style={styles.title}>PriceWhisper</Text>
 
-            <View style={styles.form}>
-                <View style={styles.inputList}>
-                    <Input
-                        label='Nome'
-                        placeholder='Seu nome...'
-                        value={nome}
-                        setValue={setNome}
-                    />
-                    <Input
-                        label='Email'
-                        placeholder='Seu email...'
-                        value={email}
-                        setValue={setEmail}
-                    />
-                    <SecureInput
-                        label='CNPJ'
-                        placeholder='Seu CNPJ...'
-                        value={cnpj}
-                        setValue={setCnpj}
-                    />
-                    <SecureInput
-                        label='Senha'
-                        placeholder='Sua senha...'
-                        value={senha}
-                        setValue={setSenha}
-                    />
-                    <SecureInput
-                        label='Confirmar senha'
-                        placeholder='Confirmar senha...'
-                        value={confirmSenha}
-                        setValue={setConfirmSenha}
-                    />
-                </View>
-
-                <Button
-                    title='Criar conta'
-                    onPress={handleCadastro}
-                />
-            </View>
-        </SafeAreaView>
+            <Form
+                inputList={cadastroForm.inputList}
+                buttonList={cadastroForm.buttonList}
+            />
+        </View>
     )
 }
 
@@ -93,17 +105,9 @@ const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
         backgroundColor: '#FFFFFF',
-        justifyContent: 'center',
         flex: 1,
         paddingBottom: 60,
         paddingHorizontal: 20,
-    },
-    form: {
-        width: '100%',
-    },
-    inputList: {
-        gap: 20,
-        marginBottom: 50,
     },
     title: {
         fontSize: 28,

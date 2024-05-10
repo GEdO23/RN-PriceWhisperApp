@@ -38,6 +38,7 @@ export function SecureInput({ label, value, setValue, placeholder }: Input) {
                     spellCheck={false}
                     value={value}
                     onChangeText={(text) => setValue(text)}
+                    style={styles.textInput}
                 />
                 {
                     showValue ?
@@ -73,4 +74,7 @@ const styles = StyleSheet.create({
     label: {
         fontWeight: '600',
     },
+    textInput: {
+        flex: 1
+    }
 })
