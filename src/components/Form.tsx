@@ -1,6 +1,7 @@
 import { Text, View, StyleSheet } from 'react-native'
 import { Input, SecureInput } from './Input'
 import { Button } from './Button';
+import { Link, LinkParam } from './Link';
 
 
 /**
@@ -69,7 +70,7 @@ export type ButtonListProps = {
  * @param inputList List of inputs that the user will be required to fill
  * @returns A list of `Input` or `SecureInput` components that use the `inputList` data
  */
-export function InputList({ inputList }: InputListProps) {
+export function InputList({ inputList, link }: InputListProps & LinkParam) {
     return (
         <View style={styles.inputList}>
             {
@@ -92,6 +93,11 @@ export function InputList({ inputList }: InputListProps) {
                         />
                     )
                 })
+            }
+            {
+                link ? (
+                    <Link link={link}/>
+                ) : (<></>)
             }
         </View>
     )
@@ -125,10 +131,10 @@ export function ButtonList({ buttonList }: ButtonListProps) {
  * @param buttonList List of available buttons that the user may press
  * @returns The `Form` component
  */
-export function Form({ inputList, buttonList }: InputListProps & ButtonListProps) {
+export function Form({ inputList, buttonList, link }: InputListProps & ButtonListProps & LinkParam) {
     return (
         <View style={styles.form}>
-            <InputList inputList={inputList} />
+            <InputList inputList={inputList} link={link} />
             <ButtonList buttonList={buttonList} />
         </View>
     )

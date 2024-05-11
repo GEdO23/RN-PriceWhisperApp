@@ -3,6 +3,8 @@ import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView, StyleSheet, Text } from 'react-native'
 import { ButtonListProps, Form, InputListProps } from '~/components/Form';
 import { LoginScreenNavigationProps } from '~/navigation/props';
+import { FIREBASE_AUTH } from 'utils/firebase';
+import { LinkParam } from '~/components/Link';
 
 
 /**
@@ -19,10 +21,11 @@ export function LoginScreen() {
     const [cnpj, setCnpj] = useState("");
     const [senha, setSenha] = useState("");
 
-    const handleLogin = async () => {
+    async function handleLogin() {
+
     }
 
-    const cadastroForm: InputListProps & ButtonListProps = {
+    const loginForm: InputListProps & ButtonListProps & LinkParam = {
         inputList: [
             {
                 id: 1,
@@ -47,16 +50,21 @@ export function LoginScreen() {
                 title: 'Entrar',
                 onPress: handleLogin
             }
-        ]
+        ],
+        link: {
+            firstText: 'Não possui uma conta?',
+            linkText: 'Cadastre-se',
+            navigate: () => navigation.navigate('SignupScreen')
+        }
     }
 
     return (
         <SafeAreaView style={styles.container} >
             <Text style={styles.title}>PriceWhisper</Text>
-
             <Form
-                inputList={cadastroForm.inputList}
-                buttonList={cadastroForm.buttonList}
+                inputList={loginForm.inputList}
+                buttonList={loginForm.buttonList}
+                link={loginForm.link}
             />
 
         </SafeAreaView>

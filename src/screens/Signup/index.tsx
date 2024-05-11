@@ -11,6 +11,7 @@ import { SafeAreaView, StyleSheet, Text } from 'react-native'
 import { FIREBASE_DATABASE } from 'utils/firebase';
 import { addDoc, collection } from 'firebase/firestore';
 import { ButtonListProps, Form, InputListProps } from '~/components/Form';
+import { LinkParam } from '~/components/Link';
 
 
 /**
@@ -50,7 +51,7 @@ export function SignupScreen() {
         }
     }
 
-    const cadastroForm: InputListProps & ButtonListProps = {
+    const cadastroForm: InputListProps & ButtonListProps & LinkParam = {
         inputList: [
             {
                 id: 1,
@@ -99,7 +100,12 @@ export function SignupScreen() {
                 title: 'Criar conta',
                 onPress: handleCadastro,
             }
-        ]
+        ],
+        link: {
+            firstText: 'Já possui uma conta?',
+            linkText: 'Entrar',
+            navigate: () => navigation.navigate('LoginScreen')
+        }
     }
 
     return (
@@ -109,6 +115,7 @@ export function SignupScreen() {
             <Form
                 inputList={cadastroForm.inputList}
                 buttonList={cadastroForm.buttonList}
+                link={cadastroForm.link}
             />
         </SafeAreaView>
     )
