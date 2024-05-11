@@ -1,5 +1,5 @@
 import { Text, View, StyleSheet } from 'react-native'
-import { Input, SecureInput } from './Input'
+import { Input, SecureInput, TextBelow } from './Input'
 import { Button } from './Button';
 import { Link, LinkParam } from './Link';
 
@@ -36,7 +36,7 @@ export type InputListProps = {
         value: any;
         setValue: any;
         isSecured: boolean;
-        textBelow?: string;
+        textBelow?: TextBelow;
     }[];
 }
 

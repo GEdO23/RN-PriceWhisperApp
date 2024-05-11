@@ -5,6 +5,7 @@ import { ButtonListProps, Form, InputListProps } from '~/components/Form';
 import { LoginScreenNavigationProps } from '~/navigation/props';
 import { FIREBASE_AUTH } from 'utils/firebase';
 import { LinkParam } from '~/components/Link';
+import { sendPasswordResetEmail, signInWithEmailAndPassword } from 'firebase/auth';
 
 
 /**
@@ -18,22 +19,41 @@ import { LinkParam } from '~/components/Link';
 export function LoginScreen() {
     const navigation = useNavigation<LoginScreenNavigationProps>();
 
-    const [cnpj, setCnpj] = useState("");
+    const auth = FIREBASE_AUTH
+
+    const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
 
     async function handleLogin() {
+        try {
+            const result = await signInWithEmailAndPassword(auth, email, senha);
+            if (result) navigation.push('App');
+            else throw new Error("Erro no result")
 
+        } catch (error) {
+            console.log("Erro ao autenticar usuario: " + error);
+        }
+    }
+
+    async function handleForgotPassword() {
+        try {
+            await sendPasswordResetEmail(auth, email);
+            alert('Foi enviado um email para resetar sua senha')
+
+        } catch (error) {
+            console.log("Erro ao enviar forgotpassword: " + error);
+        }
     }
 
     const loginForm: InputListProps & ButtonListProps & LinkParam = {
         inputList: [
             {
                 id: 1,
-                label: 'CNPJ',
-                placeholder: 'XX.XXX.XXX/XXXX-XX',
-                value: cnpj,
-                setValue: setCnpj,
-                isSecured: true,
+                label: 'Email',
+                placeholder: 'Insira seu email',
+                value: email,
+                setValue: setEmail,
+                isSecured: false,
             },
             {
                 id: 2,
@@ -42,7 +62,10 @@ export function LoginScreen() {
                 value: senha,
                 setValue: setSenha,
                 isSecured: true,
-                textBelow: 'Esqueceu sua senha?'
+                textBelow: {
+                    text: 'Esqueceu sua senha?',
+                    onPress: ''//TODO: sendPasswordResetEmail(auth, email)
+                }
             }
         ],
         buttonList: [

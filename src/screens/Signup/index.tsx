@@ -8,10 +8,10 @@ import { SignupScreenNavigationProps } from '~/navigation/props';
 import { SafeAreaView, StyleSheet, Text } from 'react-native'
 
 // Firebase
-import { FIREBASE_DATABASE } from 'utils/firebase';
-import { addDoc, collection } from 'firebase/firestore';
 import { ButtonListProps, Form, InputListProps } from '~/components/Form';
 import { LinkParam } from '~/components/Link';
+import { FIREBASE_AUTH } from 'utils/firebase';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 
 /**
@@ -28,6 +28,8 @@ import { LinkParam } from '~/components/Link';
 export function SignupScreen() {
     const navigation = useNavigation<SignupScreenNavigationProps>();
 
+    const auth = FIREBASE_AUTH;
+
     const [nome, setNome] = useState("");
     const [email, setEmail] = useState("");
     const [cnpj, setCnpj] = useState("");
@@ -36,15 +38,9 @@ export function SignupScreen() {
 
     async function handleCadastro() {
         try {
-            await addDoc(collection(FIREBASE_DATABASE, 'usuarios'), {
-                nome: nome,
-                email: email,
-                cnpj: cnpj,
-                senha: senha,
-                foto: 'assets/favicon.png',
-                timestamp: new Date(),
-            });
-            navigation.push('App')
+            const result = await createUserWithEmailAndPassword(auth, email, senha);
+            if (result) navigation.push('App');
+            else throw new Error("Erro no result")
 
         } catch (error) {
             console.log("Erro ao cadastrar: " + error);

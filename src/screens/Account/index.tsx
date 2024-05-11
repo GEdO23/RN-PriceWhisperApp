@@ -1,6 +1,8 @@
 import { useNavigation } from "@react-navigation/native";
+import { useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { AccountScreenNavigationProps } from "~/navigation/props";
+import { Button } from "~/components/Button";
+import { AppNavigationProps } from "~/navigation/props";
 
 
 /**
@@ -16,11 +18,23 @@ import { AccountScreenNavigationProps } from "~/navigation/props";
  * @returns The `AccountScreen`
  */
 export function AccountScreen() {
-    const navigation = useNavigation<AccountScreenNavigationProps>();
+    const navigation = useNavigation<AppNavigationProps>();
+
+    useEffect(() => {
+        // Collect user data
+        async function fetchUserData() {
+            
+        }
+
+
+    })
 
     return (
         <SafeAreaView>
-
+            <Button
+                title="Sair da conta"
+                onPress={() => navigation.navigate('InitialScreen')}
+            />
         </SafeAreaView>
     )
 }

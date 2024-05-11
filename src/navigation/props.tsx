@@ -50,6 +50,13 @@ export type LoginScreenNavigationProps = StackNavigationProp<RootStackParamList,
 
 
 /**
+ * Stack navigation props for the `LoginScreen`
+ * @returns A type which has the `LoginScreen` navigation props
+ */
+export type AppNavigationProps = StackNavigationProp<RootStackParamList, 'App'>;
+
+
+/**
  * Bottom tab navigation props for the `ProductsScreen`
  * @returns A type which has the `ProductsScreen` navigation props
  */
