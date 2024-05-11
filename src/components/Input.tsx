@@ -1,16 +1,16 @@
 
 import { StyleSheet, Text, TextInput, TextInputProps, View } from 'react-native'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Ionicons } from '@expo/vector-icons';
 
-interface Input extends TextInputProps {
+interface InputProps extends TextInputProps {
     label: string;
     placeholder: string;
     value: any;
     setValue: any;
 }
 
-export function Input({ label, value, setValue, placeholder }: Input) {
+function Input({ label, value, setValue, placeholder }: InputProps) {
     return (
         <View style={styles.inputContainer}>
             <Text style={styles.label}>{label}</Text>
@@ -25,7 +25,7 @@ export function Input({ label, value, setValue, placeholder }: Input) {
     )
 }
 
-export function SecureInput({ label, value, setValue, placeholder }: Input) {
+function SecureInput({ label, value, setValue, placeholder }: InputProps) {
     const [showValue, setShowValue] = useState(false);
 
     return (
@@ -78,3 +78,5 @@ const styles = StyleSheet.create({
         flex: 1
     }
 })
+
+export { Input, SecureInput }

@@ -1,24 +1,31 @@
 import { useState } from 'react'
 
-// Navegação
+// Navigation
 import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '~/navigation';
+import { SignupScreenNavigationProps } from '~/navigation/props';
 
-// Componentes
-import { KeyboardAvoidingView, SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-native'
-import { Button } from '~/components/Button'
-import { Input, SecureInput } from '~/components/Input';
+// Components
+import { SafeAreaView, StyleSheet, Text } from 'react-native'
 
 // Firebase
 import { FIREBASE_DATABASE } from 'utils/firebase';
-import { addDoc, collection, doc } from 'firebase/firestore';
-import { ButtonListAtributes, Form, InputListAtributes } from '~/components/Form';
+import { addDoc, collection } from 'firebase/firestore';
+import { ButtonListProps, Form, InputListProps } from '~/components/Form';
 
-type CadastroScreenNavigationProps = StackNavigationProp<RootStackParamList, 'Cadastro'>;
 
-export function Cadastro() {
-    const navigation = useNavigation<CadastroScreenNavigationProps>();
+/**
+ * The `SignupScreen` which allows the user to create a new account #4 #9
+ * 
+ * @requires `username`
+ * @requires `email`
+ * @requires `CRN`
+ * @requires `password`
+ * @requires `repeatPassword`
+ * 
+ * @returns The `SignupScreen`
+ */
+const SignupScreen = () => {
+    const navigation = useNavigation<SignupScreenNavigationProps>();
 
     const [nome, setNome] = useState("");
     const [email, setEmail] = useState("");
@@ -43,7 +50,7 @@ export function Cadastro() {
         }
     }
 
-    const cadastroForm: InputListAtributes & ButtonListAtributes = {
+    const cadastroForm: InputListProps & ButtonListProps = {
         inputList: [
             {
                 label: 'Nome',
@@ -90,14 +97,14 @@ export function Cadastro() {
     }
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <Text style={styles.title}>PriceWhisper</Text>
 
             <Form
                 inputList={cadastroForm.inputList}
                 buttonList={cadastroForm.buttonList}
             />
-        </View>
+        </SafeAreaView>
     )
 }
 
@@ -116,3 +123,5 @@ const styles = StyleSheet.create({
         paddingVertical: 80,
     }
 })
+
+export { SignupScreen }

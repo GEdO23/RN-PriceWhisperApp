@@ -1,17 +1,22 @@
 import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack'
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
 
 // Componentes
 import { Button } from '~/components/Button';
 
 // Navigation
-import { RootStackParamList } from '~/navigation'
+import { InitialScreenNavigationProps } from '~/navigation/props';
 
-type InicioScreenNavigationProps = StackNavigationProp<RootStackParamList, 'Inicio'>;
 
-export function Inicio() {
-    const navigation = useNavigation<InicioScreenNavigationProps>();
+/**
+ * The startup screen, the first screen the user will see #2 #3
+ * 
+ * The user may choose to *log in* or *sign up* a new account #4 #5
+ * 
+ * @returns The `InitialScreen`
+ */
+const InitialScreen = () => {
+    const navigation = useNavigation<InitialScreenNavigationProps>();
 
     return (
         <SafeAreaView style={styles.container}>
@@ -22,12 +27,12 @@ export function Inicio() {
             <View style={styles.buttonList}>
                 <Button
                     title='Entrar'
-                    onPress={() => navigation.push('Login')}
+                    onPress={() => navigation.push('LoginScreen')}
                 />
 
                 <Button
                     title='Criar conta'
-                    onPress={() => navigation.push('Cadastro')}
+                    onPress={() => navigation.push('SignupScreen')}
                 />
             </View>
         </SafeAreaView>
@@ -56,3 +61,5 @@ const styles = StyleSheet.create({
         gap: 20
     }
 });
+
+export { InitialScreen }

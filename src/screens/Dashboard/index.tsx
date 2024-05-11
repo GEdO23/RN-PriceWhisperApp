@@ -1,11 +1,18 @@
 import { useNavigation } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { RootTabParamList } from "~/navigation";
+import { DashboardScreenNavigationProps } from "~/navigation/props";
 
-type DashboardScreenNavigationProps = StackNavigationProp<RootTabParamList, 'Dashboard'>;
 
-export function Dashboard() {
+/**
+ * The `DashboardScreen` which allows the user to see key indicators and metrics about the company `products` #44
+ * 
+ * The user may see:
+ * - `totalRevenue` between a given date
+ * - `salesAmount` of company products
+ * 
+ * @returns The `DashboardScreen`
+ */
+const DashboardScreen = () => {
     const navigation = useNavigation<DashboardScreenNavigationProps>();
 
     return (
@@ -14,3 +21,5 @@ export function Dashboard() {
         </SafeAreaView>
     )
 }
+
+export { DashboardScreen }

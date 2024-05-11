@@ -1,53 +1,43 @@
 import { Ionicons } from '@expo/vector-icons';
-import { IconProps } from '@expo/vector-icons/build/createIconSet';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { useState } from 'react';
-import { BackButton } from '~/components/BackButton';
-import { Cadastro } from '~/screens/Cadastro';
-import { Configuracoes } from '~/screens/Configuracoes';
-import { Dashboard } from '~/screens/Dashboard';
-import { Inicio } from '~/screens/Inicio';
-import { Login } from '~/screens/Login';
-import { Produtos } from '~/screens/Produtos';
-import { Usuario } from '~/screens/Usuario';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-export type RootStackParamList = {
-    Inicio: undefined;
-    Cadastro: undefined;
-    Login: undefined;
+/* SCREENS */
+import { InitialScreen } from '~/screens/Initial';
+import { SignupScreen } from '~/screens/Signup';
+import { LoginScreen } from '~/screens/Login';
+import { ProductsScreen } from '~/screens/Products';
+import { DashboardScreen } from '~/screens/Dashboard';
+import { AccountScreen } from '~/screens/Account';
+import { SettingsScreen } from '~/screens/Settings';
+
+type RootStackParamList = {
+    InitialScreen: undefined;
+    SignupScreen: undefined;
+    LoginScreen: undefined;
     App: undefined;
+    NotificationsScreen: undefined;
 };
 
-export type RootTabParamList = {
-    Configuracoes: undefined;
-    Notificacoes: undefined;
-    Produtos: undefined;
-    Produto: undefined;
-    Dashboard: undefined;
-    Usuario: undefined;
-}
-
-type TabAtributes = {
-    name: keyof (RootTabParamList);
-    component: any;
-    iconName: {
-        'on': any;
-        'off': any;
-    };
+type RootTabParamList = {
+    SettingsScreen: undefined;
+    ProductsScreen: undefined;
+    ProductScreen: undefined;
+    DashboardScreen: undefined;
+    AccountScreen: undefined;
 }
 
 const Stack = createStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator<RootTabParamList>();
 
-export function RootTab() {
 
+const RootTab = () => {
     return (
-        <Tab.Navigator initialRouteName='Produtos'>
+        <Tab.Navigator initialRouteName='ProductsScreen'>
             <Tab.Screen
-                name='Configuracoes'
-                component={Configuracoes}
+                name='SettingsScreen'
+                component={SettingsScreen}
                 options={{
                     tabBarShowLabel: false,
                     tabBarIcon: ({ focused, color, size }) => {
@@ -59,8 +49,8 @@ export function RootTab() {
                 }}
             />
             <Tab.Screen
-                name='Produtos'
-                component={Produtos}
+                name='ProductsScreen'
+                component={ProductsScreen}
                 options={{
                     tabBarShowLabel: false,
                     tabBarIcon: ({ focused, color, size }) => {
@@ -72,8 +62,8 @@ export function RootTab() {
                 }}
             />
             <Tab.Screen
-                name='Dashboard'
-                component={Dashboard}
+                name='DashboardScreen'
+                component={DashboardScreen}
                 options={{
                     tabBarShowLabel: false,
                     tabBarIcon: ({ focused, color, size }) => {
@@ -85,8 +75,8 @@ export function RootTab() {
                 }}
             />
             <Tab.Screen
-                name='Usuario'
-                component={Usuario}
+                name='AccountScreen'
+                component={AccountScreen}
                 options={{
                     tabBarShowLabel: false,
                     tabBarIcon: ({ focused, color, size }) => {
@@ -101,27 +91,27 @@ export function RootTab() {
     )
 }
 
-export default function RootStack() {
+const RootStack = () => {
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="Inicio" >
+            <Stack.Navigator initialRouteName="InitialScreen" >
                 <Stack.Screen
-                    name="Inicio"
-                    component={Inicio}
+                    name="InitialScreen"
+                    component={InitialScreen}
                     options={{
                         headerShown: false
                     }}
                 />
                 <Stack.Screen
-                    name="Cadastro"
-                    component={Cadastro}
+                    name="SignupScreen"
+                    component={SignupScreen}
                     options={{
                         headerShown: false,
                     }}
                 />
                 <Stack.Screen
-                    name="Login"
-                    component={Login}
+                    name="LoginScreen"
+                    component={LoginScreen}
                     options={{
                         headerShown: false,
                     }}
@@ -137,3 +127,5 @@ export default function RootStack() {
         </NavigationContainer>
     );
 }
+
+export { RootStack, RootTab, RootStackParamList, RootTabParamList }

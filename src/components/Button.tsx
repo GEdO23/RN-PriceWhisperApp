@@ -6,7 +6,7 @@ type ButtonProps = {
   title?: string;
 } & TouchableOpacityProps;
 
-export const Button = forwardRef<TouchableOpacity, ButtonProps>(({ onPress, title }, ref) => {
+const Button = forwardRef<TouchableOpacity, ButtonProps>(({ onPress, title }, ref) => {
   return (
     <TouchableOpacity ref={ref} style={styles.button} onPress={onPress}>
       <Text style={styles.buttonText}>{title}</Text>
@@ -31,3 +31,5 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
+
+export { Button }

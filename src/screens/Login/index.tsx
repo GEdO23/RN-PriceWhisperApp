@@ -1,15 +1,19 @@
+import { useState } from 'react'
 import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { addDoc, collection } from 'firebase/firestore';
-import React, { useState } from 'react'
 import { SafeAreaView, StyleSheet, Text } from 'react-native'
-import { FIREBASE_DATABASE } from 'utils/firebase';
-import { ButtonListAtributes, Form, InputListAtributes } from '~/components/Form';
-import { RootStackParamList } from '~/navigation';
+import { ButtonListProps, Form, InputListProps } from '~/components/Form';
+import { LoginScreenNavigationProps } from '~/navigation/props';
 
-type LoginScreenNavigationProps = StackNavigationProp<RootStackParamList, 'Cadastro'>;
 
-export function Login() {
+/**
+ * The `LoginScreen` which allows the user to log in it's account #5
+ * 
+ * @requires `CRN`
+ * @requires `password`
+ * 
+ * @returns The `LoginScreen`
+ */
+const LoginScreen = () => {
     const navigation = useNavigation<LoginScreenNavigationProps>();
 
     const [cnpj, setCnpj] = useState("");
@@ -18,7 +22,7 @@ export function Login() {
     const handleLogin = async () => {
     }
 
-    const cadastroForm: InputListAtributes & ButtonListAtributes = {
+    const cadastroForm: InputListProps & ButtonListProps = {
         inputList: [
             {
                 label: 'CNPJ',
@@ -71,3 +75,5 @@ const styles = StyleSheet.create({
         paddingVertical: 80,
     }
 })
+
+export { LoginScreen }
