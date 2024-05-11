@@ -1,5 +1,6 @@
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList, RootTabParamList } from ".";
+import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 
 
 /**
@@ -24,32 +25,31 @@ type LoginScreenNavigationProps = StackNavigationProp<RootStackParamList, 'Login
 
 
 /**
- * Tab navigation props for the `ProductsScreen`
+ * Bottom tab navigation props for the `ProductsScreen`
  * @returns A type which has the `ProductsScreen` navigation props
  */
-type ProductsScreenNavigationProps = StackNavigationProp<RootTabParamList, 'ProductsScreen'>;
+type ProductsScreenNavigationProps = BottomTabNavigationProp<RootTabParamList, 'ProductsScreen'>;
 
 
 /**
- * Tab navigation props for the `DashboardScreen`
+ * Bottom tab navigation props for the `DashboardScreen`
  * @returns A type which has the `DashboardScreen` navigation props 
  * */
-type DashboardScreenNavigationProps = StackNavigationProp<RootTabParamList, 'DashboardScreen'>;
+type DashboardScreenNavigationProps = BottomTabNavigationProp<RootTabParamList, 'DashboardScreen'>;
 
 
 /**
- * Tab navigation props for the `AccountScreen`
- * 
+ * Bottom tab navigation props for the `AccountScreen`
  * @returns A type which has the `AccountScreen` navigation props
  */
-type AccountScreenNavigationProps = StackNavigationProp<RootTabParamList, 'AccountScreen'>;
+type AccountScreenNavigationProps = BottomTabNavigationProp<RootTabParamList, 'AccountScreen'>;
 
 
 /**
- * Tab navigation props for the `SettingsScreen`
+ * Bottom tab navigation props for the `SettingsScreen`
  * @returns A type which has the `SettingsScreen` navigation props
  */
-type SettingsScreenNavigationProps = StackNavigationProp<RootTabParamList, 'SettingsScreen'>;
+type SettingsScreenNavigationProps = BottomTabNavigationProp<RootTabParamList, 'SettingsScreen'>;
 
 
 /**
