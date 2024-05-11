@@ -25,6 +25,7 @@ function RootTab() {
                 name='SettingsScreen'
                 component={SettingsScreen}
                 options={{
+                    headerTitle: 'Configurações',
                     tabBarShowLabel: false,
                     tabBarIcon: ({ focused, color, size }) => {
                         if (focused) {
@@ -38,6 +39,7 @@ function RootTab() {
                 name='ProductsScreen'
                 component={ProductsScreen}
                 options={{
+                    headerTitle: 'Produtos',
                     tabBarShowLabel: false,
                     tabBarIcon: ({ focused, color, size }) => {
                         if (focused) {
@@ -51,6 +53,7 @@ function RootTab() {
                 name='DashboardScreen'
                 component={DashboardScreen}
                 options={{
+                    headerTitle: 'Dashboard',
                     tabBarShowLabel: false,
                     tabBarIcon: ({ focused, color, size }) => {
                         if (focused) {
@@ -64,6 +67,7 @@ function RootTab() {
                 name='AccountScreen'
                 component={AccountScreen}
                 options={{
+                    headerTitle: 'Perfil',
                     tabBarShowLabel: false,
                     tabBarIcon: ({ focused, color, size }) => {
                         if (focused) {
