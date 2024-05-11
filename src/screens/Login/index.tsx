@@ -33,7 +33,7 @@ export function LoginScreen() {
                 placeholder: 'XX.XXX.XXX/XXXX-XX',
                 value: cnpj,
                 setValue: setCnpj,
-                isSecured: true
+                isSecured: true,
             },
             {
                 id: 2,
@@ -41,7 +41,8 @@ export function LoginScreen() {
                 placeholder: 'Insira sua senha',
                 value: senha,
                 setValue: setSenha,
-                isSecured: true
+                isSecured: true,
+                textBelow: 'Esqueceu sua senha?'
             }
         ],
         buttonList: [

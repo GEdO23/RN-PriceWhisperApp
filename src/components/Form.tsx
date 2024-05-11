@@ -3,7 +3,6 @@ import { Input, SecureInput } from './Input'
 import { Button } from './Button';
 import { Link, LinkParam } from './Link';
 
-
 /**
  * Type of input list props
  * 
@@ -37,6 +36,7 @@ export type InputListProps = {
         value: any;
         setValue: any;
         isSecured: boolean;
+        textBelow?: string;
     }[];
 }
 
@@ -82,6 +82,7 @@ export function InputList({ inputList, link }: InputListProps & LinkParam) {
                             placeholder={item.placeholder}
                             value={item.value}
                             setValue={item.setValue}
+                            textBelow={item.textBelow}
                         />
                     ) : (
                         <SecureInput
@@ -90,6 +91,7 @@ export function InputList({ inputList, link }: InputListProps & LinkParam) {
                             placeholder={item.placeholder}
                             value={item.value}
                             setValue={item.setValue}
+                            textBelow={item.textBelow}
                         />
                     )
                 })

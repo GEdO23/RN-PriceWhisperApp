@@ -1,16 +1,29 @@
 
-import { StyleSheet, Text, TextInput, TextInputProps, View } from 'react-native'
+import { StyleSheet, Text, TextInput, TextInputProps, TouchableOpacity, View } from 'react-native'
 import { useState } from 'react'
 import { Ionicons } from '@expo/vector-icons';
 
-interface InputProps extends TextInputProps {
+export interface InputProps extends TextInputProps {
     label: string;
     placeholder: string;
     value: any;
     setValue: any;
+    textBelow?: string | undefined;
 }
 
-export function Input({ label, value, setValue, placeholder }: InputProps) {
+function TextBelow({ text }: any) {
+    if (text) {
+        return (
+            <TouchableOpacity>
+                <Text style={styles.linkText}>{text}</Text>
+            </TouchableOpacity>
+        )
+    }
+    return null
+}
+
+export function Input({ label, value, setValue, placeholder, textBelow }: InputProps) {
+
     return (
         <View style={styles.inputContainer}>
             <Text style={styles.label}>{label}</Text>
@@ -21,12 +34,29 @@ export function Input({ label, value, setValue, placeholder }: InputProps) {
                 onChangeText={(text) => setValue(text)}
                 style={styles.input}
             />
+            <TextBelow text={textBelow} />
         </View>
     )
 }
 
-export function SecureInput({ label, value, setValue, placeholder }: InputProps) {
+export function SecureInput({ label, value, setValue, placeholder, textBelow }: InputProps) {
     const [showValue, setShowValue] = useState(false);
+
+    function SecretIcon() {
+        return showValue ?
+            <Ionicons
+                size={20}
+                color="#000"
+                name='eye'
+                onPress={() => setShowValue(!showValue)}
+            /> :
+            <Ionicons
+                size={20}
+                color="#9D9D9D"
+                name='eye-off'
+                onPress={() => setShowValue(!showValue)}
+            />
+    }
 
     return (
         <View style={styles.inputContainer}>
@@ -40,22 +70,9 @@ export function SecureInput({ label, value, setValue, placeholder }: InputProps)
                     onChangeText={(text) => setValue(text)}
                     style={styles.textInput}
                 />
-                {
-                    showValue ?
-                        <Ionicons
-                            size={20}
-                            color="#000"
-                            name='eye'
-                            onPress={() => setShowValue(!showValue)}
-                        /> :
-                        <Ionicons
-                            size={20}
-                            color="#9D9D9D"
-                            name='eye-off'
-                            onPress={() => setShowValue(!showValue)}
-                        />
-                }
+                <SecretIcon />
             </View>
+            <TextBelow text={textBelow} />
         </View>
     )
 }
@@ -76,5 +93,9 @@ const styles = StyleSheet.create({
     },
     textInput: {
         flex: 1
+    },
+    linkText: {
+        color: '#9D9D9D',
+        fontWeight: '600'
     }
 })
