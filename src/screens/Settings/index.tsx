@@ -13,7 +13,7 @@ import { SettingsScreenNavigationProps } from "~/navigation/props";
  * 
  * @returns The `SettingsScreen`
  */
-const SettingsScreen = () => {
+export function SettingsScreen() {
     const navigation = useNavigation<SettingsScreenNavigationProps>();
 
     return (
@@ -22,5 +22,3 @@ const SettingsScreen = () => {
         </SafeAreaView>
     )
 }
-
-export { SettingsScreen }

@@ -10,7 +10,7 @@ import { ProductsScreenNavigationProps } from "~/navigation/props";
  * 
  * @returns The `ProductsScreen`
  */
-const ProductsScreen = () => {
+export function ProductsScreen() {
     const navigation = useNavigation<ProductsScreenNavigationProps>();
 
     return (
@@ -19,5 +19,3 @@ const ProductsScreen = () => {
         </SafeAreaView>
     )
 }
-
-export { ProductsScreen }

@@ -15,7 +15,7 @@ import { InitialScreenNavigationProps } from '~/navigation/props';
  * 
  * @returns The `InitialScreen`
  */
-const InitialScreen = () => {
+export function InitialScreen() {
     const navigation = useNavigation<InitialScreenNavigationProps>();
 
     return (
@@ -61,5 +61,3 @@ const styles = StyleSheet.create({
         gap: 20
     }
 });
-
-export { InitialScreen }

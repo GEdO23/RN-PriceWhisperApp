@@ -10,7 +10,7 @@ interface InputProps extends TextInputProps {
     setValue: any;
 }
 
-function Input({ label, value, setValue, placeholder }: InputProps) {
+export function Input({ label, value, setValue, placeholder }: InputProps) {
     return (
         <View style={styles.inputContainer}>
             <Text style={styles.label}>{label}</Text>
@@ -25,7 +25,7 @@ function Input({ label, value, setValue, placeholder }: InputProps) {
     )
 }
 
-function SecureInput({ label, value, setValue, placeholder }: InputProps) {
+export function SecureInput({ label, value, setValue, placeholder }: InputProps) {
     const [showValue, setShowValue] = useState(false);
 
     return (
@@ -78,5 +78,3 @@ const styles = StyleSheet.create({
         flex: 1
     }
 })
-
-export { Input, SecureInput }

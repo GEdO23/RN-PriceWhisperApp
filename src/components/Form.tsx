@@ -28,8 +28,9 @@ import { Button } from './Button';
  *      }
  * ]
  */
-type InputListProps = {
+export type InputListProps = {
     inputList: {
+        id: number;
         label: string;
         placeholder: string;
         value: any;
@@ -55,8 +56,9 @@ type InputListProps = {
  *      }
  * ]
  */
-type ButtonListProps = {
+export type ButtonListProps = {
     buttonList: {
+        id: number;
         title: string;
         onPress: any;
     }[];
@@ -67,13 +69,14 @@ type ButtonListProps = {
  * @param inputList List of inputs that the user will be required to fill
  * @returns A list of `Input` or `SecureInput` components that use the `inputList` data
  */
-const InputList = ({ inputList }: InputListProps) => {
+export function InputList({ inputList }: InputListProps) {
     return (
         <View style={styles.inputList}>
             {
                 inputList.map((item) => {
                     return !item.isSecured ? (
                         <Input
+                            key={item.id}
                             label={item.label}
                             placeholder={item.placeholder}
                             value={item.value}
@@ -81,6 +84,7 @@ const InputList = ({ inputList }: InputListProps) => {
                         />
                     ) : (
                         <SecureInput
+                            key={item.id}
                             label={item.label}
                             placeholder={item.placeholder}
                             value={item.value}
@@ -98,12 +102,13 @@ const InputList = ({ inputList }: InputListProps) => {
  * @param buttonList List of available buttons that the user may press
  * @returns A list of `Button` components that use the `buttonList` data
  */
-const ButtonList = ({ buttonList }: ButtonListProps) => {
+export function ButtonList({ buttonList }: ButtonListProps) {
     return (
         <>
             {
                 buttonList.map((item) => (
                     <Button
+                        key={item.id}
                         title={item.title}
                         onPress={item.onPress}
                     />
@@ -120,7 +125,7 @@ const ButtonList = ({ buttonList }: ButtonListProps) => {
  * @param buttonList List of available buttons that the user may press
  * @returns The `Form` component
  */
-const Form = ({ inputList, buttonList }: InputListProps & ButtonListProps) => {
+export function Form({ inputList, buttonList }: InputListProps & ButtonListProps) {
     return (
         <View style={styles.form}>
             <InputList inputList={inputList} />
@@ -140,5 +145,3 @@ const styles = StyleSheet.create({
         marginBottom: 50,
     }
 })
-
-export { Form, InputListProps, ButtonListProps }

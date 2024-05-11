@@ -13,7 +13,7 @@ import { LoginScreenNavigationProps } from '~/navigation/props';
  * 
  * @returns The `LoginScreen`
  */
-const LoginScreen = () => {
+export function LoginScreen() {
     const navigation = useNavigation<LoginScreenNavigationProps>();
 
     const [cnpj, setCnpj] = useState("");
@@ -25,6 +25,7 @@ const LoginScreen = () => {
     const cadastroForm: InputListProps & ButtonListProps = {
         inputList: [
             {
+                id: 1,
                 label: 'CNPJ',
                 placeholder: 'XX.XXX.XXX/XXXX-XX',
                 value: cnpj,
@@ -32,6 +33,7 @@ const LoginScreen = () => {
                 isSecured: true
             },
             {
+                id: 2,
                 label: 'Senha',
                 placeholder: 'Insira sua senha',
                 value: senha,
@@ -41,6 +43,7 @@ const LoginScreen = () => {
         ],
         buttonList: [
             {
+                id: 1,
                 title: 'Entrar',
                 onPress: handleLogin
             }
@@ -75,5 +78,3 @@ const styles = StyleSheet.create({
         paddingVertical: 80,
     }
 })
-
-export { LoginScreen }

@@ -12,7 +12,7 @@ import { DashboardScreenNavigationProps } from "~/navigation/props";
  * 
  * @returns The `DashboardScreen`
  */
-const DashboardScreen = () => {
+export function DashboardScreen() {
     const navigation = useNavigation<DashboardScreenNavigationProps>();
 
     return (
@@ -21,5 +21,3 @@ const DashboardScreen = () => {
         </SafeAreaView>
     )
 }
-
-export { DashboardScreen }

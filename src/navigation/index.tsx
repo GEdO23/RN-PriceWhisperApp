@@ -2,6 +2,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { RootBottomTabParamList, RootStackParamList } from './props';
+
 
 /* SCREENS */
 import { InitialScreen } from '~/screens/Initial';
@@ -10,29 +12,13 @@ import { LoginScreen } from '~/screens/Login';
 import { ProductsScreen } from '~/screens/Products';
 import { DashboardScreen } from '~/screens/Dashboard';
 import { AccountScreen } from '~/screens/Account';
-import { SettingsScreen } from '~/screens/Settings';
-
-type RootStackParamList = {
-    InitialScreen: undefined;
-    SignupScreen: undefined;
-    LoginScreen: undefined;
-    App: undefined;
-    NotificationsScreen: undefined;
-};
-
-type RootTabParamList = {
-    SettingsScreen: undefined;
-    ProductsScreen: undefined;
-    ProductScreen: undefined;
-    DashboardScreen: undefined;
-    AccountScreen: undefined;
-}
+import { SettingsScreen } from '~/screens/Settings'
 
 const Stack = createStackNavigator<RootStackParamList>();
-const Tab = createBottomTabNavigator<RootTabParamList>();
+const Tab = createBottomTabNavigator<RootBottomTabParamList>();
 
 
-const RootTab = () => {
+function RootTab() {
     return (
         <Tab.Navigator initialRouteName='ProductsScreen'>
             <Tab.Screen
@@ -91,7 +77,7 @@ const RootTab = () => {
     )
 }
 
-const RootStack = () => {
+export function RootStack() {
     return (
         <NavigationContainer>
             <Stack.Navigator initialRouteName="InitialScreen" >
@@ -127,5 +113,3 @@ const RootStack = () => {
         </NavigationContainer>
     );
 }
-
-export { RootStack, RootTab, RootStackParamList, RootTabParamList }

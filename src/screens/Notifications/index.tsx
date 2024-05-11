@@ -8,7 +8,7 @@ import { NotificationsScreenNavigationProps } from "~/navigation/props";
  * 
  * @returns The `NotificationScreen`
  */
-const NotificationScreen = () => {
+export function NotificationScreen() {
     const navigation = useNavigation<NotificationsScreenNavigationProps>();
 
     return (
@@ -17,5 +17,3 @@ const NotificationScreen = () => {
         </SafeAreaView>
     )
 }
-
-export { NotificationScreen }

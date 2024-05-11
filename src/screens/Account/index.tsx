@@ -15,7 +15,7 @@ import { AccountScreenNavigationProps } from "~/navigation/props";
  * 
  * @returns The `AccountScreen`
  */
-const AccountScreen = () => {
+export function AccountScreen() {
     const navigation = useNavigation<AccountScreenNavigationProps>();
 
     return (
@@ -24,5 +24,3 @@ const AccountScreen = () => {
         </SafeAreaView>
     )
 }
-
-export { AccountScreen }

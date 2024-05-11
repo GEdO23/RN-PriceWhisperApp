@@ -24,7 +24,7 @@ import { ButtonListProps, Form, InputListProps } from '~/components/Form';
  * 
  * @returns The `SignupScreen`
  */
-const SignupScreen = () => {
+export function SignupScreen() {
     const navigation = useNavigation<SignupScreenNavigationProps>();
 
     const [nome, setNome] = useState("");
@@ -33,7 +33,7 @@ const SignupScreen = () => {
     const [senha, setSenha] = useState("");
     const [confirmSenha, setConfirmSenha] = useState("");
 
-    const handleCadastro = async () => {
+    async function handleCadastro() {
         try {
             await addDoc(collection(FIREBASE_DATABASE, 'usuarios'), {
                 nome: nome,
@@ -53,45 +53,51 @@ const SignupScreen = () => {
     const cadastroForm: InputListProps & ButtonListProps = {
         inputList: [
             {
+                id: 1,
                 label: 'Nome',
                 placeholder: 'Insira seu nome',
                 value: nome,
                 setValue: setNome,
-                isSecured: false
+                isSecured: false,
             },
             {
+                id: 2,
                 label: 'Email',
                 placeholder: 'Insira seu email',
                 value: email,
                 setValue: setEmail,
-                isSecured: false
+                isSecured: false,
             },
             {
+                id: 3,
                 label: 'CNPJ',
                 placeholder: 'XX.XXX.XXX/XXXX-XX',
                 value: cnpj,
                 setValue: setCnpj,
-                isSecured: true
+                isSecured: true,
             },
             {
+                id: 4,
                 label: 'Senha',
                 placeholder: 'Insira sua senha',
                 value: senha,
                 setValue: setSenha,
-                isSecured: true
+                isSecured: true,
             },
             {
+                id: 5,
                 label: 'Confirmar senha',
                 placeholder: 'Repetir senha',
                 value: confirmSenha,
                 setValue: setConfirmSenha,
-                isSecured: true
+                isSecured: true,
             }
         ],
         buttonList: [
             {
+                id: 1,
                 title: 'Criar conta',
-                onPress: handleCadastro
+                onPress: handleCadastro,
             }
         ]
     }
@@ -123,5 +129,3 @@ const styles = StyleSheet.create({
         paddingVertical: 80,
     }
 })
-
-export { SignupScreen }
