@@ -1,6 +1,6 @@
 import { Text, View, StyleSheet } from 'react-native'
 import { Input, SecureInput, TextBelow } from './Input'
-import { Button } from './Button';
+import { Button, ButtonProps } from './Button';
 import { Link, LinkParam } from './Link';
 
 /**
@@ -58,11 +58,9 @@ export type InputListProps = {
  * ]
  */
 export type ButtonListProps = {
-    buttonList: {
-        id: number;
-        title: string;
-        onPress: any;
-    }[];
+    buttonList: ({
+        buttonId: number;
+    } & ButtonProps)[];
 }
 
 
@@ -98,7 +96,7 @@ export function InputList({ inputList, link }: InputListProps & LinkParam) {
             }
             {
                 link ? (
-                    <Link link={link}/>
+                    <Link link={link} />
                 ) : (<></>)
             }
         </View>
@@ -116,9 +114,14 @@ export function ButtonList({ buttonList }: ButtonListProps) {
             {
                 buttonList.map((item) => (
                     <Button
-                        key={item.id}
+                        key={item.buttonId}
                         title={item.title}
                         onPress={item.onPress}
+                        btnStyle={{
+                            background: item.btnStyle?.background,
+                            border: item.btnStyle?.border,
+                            textColor: item.btnStyle?.textColor,
+                        }}
                     />
                 ))
             }

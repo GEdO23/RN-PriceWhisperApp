@@ -47,39 +47,13 @@ export function LoginScreen() {
 
     const loginForm: InputListProps & ButtonListProps & LinkParam = {
         inputList: [
-            {
-                id: 1,
-                label: 'Email',
-                placeholder: 'Insira seu email',
-                value: email,
-                setValue: setEmail,
-                isSecured: false,
-            },
-            {
-                id: 2,
-                label: 'Senha',
-                placeholder: 'Insira sua senha',
-                value: senha,
-                setValue: setSenha,
-                isSecured: true,
-                textBelow: {
-                    text: 'Esqueceu sua senha?',
-                    onPress: ''//TODO: sendPasswordResetEmail(auth, email)
-                }
-            }
+            { id: 1, label: 'Email', placeholder: 'Insira seu email', value: email, setValue: setEmail, isSecured: false, },
+            { id: 2, label: 'Senha', placeholder: 'Insira sua senha', value: senha, setValue: setSenha, isSecured: true, textBelow: { text: 'Esqueceu sua senha?', onPress: handleForgotPassword } }
         ],
         buttonList: [
-            {
-                id: 1,
-                title: 'Entrar',
-                onPress: handleLogin
-            }
+            { buttonId: 1, title: 'Entrar', onPress: handleLogin, btnStyle: { background: '#EF4023', border: 'transparent', textColor: '#FFFFFF' } }
         ],
-        link: {
-            firstText: 'Não possui uma conta?',
-            linkText: 'Cadastre-se',
-            navigate: () => navigation.navigate('SignupScreen')
-        }
+        link: { firstText: 'Não possui uma conta?', linkText: 'Cadastre-se', navigate: () => navigation.navigate('SignupScreen') }
     }
 
     return (

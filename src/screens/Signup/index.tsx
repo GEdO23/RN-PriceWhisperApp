@@ -49,59 +49,16 @@ export function SignupScreen() {
 
     const cadastroForm: InputListProps & ButtonListProps & LinkParam = {
         inputList: [
-            {
-                id: 1,
-                label: 'Nome',
-                placeholder: 'Insira seu nome',
-                value: nome,
-                setValue: setNome,
-                isSecured: false,
-            },
-            {
-                id: 2,
-                label: 'Email',
-                placeholder: 'Insira seu email',
-                value: email,
-                setValue: setEmail,
-                isSecured: false,
-            },
-            {
-                id: 3,
-                label: 'CNPJ',
-                placeholder: 'XX.XXX.XXX/XXXX-XX',
-                value: cnpj,
-                setValue: setCnpj,
-                isSecured: true,
-            },
-            {
-                id: 4,
-                label: 'Senha',
-                placeholder: 'Insira sua senha',
-                value: senha,
-                setValue: setSenha,
-                isSecured: true,
-            },
-            {
-                id: 5,
-                label: 'Confirmar senha',
-                placeholder: 'Repetir senha',
-                value: confirmSenha,
-                setValue: setConfirmSenha,
-                isSecured: true,
-            }
+            { id: 1, label: 'Nome', placeholder: 'Insira seu nome', value: nome, setValue: setNome, isSecured: false, },
+            { id: 2, label: 'Email', placeholder: 'Insira seu email', value: email, setValue: setEmail, isSecured: false, },
+            { id: 3, label: 'CNPJ', placeholder: 'XX.XXX.XXX/XXXX-XX', value: cnpj, setValue: setCnpj, isSecured: true, },
+            { id: 4, label: 'Senha', placeholder: 'Insira sua senha', value: senha, setValue: setSenha, isSecured: true, },
+            { id: 5, label: 'Confirmar senha', placeholder: 'Repetir senha', value: confirmSenha, setValue: setConfirmSenha, isSecured: true, }
         ],
         buttonList: [
-            {
-                id: 1,
-                title: 'Criar conta',
-                onPress: handleCadastro,
-            }
+            { buttonId: 1, title: 'Criar conta', onPress: handleCadastro, btnStyle: { background: '#EF4023', border: 'transparent', textColor: '#FFFFFF' } }
         ],
-        link: {
-            firstText: 'Já possui uma conta?',
-            linkText: 'Entrar',
-            navigate: () => navigation.navigate('LoginScreen')
-        }
+        link: { firstText: 'Já possui uma conta?', linkText: 'Entrar', navigate: () => navigation.navigate('LoginScreen') }
     }
 
     return (

@@ -28,11 +28,21 @@ export function InitialScreen() {
                 <Button
                     title='Entrar'
                     onPress={() => navigation.push('LoginScreen')}
+                    btnStyle={{
+                        background: 'transparent',
+                        border: '#EF4023',
+                        textColor: '#EF4023'
+                    }}
                 />
 
                 <Button
                     title='Criar conta'
                     onPress={() => navigation.push('SignupScreen')}
+                    btnStyle={{
+                        background: '#EF4023',
+                        border: 'transparent',
+                        textColor: '#FFFFFF'
+                    }}
                 />
             </View>
         </SafeAreaView>
