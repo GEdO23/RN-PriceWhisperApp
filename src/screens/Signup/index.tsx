@@ -10,8 +10,9 @@ import { SafeAreaView, StyleSheet, Text } from 'react-native'
 // Firebase
 import { ButtonListProps, Form, InputListProps } from '~/components/Form';
 import { LinkParam } from '~/components/Link';
-import { FIREBASE_AUTH } from 'utils/firebase';
+import { FIREBASE_AUTH, FIREBASE_DATABASE } from 'utils/firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { Timestamp, addDoc, collection } from 'firebase/firestore';
 
 
 /**
@@ -39,6 +40,15 @@ export function SignupScreen() {
     async function handleCadastro() {
         try {
             const result = await createUserWithEmailAndPassword(auth, email, senha);
+
+            await addDoc(collection(FIREBASE_DATABASE, 'usuarios'), {
+                nome: nome,
+                email: email,
+                cnpj: cnpj,
+                senha: senha,
+                timeStamp: new Date()
+            })
+
             if (result) navigation.push('App');
             else throw new Error("Erro no result")
 

@@ -1,4 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
+import { onSnapshot } from "firebase/firestore";
 import { useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Button } from "~/components/Button";
