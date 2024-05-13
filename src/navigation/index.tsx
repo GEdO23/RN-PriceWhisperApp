@@ -13,10 +13,48 @@ import { ProductsScreen } from '~/screens/Products';
 import { DashboardScreen } from '~/screens/Dashboard';
 import { AccountScreen } from '~/screens/Account';
 import { SettingsScreen } from '~/screens/Settings'
+import { AuthHeader } from '~/components/Header';
 
 const Stack = createStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator<RootBottomTabParamList>();
 
+
+export function RootStack() {
+    return (
+        <NavigationContainer>
+            <Stack.Navigator initialRouteName="InitialScreen">
+                <Stack.Screen
+                    name="InitialScreen"
+                    component={InitialScreen}
+                    options={{
+                        headerShown: false,
+                    }}
+                />
+                <Stack.Screen
+                    name="SignupScreen"
+                    component={SignupScreen}
+                    options={{
+                        header: AuthHeader
+                    }}
+                />
+                <Stack.Screen
+                    name="LoginScreen"
+                    component={LoginScreen}
+                    options={{
+                        header: AuthHeader
+                    }}
+                />
+                <Stack.Screen
+                    name="App"
+                    component={RootTab}
+                    options={{
+                        headerShown: false,
+                    }}
+                />
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
+}
 
 function RootTab() {
     return (
@@ -79,41 +117,4 @@ function RootTab() {
             />
         </Tab.Navigator>
     )
-}
-
-export function RootStack() {
-    return (
-        <NavigationContainer>
-            <Stack.Navigator initialRouteName="InitialScreen" >
-                <Stack.Screen
-                    name="InitialScreen"
-                    component={InitialScreen}
-                    options={{
-                        headerShown: false
-                    }}
-                />
-                <Stack.Screen
-                    name="SignupScreen"
-                    component={SignupScreen}
-                    options={{
-                        headerShown: false,
-                    }}
-                />
-                <Stack.Screen
-                    name="LoginScreen"
-                    component={LoginScreen}
-                    options={{
-                        headerShown: false,
-                    }}
-                />
-                <Stack.Screen
-                    name="App"
-                    component={RootTab}
-                    options={{
-                        headerShown: false,
-                    }}
-                />
-            </Stack.Navigator>
-        </NavigationContainer>
-    );
 }

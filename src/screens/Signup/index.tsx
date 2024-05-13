@@ -106,8 +106,6 @@ export function SignupScreen() {
 
     return (
         <SafeAreaView style={styles.container}>
-            <Text style={styles.title}>PriceWhisper</Text>
-
             <Form
                 inputList={cadastroForm.inputList}
                 buttonList={cadastroForm.buttonList}

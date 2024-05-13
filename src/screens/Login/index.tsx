@@ -84,7 +84,6 @@ export function LoginScreen() {
 
     return (
         <SafeAreaView style={styles.container} >
-            <Text style={styles.title}>PriceWhisper</Text>
             <Form
                 inputList={loginForm.inputList}
                 buttonList={loginForm.buttonList}
@@ -102,11 +101,5 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingBottom: 60,
         paddingHorizontal: 20,
-    },
-    title: {
-        fontSize: 28,
-        fontWeight: '700',
-        textAlign: 'center',
-        paddingVertical: 80,
     }
 })
