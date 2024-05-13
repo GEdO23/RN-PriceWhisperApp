@@ -35,6 +35,10 @@ export function AccountScreen() {
             <Button
                 title="Sair da conta"
                 onPress={() => navigation.navigate('InitialScreen')}
+                buttonStyle={{
+                    background: '#EF4023',
+                    textColor: '#FFFFFF'
+                }}
             />
         </SafeAreaView>
     )

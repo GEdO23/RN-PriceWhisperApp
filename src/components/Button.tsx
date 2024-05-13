@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 import { StyleSheet, Text, TouchableOpacity, TouchableOpacityProps } from 'react-native';
-import { Colors } from './Colors';
+import { Colors, darkColor, lightColor } from './Styles';
 
 
 type ButtonStyle = {
@@ -12,14 +12,14 @@ type ButtonStyle = {
 export type ButtonProps = {
     onPress?: TouchableOpacityProps['onPress'];
     title?: string;
-    btnStyle?: ButtonStyle;
+    buttonStyle?: ButtonStyle;
 } & TouchableOpacityProps;
 
-export const Button = forwardRef<TouchableOpacity, ButtonProps>(({ onPress, title, btnStyle }, ref) => {
+export const Button = forwardRef<TouchableOpacity, ButtonProps>(({ onPress, title, buttonStyle }, ref) => {
     
-    const dfBackgroundColor: Colors = '#FFFFFF';
+    const dfBackgroundColor: Colors = lightColor;
     const dfOutlineColor: Colors = 'transparent';
-    const dfTextColor: Colors = '#000000';
+    const dfTextColor: Colors = darkColor;
 
     const getButtonStyle = (bg?: Colors, outline?: Colors): {} => {
         return {
@@ -33,8 +33,8 @@ export const Button = forwardRef<TouchableOpacity, ButtonProps>(({ onPress, titl
     }
 
     return (
-        <TouchableOpacity ref={ref} style={[styles.button, getButtonStyle(btnStyle?.background, btnStyle?.border)]} onPress={onPress}>
-            <Text style={[styles.buttonText, getTextColor(btnStyle?.textColor)]}>{title}</Text>
+        <TouchableOpacity ref={ref} style={[styles.button, getButtonStyle(buttonStyle?.background, buttonStyle?.border)]} onPress={onPress}>
+            <Text style={[styles.buttonText, getTextColor(buttonStyle?.textColor)]}>{title}</Text>
         </TouchableOpacity>
     );
 });
@@ -42,14 +42,14 @@ export const Button = forwardRef<TouchableOpacity, ButtonProps>(({ onPress, titl
 const styles = StyleSheet.create({
     button: {
         alignItems: 'center',
+        borderColor: 'transparent',
         borderRadius: 5,
+        borderStyle: 'solid',
+        borderWidth: 2,
         flexDirection: 'row',
         justifyContent: 'center',
         padding: 16,
         width: '100%',
-        borderWidth: 2,
-        borderStyle: 'solid',
-        borderColor: 'transparent'
     },
     buttonText: {
         fontSize: 16,

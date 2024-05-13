@@ -1,6 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
-import * as NavProp from '~/navigation/props';
+import { brandColor } from './Styles';
 
 export type LinkParam = {
     link?: {
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
         gap: 5
     },
     linkText: {
-        color: '#00F',
+        color: brandColor,
         fontWeight: '600'
     }
 })

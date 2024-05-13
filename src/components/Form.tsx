@@ -117,10 +117,10 @@ export function ButtonList({ buttonList }: ButtonListProps) {
                         key={item.buttonId}
                         title={item.title}
                         onPress={item.onPress}
-                        btnStyle={{
-                            background: item.btnStyle?.background,
-                            border: item.btnStyle?.border,
-                            textColor: item.btnStyle?.textColor,
+                        buttonStyle={{
+                            background: item.buttonStyle?.background,
+                            border: item.buttonStyle?.border,
+                            textColor: item.buttonStyle?.textColor,
                         }}
                     />
                 ))

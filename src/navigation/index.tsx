@@ -14,6 +14,7 @@ import { DashboardScreen } from '~/screens/Dashboard';
 import { AccountScreen } from '~/screens/Account';
 import { SettingsScreen } from '~/screens/Settings'
 import { AuthHeader } from '~/components/Header';
+import { brandColor, darkColor } from '~/components/Styles';
 
 const Stack = createStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator<RootBottomTabParamList>();
@@ -67,9 +68,9 @@ function RootTab() {
                     tabBarShowLabel: false,
                     tabBarIcon: ({ focused, color, size }) => {
                         if (focused) {
-                            return <Ionicons name='cog' color={color} size={size} />
+                            return <Ionicons name='cog' color={brandColor} size={size} />
                         }
-                        return <Ionicons name='cog-outline' color={color} size={size} />
+                        return <Ionicons name='cog-outline' color={darkColor} size={size} />
                     }
                 }}
             />
@@ -79,11 +80,11 @@ function RootTab() {
                 options={{
                     headerTitle: 'Produtos',
                     tabBarShowLabel: false,
-                    tabBarIcon: ({ focused, color, size }) => {
+                    tabBarIcon: ({ focused, size }) => {
                         if (focused) {
-                            return <Ionicons name='storefront' color={color} size={size} />
+                            return <Ionicons name='storefront' color={brandColor} size={size} />
                         }
-                        return <Ionicons name='storefront-outline' color={color} size={size} />
+                        return <Ionicons name='storefront-outline' color={darkColor} size={size} />
                     }
                 }}
             />
@@ -95,9 +96,9 @@ function RootTab() {
                     tabBarShowLabel: false,
                     tabBarIcon: ({ focused, color, size }) => {
                         if (focused) {
-                            return <Ionicons name='podium' color={color} size={size} />
+                            return <Ionicons name='podium' color={brandColor} size={size} />
                         }
-                        return <Ionicons name='podium-outline' color={color} size={size} />
+                        return <Ionicons name='podium-outline' color={darkColor} size={size} />
                     }
                 }}
             />
@@ -109,9 +110,9 @@ function RootTab() {
                     tabBarShowLabel: false,
                     tabBarIcon: ({ focused, color, size }) => {
                         if (focused) {
-                            return <Ionicons name='person-circle' color={color} size={size} />
+                            return <Ionicons name='person-circle' color={brandColor} size={size} />
                         }
-                        return <Ionicons name='person-circle-outline' color={color} size={size} />
+                        return <Ionicons name='person-circle-outline' color={darkColor} size={size} />
                     }
                 }}
             />

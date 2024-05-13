@@ -53,7 +53,7 @@ export function SecureInput({ label, value, setValue, placeholder, textBelow }: 
         return showValue ?
             <Ionicons
                 size={20}
-                color="#000"
+                color="#000000"
                 name='eye'
                 onPress={() => setShowValue(!showValue)}
             /> :

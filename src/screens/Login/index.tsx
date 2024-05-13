@@ -51,7 +51,7 @@ export function LoginScreen() {
             { id: 2, label: 'Senha', placeholder: 'Insira sua senha', value: senha, setValue: setSenha, isSecured: true, textBelow: { text: 'Esqueceu sua senha?', onPress: handleForgotPassword } }
         ],
         buttonList: [
-            { buttonId: 1, title: 'Entrar', onPress: handleLogin, btnStyle: { background: '#EF4023', border: 'transparent', textColor: '#FFFFFF' } }
+            { buttonId: 1, title: 'Entrar', onPress: handleLogin, buttonStyle: { background: '#EF4023', border: 'transparent', textColor: '#FFFFFF' } }
         ],
         link: { firstText: 'Não possui uma conta?', linkText: 'Cadastre-se', navigate: () => navigation.navigate('SignupScreen') }
     }
