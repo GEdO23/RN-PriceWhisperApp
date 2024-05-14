@@ -8,7 +8,7 @@ import { SignupScreenNavigationProps } from '~/navigation/props';
 import { SafeAreaView, StyleSheet, Text } from 'react-native'
 
 // Firebase
-import { ButtonListProps, Form, InputListProps } from '~/components/Form';
+import { ButtonList, ButtonListProps, Form, InputList, InputListProps } from '~/components/Form';
 import { LinkParam } from '~/components/Link';
 import { FIREBASE_AUTH, FIREBASE_DATABASE } from 'utils/firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
@@ -66,31 +66,30 @@ export function SignupScreen() {
             { id: 5, label: 'Confirmar senha', placeholder: 'Repetir senha', value: confirmSenha, setValue: setConfirmSenha, isSecured: true, }
         ],
         buttonList: [
-            { 
-                buttonId: 1, 
-                title: 'Criar conta', 
-                onPress: handleCadastro, 
-                buttonStyle: { 
-                    background: '#EF4023', 
-                    border: 'transparent', 
-                    textColor: '#FFFFFF' 
-                } 
+            {
+                buttonId: 1,
+                title: 'Criar conta',
+                onPress: handleCadastro,
+                buttonStyle: {
+                    background: '#EF4023',
+                    border: 'transparent',
+                    textColor: '#FFFFFF'
+                }
             }
         ],
-        link: { 
-            firstText: 'Já possui uma conta?', 
-            linkText: 'Entrar', 
-            navigate: () => navigation.navigate('LoginScreen') 
+        link: {
+            firstText: 'Já possui uma conta?',
+            linkText: 'Entrar',
+            navigate: () => navigation.navigate('LoginScreen')
         }
     }
 
     return (
         <SafeAreaView style={styles.container}>
-            <Form
-                inputList={cadastroForm.inputList}
-                buttonList={cadastroForm.buttonList}
-                link={cadastroForm.link}
-            />
+            <Form>
+                <InputList inputList={cadastroForm.inputList} link={cadastroForm.link} />
+                <ButtonList buttonList={cadastroForm.buttonList} />
+            </Form>
         </SafeAreaView>
     )
 }

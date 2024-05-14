@@ -3,9 +3,9 @@ import { useNavigation } from '@react-navigation/native';
 import { LinkParam } from '~/components/Link';
 import { FIREBASE_AUTH } from 'utils/firebase';
 import { Alert, SafeAreaView, StyleSheet } from 'react-native'
-import { ButtonListProps, Form, InputListProps } from '~/components/Form';
+import { ButtonList, ButtonListProps, Form, InputList, InputListProps } from '~/components/Form';
 import { LoginScreenNavigationProps } from '~/navigation/props';
-import { sendPasswordResetEmail, signInWithEmailAndPassword } from 'firebase/auth';
+import { User, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword } from 'firebase/auth';
 import { lightColor } from '~/components/Styles';
 
 
@@ -105,11 +105,10 @@ export function LoginScreen() {
 
     return (
         <SafeAreaView style={styles.container} >
-            <Form
-                inputList={loginForm.inputList}
-                buttonList={loginForm.buttonList}
-                link={loginForm.link}
-            />
+            <Form>
+                <InputList inputList={loginForm.inputList} link={loginForm.link} />
+                <ButtonList buttonList={loginForm.buttonList} />
+            </Form>
         </SafeAreaView>
     )
 }
