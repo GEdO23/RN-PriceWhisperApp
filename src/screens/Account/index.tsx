@@ -1,12 +1,14 @@
-import { useNavigation } from "@react-navigation/native";
-import { signOut } from "firebase/auth";
-import { DocumentData, collection, onSnapshot, query } from "firebase/firestore";
-import { useEffect, useState } from "react";
-import { Alert, Text, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { FIREBASE_AUTH, FIREBASE_DATABASE } from "utils/firebase";
-import { Button } from "~/components/Button";
-import { AppNavigationProps } from "~/navigation/props";
+import React from 'react'
+import { useNavigation } from '@react-navigation/native';
+import { User, signOut } from 'firebase/auth';
+import { Alert, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { FIREBASE_AUTH } from 'utils/firebase';
+import { Button } from '~/components/Button';
+import { AccountScreenNavigationProps, AppNavigationProps } from '~/navigation/props';
+import { Ionicons } from '@expo/vector-icons';
+import { AppNavigation } from '~/navigation';
+import { UserInfoLine, UserInfoTable } from './components/UserInfo';
 
 
 type UserInfo = {
@@ -29,14 +31,14 @@ type UserInfo = {
  * @returns The `AccountScreen`
  */
 export function AccountScreen() {
-    const navigation = useNavigation<AppNavigationProps>();
+    const navigation = useNavigation<AccountScreenNavigationProps>();
 
     const auth = FIREBASE_AUTH;
 
     async function handleExit() {
         try {
             await signOut(auth);
-            navigation.push('InitialScreen')
+            AppNavigation.push('InitialScreen')
         } catch (error) {
             Alert.alert(
                 'Erro inesperado',
@@ -47,8 +49,28 @@ export function AccountScreen() {
         }
     }
 
-    return (
-        <SafeAreaView>
+    function SettingsIcon() {
+        return (
+            <Ionicons
+                color='#4d4d4d'
+                name='cog-outline'
+                onPress={() => navigation.navigate('SettingsScreen')}
+                size={10}
+                style={styles.settingsIcon}
+            />
+        )
+    }
+
+    function ProfilePicture() {
+        return (
+            <View style={styles.profileContainer}>
+                <Ionicons name='person-circle' color='#4d4d4d' size={50} />
+            </View>
+        )
+    }
+
+    function ExitAccountButton() {
+        return (
             <Button
                 title="Sair da conta"
                 onPress={() => handleExit()}
@@ -57,6 +79,47 @@ export function AccountScreen() {
                     textColor: '#FFFFFF'
                 }}
             />
+        )
+    }
+
+    /** 
+     * TODO: Coletar e exibir dados do usuário 
+     * TODO: EDIT USER
+     * */
+    return (
+        <SafeAreaView style={styles.container}>
+            <SettingsIcon />
+            <ProfilePicture />
+
+            <UserInfoTable>
+                <UserInfoLine name={'Nome'} value={'Nome'} />
+                <UserInfoLine name={'Email'} value={'Email'} />
+                <UserInfoLine name={'CNPJ'} value={'CNPJ'} />
+                <UserInfoLine name={'Senha'} value={'Senha'} />
+            </UserInfoTable>
+
+            <ExitAccountButton />
         </SafeAreaView>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        alignItems: 'center',
+        flex: 1,
+        gap: 20,
+        margin: 20,
+    },
+    profileContainer: {
+        alignItems: 'center',
+        backgroundColor: '#9D9D9D',
+        borderRadius: 100,
+        justifyContent: 'center',
+        padding: 20,
+    },
+    settingsIcon: {
+        position: 'absolute',
+        right: 20,
+        top: 20,
+    }
+})

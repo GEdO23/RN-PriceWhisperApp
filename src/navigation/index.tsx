@@ -1,8 +1,8 @@
 import { Ionicons } from '@expo/vector-icons';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { RootBottomTabParamList, RootStackParamList } from './props';
+import { AppNavigationProps, RootBottomTabParamList, RootStackParamList } from './props';
 
 
 /* SCREENS */
@@ -18,7 +18,7 @@ import { brandColor, darkColor } from '~/components/Styles';
 
 const Stack = createStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator<RootBottomTabParamList>();
-
+export const AppNavigation = useNavigation<AppNavigationProps>();
 
 export function RootStack() {
     return (
