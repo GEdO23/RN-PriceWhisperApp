@@ -64,6 +64,13 @@ export type ProductsScreenNavigationProps = BottomTabNavigationProp<RootBottomTa
 
 
 /**
+ * Bottom tab navigation props for the `ProductsScreen`
+ * @returns A type which has the `ProductsScreen` navigation props
+ */
+export type ProductScreenNavigationProps = BottomTabNavigationProp<RootBottomTabParamList, 'ProductScreen'>;
+
+
+/**
  * Bottom tab navigation props for the `DashboardScreen`
  * @returns A type which has the `DashboardScreen` navigation props 
  * */

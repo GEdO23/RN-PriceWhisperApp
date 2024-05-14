@@ -17,7 +17,7 @@ import { lightColor } from '~/components/Styles';
  * 
  * @returns The `LoginScreen`
  */
-export function LoginScreen() {
+export default function LoginScreen() {
     const navigation = useNavigation<LoginScreenNavigationProps>();
 
     const auth = FIREBASE_AUTH

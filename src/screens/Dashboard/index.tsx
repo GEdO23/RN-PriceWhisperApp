@@ -12,7 +12,7 @@ import { DashboardScreenNavigationProps } from "~/navigation/props";
  * 
  * @returns The `DashboardScreen`
  */
-export function DashboardScreen() {
+export default function DashboardScreen() {
     const navigation = useNavigation<DashboardScreenNavigationProps>();
 
     return (

@@ -13,7 +13,7 @@ import { SettingsScreenNavigationProps } from "~/navigation/props";
  * 
  * @returns The `SettingsScreen`
  */
-export function SettingsScreen() {
+export default function SettingsScreen() {
     const navigation = useNavigation<SettingsScreenNavigationProps>();
 
     return (

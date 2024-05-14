@@ -6,21 +6,22 @@ import { AppNavigationProps, RootBottomTabParamList, RootStackParamList } from '
 
 
 /* SCREENS */
-import { InitialScreen } from '~/screens/Initial';
-import { SignupScreen } from '~/screens/Signup';
-import { LoginScreen } from '~/screens/Login';
-import { ProductsScreen } from '~/screens/Products';
-import { DashboardScreen } from '~/screens/Dashboard';
-import { AccountScreen } from '~/screens/Account';
-import { SettingsScreen } from '~/screens/Settings'
 import { AuthHeader } from '~/components/Header';
 import { brandColor, darkColor } from '~/components/Styles';
+import InitialScreen from '~/screens/Initial';
+import SignupScreen from '~/screens/Signup';
+import LoginScreen from '~/screens/Login';
+import AccountScreen from '~/screens/Account';
+import DashboardScreen from '~/screens/Dashboard';
+import ProductsScreen from '~/screens/Products';
+import SettingsScreen from '~/screens/Settings';
+
 
 const Stack = createStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator<RootBottomTabParamList>();
 export const AppNavigation = useNavigation<AppNavigationProps>();
 
-export function RootStack() {
+export default function RootStack() {
     return (
         <NavigationContainer>
             <Stack.Navigator initialRouteName="InitialScreen">
@@ -57,7 +58,7 @@ export function RootStack() {
     );
 }
 
-function RootTab() {
+export function RootTab() {
     return (
         <Tab.Navigator initialRouteName='ProductsScreen'>
             <Tab.Screen

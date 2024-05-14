@@ -26,7 +26,7 @@ import { Timestamp, addDoc, collection } from 'firebase/firestore';
  * 
  * @returns The `SignupScreen`
  */
-export function SignupScreen() {
+export default function SignupScreen() {
     const navigation = useNavigation<SignupScreenNavigationProps>();
 
     const auth = FIREBASE_AUTH;

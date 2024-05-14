@@ -8,7 +8,7 @@ import { NotificationsScreenNavigationProps } from "~/navigation/props";
  * 
  * @returns The `NotificationScreen`
  */
-export function NotificationScreen() {
+export default function NotificationScreen() {
     const navigation = useNavigation<NotificationsScreenNavigationProps>();
 
     return (

@@ -15,7 +15,7 @@ import { InitialScreenNavigationProps } from '~/navigation/props';
  * 
  * @returns The `InitialScreen`
  */
-export function InitialScreen() {
+export default function InitialScreen() {
     const navigation = useNavigation<InitialScreenNavigationProps>();
 
     return (

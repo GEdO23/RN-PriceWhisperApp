@@ -11,13 +11,6 @@ import { AppNavigation } from '~/navigation';
 import { UserInfoLine, UserInfoTable } from './components/UserInfo';
 
 
-type UserInfo = {
-    nome: string,
-    email: string,
-    cnpj: string,
-    senha: string,
-};
-
 /**
  * The `AccountScreen` which allows the user to edit it's account's information #25
  * 
@@ -30,7 +23,7 @@ type UserInfo = {
  * 
  * @returns The `AccountScreen`
  */
-export function AccountScreen() {
+export default function AccountScreen() {
     const navigation = useNavigation<AccountScreenNavigationProps>();
 
     const auth = FIREBASE_AUTH;
@@ -84,7 +77,7 @@ export function AccountScreen() {
 
     /** 
      * TODO: Coletar e exibir dados do usuário 
-     * TODO: EDIT USER
+     * TODO: EDIT USER #30 #31 #32
      * */
     return (
         <SafeAreaView style={styles.container}>
