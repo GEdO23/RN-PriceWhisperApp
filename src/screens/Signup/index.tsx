@@ -66,9 +66,22 @@ export function SignupScreen() {
             { id: 5, label: 'Confirmar senha', placeholder: 'Repetir senha', value: confirmSenha, setValue: setConfirmSenha, isSecured: true, }
         ],
         buttonList: [
-            { buttonId: 1, title: 'Criar conta', onPress: handleCadastro, buttonStyle: { background: '#EF4023', border: 'transparent', textColor: '#FFFFFF' } }
+            { 
+                buttonId: 1, 
+                title: 'Criar conta', 
+                onPress: handleCadastro, 
+                buttonStyle: { 
+                    background: '#EF4023', 
+                    border: 'transparent', 
+                    textColor: '#FFFFFF' 
+                } 
+            }
         ],
-        link: { firstText: 'Já possui uma conta?', linkText: 'Entrar', navigate: () => navigation.navigate('LoginScreen') }
+        link: { 
+            firstText: 'Já possui uma conta?', 
+            linkText: 'Entrar', 
+            navigate: () => navigation.navigate('LoginScreen') 
+        }
     }
 
     return (

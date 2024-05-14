@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import { useNavigation } from '@react-navigation/native';
-import { SafeAreaView, StyleSheet, Text } from 'react-native'
+import { LinkParam } from '~/components/Link';
+import { FIREBASE_AUTH } from 'utils/firebase';
+import { Alert, SafeAreaView, StyleSheet } from 'react-native'
 import { ButtonListProps, Form, InputListProps } from '~/components/Form';
 import { LoginScreenNavigationProps } from '~/navigation/props';
-import { FIREBASE_AUTH } from 'utils/firebase';
-import { LinkParam } from '~/components/Link';
 import { sendPasswordResetEmail, signInWithEmailAndPassword } from 'firebase/auth';
+import { lightColor } from '~/components/Styles';
 
 
 /**
@@ -24,6 +25,7 @@ export function LoginScreen() {
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
 
+    /** Asynchronous function that handles the login */
     async function handleLogin() {
         try {
             const result = await signInWithEmailAndPassword(auth, email, senha);
@@ -35,25 +37,70 @@ export function LoginScreen() {
         }
     }
 
+    /** Asynchronous function that handles the `forgotPassword` action */
     async function handleForgotPassword() {
         try {
-            await sendPasswordResetEmail(auth, email);
-            alert('Foi enviado um email para resetar sua senha')
-
+            if (email.length > 5) {
+                await sendPasswordResetEmail(auth, email);
+                Alert.alert(
+                    'Email de confirmação',
+                    'Um email de confirmação foi enviado a ' + email,
+                    [{ text: 'Ok' }]
+                )
+                console.log('Chegou')
+            } else {
+                Alert.alert(
+                    'Erro no envio!',
+                    'Favor informar para qual email vemos enviar o link de confirmação para resetar sua senha...',
+                    [{ text: 'Ok' }]
+                )
+                console.log('Não chegou')
+            }
         } catch (error) {
-            console.log("Erro ao enviar forgotpassword: " + error);
+            console.log("Erro ao tentar processar request de forgotpassword: " + error)
         }
     }
 
+    /** Data used for the login form */
     const loginForm: InputListProps & ButtonListProps & LinkParam = {
         inputList: [
-            { id: 1, label: 'Email', placeholder: 'Insira seu email', value: email, setValue: setEmail, isSecured: false, },
-            { id: 2, label: 'Senha', placeholder: 'Insira sua senha', value: senha, setValue: setSenha, isSecured: true, textBelow: { text: 'Esqueceu sua senha?', onPress: handleForgotPassword } }
+            {
+                id: 1,
+                label: 'Email',
+                placeholder: 'Insira seu email',
+                value: email,
+                setValue: setEmail, isSecured: false
+            },
+            {
+                id: 2,
+                label: 'Senha',
+                placeholder: 'Insira sua senha',
+                value: senha,
+                setValue: setSenha,
+                isSecured: true,
+                textBelow: {
+                    text: 'Esqueceu sua senha?',
+                    onPress: () => handleForgotPassword()
+                }
+            }
         ],
         buttonList: [
-            { buttonId: 1, title: 'Entrar', onPress: handleLogin, buttonStyle: { background: '#EF4023', border: 'transparent', textColor: '#FFFFFF' } }
+            {
+                buttonId: 1,
+                title: 'Entrar',
+                onPress: () => handleLogin(),
+                buttonStyle: {
+                    background: '#EF4023',
+                    border: 'transparent',
+                    textColor: '#FFFFFF'
+                }
+            }
         ],
-        link: { firstText: 'Não possui uma conta?', linkText: 'Cadastre-se', navigate: () => navigation.navigate('SignupScreen') }
+        link: {
+            firstText: 'Não possui uma conta?',
+            linkText: 'Cadastre-se',
+            navigate: () => navigation.navigate('SignupScreen')
+        }
     }
 
     return (
@@ -63,7 +110,6 @@ export function LoginScreen() {
                 buttonList={loginForm.buttonList}
                 link={loginForm.link}
             />
-
         </SafeAreaView>
     )
 }
@@ -71,7 +117,7 @@ export function LoginScreen() {
 const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
-        backgroundColor: '#FFFFFF',
+        backgroundColor: lightColor,
         flex: 1,
         paddingBottom: 60,
         paddingHorizontal: 20,
