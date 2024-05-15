@@ -1,15 +1,14 @@
 import React from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { User, signOut } from 'firebase/auth';
-import { Alert, StyleSheet, Text, View } from 'react-native';
+import { Alert, Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { FIREBASE_AUTH } from 'utils/firebase';
-import { Button } from '~/components/Button';
 import { AccountScreenNavigationProps } from '~/navigation/props';
 import { Ionicons } from '@expo/vector-icons';
 // import { AppNavigation } from '~/navigation';
 import { UserInfoLine, UserInfoTable } from './components/UserInfo';
-import { darkColor } from '~/components/Styles';
+import { brandColor, darkColor, lightColor } from '~/components/Styles';
 
 
 /**
@@ -56,22 +55,16 @@ export default function AccountScreen() {
 
     function ProfilePicture() {
         return (
-            <View style={styles.profileContainer}>
-                <Ionicons name='person-circle' color={darkColor} size={100} />
-            </View>
+            <Ionicons name='person-circle' color={lightColor} size={100} />
         )
     }
 
     function ExitAccountButton() {
         return (
-            <Button
-                title="Sair da conta"
-                onPress={() => handleExit()}
-                buttonStyle={{
-                    background: '#EF4023',
-                    textColor: '#FFFFFF'
-                }}
-            />
+            <TouchableOpacity onPress={() => handleExit()} style={styles.exitButton}>
+                <Ionicons name='exit-outline' color={'#f00'} size={25} />
+                <Text style={styles.exitButtonText}>Sair da conta</Text>
+            </TouchableOpacity>
         )
     }
 
@@ -80,11 +73,24 @@ export default function AccountScreen() {
      * TODO: EDIT USER #30 #31 #32
      * */
     return (
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
+            {/* <SettingsIcon/> */}
 
-            <SettingsIcon/>
-            <ExitAccountButton />
-        </SafeAreaView>
+            <View style={styles.profileContainer}>
+                <ProfilePicture />
+                <Text style={styles.profileName}>OM Corp.</Text>
+            </View>
+
+            <View style={styles.userContainer}>
+                <Text style={{ fontWeight: '700', fontSize: 20, color: darkColor }}>Detalhes da conta</Text>
+
+                <UserInfoLine icon='mail-outline' name='E-mail' value='omcorp.helpcenter@gmail.com'/>
+                <UserInfoLine icon='ribbon-outline' name='CNPJ' value='00.000.000/0000-00'/>
+                <UserInfoLine icon='key-outline' name='Senha' value='******'/>
+
+                <ExitAccountButton />
+            </View>
+        </View>
     )
 }
 
@@ -92,9 +98,44 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         gap: 20,
-        margin: 20,
+    },
+    userContainer: {
+        paddingHorizontal: 25,
+        gap: 20,
     },
     profileContainer: {
-        alignItems:  'center'
+        alignItems: 'center',
+        backgroundColor: brandColor,
+        paddingTop: 75,
+        paddingBottom: 50,
+    },
+    profileName: {
+        fontSize: 20,
+        color: lightColor,
+        fontWeight: '600'
+    },
+    userInfoContainer: {
+        flexDirection: 'row',
+        padding: 20,
+        borderWidth: 2,
+        borderColor: 'rgba(0, 0, 0, .2)',
+        borderRadius: 10,
+        gap: 15,
+        alignItems: 'center'
+    },
+    exitButton: {
+        alignItems: 'center',
+        borderColor: 'rgba(255, 0, 0, .2)',
+        borderRadius: 10,
+        borderWidth: 2,
+        flexDirection: 'row',
+        padding: 20,
+        height: 85,
+        gap: 15,
+    },
+    exitButtonText: {
+        color: '#f00',
+        fontSize: 16,
+        fontWeight: '700',
     }
 })
