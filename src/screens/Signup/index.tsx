@@ -5,14 +5,14 @@ import { useNavigation } from '@react-navigation/native';
 import { SignupScreenNavigationProps } from '~/navigation/props';
 
 // Components
-import { SafeAreaView, StyleSheet, Text } from 'react-native'
+import { Alert, SafeAreaView, StyleSheet } from 'react-native'
 
 // Firebase
 import { ButtonList, ButtonListProps, Form, InputList, InputListProps } from '~/components/Form';
 import { LinkParam } from '~/components/Link';
 import { FIREBASE_AUTH, FIREBASE_DATABASE } from 'utils/firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { Timestamp, addDoc, collection } from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
 
 
 /**
@@ -29,8 +29,6 @@ import { Timestamp, addDoc, collection } from 'firebase/firestore';
 export default function SignupScreen() {
     const navigation = useNavigation<SignupScreenNavigationProps>();
 
-    const auth = FIREBASE_AUTH;
-
     const [nome, setNome] = useState("");
     const [email, setEmail] = useState("");
     const [cnpj, setCnpj] = useState("");
@@ -38,23 +36,19 @@ export default function SignupScreen() {
     const [confirmSenha, setConfirmSenha] = useState("");
 
     async function handleCadastro() {
-        try {
-            const result = await createUserWithEmailAndPassword(auth, email, senha);
-
-            await addDoc(collection(FIREBASE_DATABASE, 'usuarios'), {
+        createUserWithEmailAndPassword(FIREBASE_AUTH, email, senha).then(async cred => {
+            const docRef = doc(FIREBASE_DATABASE, 'usuarios', cred.user.uid)
+            await setDoc(docRef, {
                 nome: nome,
-                email: email,
                 cnpj: cnpj,
-                senha: senha,
-                timeStamp: new Date()
-            })
-
-            if (result) navigation.push('App');
-            else throw new Error("Erro no result")
-
-        } catch (error) {
+            }, { merge: true });
+        }).catch(error => {
             console.log("Erro ao cadastrar: " + error);
-        }
+            Alert.alert('Erro', 'Erro no cadastro', [
+                { text: 'Tentar novamente', onPress: () => handleCadastro(), isPreferred: true },
+                { text: 'Ok' }
+            ])
+        })
     }
 
     const cadastroForm: InputListProps & ButtonListProps & LinkParam = {
@@ -69,7 +63,7 @@ export default function SignupScreen() {
             {
                 buttonId: 1,
                 title: 'Criar conta',
-                onPress: handleCadastro,
+                onPress: () => handleCadastro(),
                 buttonStyle: {
                     background: '#EF4023',
                     border: 'transparent',
