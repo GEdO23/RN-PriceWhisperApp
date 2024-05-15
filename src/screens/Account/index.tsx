@@ -4,7 +4,7 @@ import { User, signOut } from 'firebase/auth';
 import { Alert, Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { FIREBASE_AUTH } from 'utils/firebase';
-import { AccountScreenNavigationProps } from '~/navigation/props';
+import { AccountScreenNavigationProps, InitialScreenNavigationProps } from '~/navigation/props';
 import { Ionicons } from '@expo/vector-icons';
 // import { AppNavigation } from '~/navigation';
 import { UserInfoLine, UserInfoTable } from './components/UserInfo';
@@ -25,13 +25,14 @@ import { brandColor, darkColor, lightColor } from '~/components/Styles';
  */
 export default function AccountScreen() {
     const navigation = useNavigation<AccountScreenNavigationProps>();
+    const initialNavigation = useNavigation<InitialScreenNavigationProps>();
 
     const auth = FIREBASE_AUTH;
 
     async function handleExit() {
         try {
             await signOut(auth);
-            // AppNavigation.push('InitialScreen')
+            initialNavigation.navigate('InitialScreen');
         } catch (error) {
             Alert.alert(
                 'Erro inesperado',
