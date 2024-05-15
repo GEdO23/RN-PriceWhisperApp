@@ -1,13 +1,11 @@
 import React from 'react'
 import { useNavigation } from '@react-navigation/native';
-import { User, signOut } from 'firebase/auth';
-import { Alert, Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { signOut } from 'firebase/auth';
+import { Alert, ImageBackground, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { FIREBASE_AUTH } from 'utils/firebase';
 import { AccountScreenNavigationProps, InitialScreenNavigationProps } from '~/navigation/props';
 import { Ionicons } from '@expo/vector-icons';
-// import { AppNavigation } from '~/navigation';
-import { UserInfoLine, UserInfoTable } from './components/UserInfo';
+import { UserInfoLine, UserInfoTable } from './components/User';
 import { brandColor, darkColor, lightColor } from '~/components/Styles';
 
 
@@ -56,7 +54,7 @@ export default function AccountScreen() {
 
     function ProfilePicture() {
         return (
-            <Ionicons name='person-circle' color={lightColor} size={100} />
+            <Ionicons name='person-circle' color={lightColor} size={150} />
         )
     }
 
@@ -69,46 +67,48 @@ export default function AccountScreen() {
         )
     }
 
+    const bg = {
+        source: { uri: 'https://static.vecteezy.com/system/resources/previews/000/680/551/original/glowing-orange-tech-arrows-concept.jpg'}
+    }
+
     /** 
      * TODO: Coletar e exibir dados do usuário 
      * TODO: EDIT USER #30 #31 #32
      * */
     return (
-        <View style={styles.container}>
+        <ScrollView fadingEdgeLength={200} style={styles.container}>
             {/* <SettingsIcon/> */}
 
-            <View style={styles.profileContainer}>
+            <ImageBackground source={bg.source} resizeMode='cover' style={styles.profileContainer}>
                 <ProfilePicture />
                 <Text style={styles.profileName}>OM Corp.</Text>
-            </View>
+            </ImageBackground>
 
             <View style={styles.userContainer}>
                 <Text style={{ fontWeight: '700', fontSize: 20, color: darkColor }}>Detalhes da conta</Text>
 
-                <UserInfoLine icon='mail-outline' name='E-mail' value='omcorp.helpcenter@gmail.com'/>
-                <UserInfoLine icon='ribbon-outline' name='CNPJ' value='00.000.000/0000-00'/>
-                <UserInfoLine icon='key-outline' name='Senha' value='******'/>
+                <UserInfoLine icon='mail-outline' name='E-mail' value='omcorp.helpcenter@gmail.com' />
+                <UserInfoLine icon='ribbon-outline' name='CNPJ' value='00.000.000/0000-00' />
+                <UserInfoLine icon='key-outline' name='Senha' value='******' />
 
                 <ExitAccountButton />
             </View>
-        </View>
+        </ScrollView>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         gap: 20,
     },
     userContainer: {
-        paddingHorizontal: 25,
+        padding: 25,
         gap: 20,
     },
     profileContainer: {
         alignItems: 'center',
-        backgroundColor: brandColor,
-        paddingTop: 75,
-        paddingBottom: 50,
+        padding: 100,
+        justifyContent: 'center',
     },
     profileName: {
         fontSize: 20,
