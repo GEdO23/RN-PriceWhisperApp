@@ -49,11 +49,11 @@ export type SignupScreenNavigationProps = StackNavigationProp<RootStackParamList
 export type LoginScreenNavigationProps = StackNavigationProp<RootStackParamList, 'LoginScreen'>;
 
 
-/**
- * Stack navigation props for the `LoginScreen`
- * @returns A type which has the `LoginScreen` navigation props
- */
-export type AppNavigationProps = StackNavigationProp<RootStackParamList, 'App'>;
+// /**
+//  * Stack navigation props for the `LoginScreen`
+//  * @returns A type which has the `LoginScreen` navigation props
+//  */
+// export type AppNavigationProps = StackNavigationProp<RootStackParamList, 'App'>;
 
 
 /**

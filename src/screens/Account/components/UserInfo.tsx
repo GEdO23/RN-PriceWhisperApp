@@ -16,7 +16,7 @@ export function UserInfoTable({ children }: any) {
 export function UserInfoLine({ name, value }: UserInfo) {
     return (
         <View style={styles.infoContainer}>
-            <Text style={styles.info}>{name}:</Text>
+            <Text style={[styles.info, {fontWeight: 'bold'}]}>{name}:</Text>
             <Text style={styles.info}>{value}</Text>
         </View>
     )
@@ -24,20 +24,21 @@ export function UserInfoLine({ name, value }: UserInfo) {
 
 const styles = StyleSheet.create({
     info: {
-        color: '#4d4d4d',
+        color: '#000',
         fontSize: 16,
     },
     infoContainer: {
         alignItems: 'center',
-        flex: 1,
+        padding: 20,
+        borderRadius: 10,
         flexDirection: 'row',
         justifyContent: 'space-between',
+        backgroundColor: '#9D9D9D'
     },
     infoListContainer: {
-        backgroundColor: '#9D9D9D',
+        backgroundColor: 'rgba(0, 0, 0, .2)',
         borderRadius: 20,
-        gap: 10,
-        paddingHorizontal: 10,
-        paddingVertical: 20,
+        gap: 25,
+        padding: 25,
     },
 })

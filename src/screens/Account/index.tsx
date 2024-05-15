@@ -5,10 +5,11 @@ import { Alert, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { FIREBASE_AUTH } from 'utils/firebase';
 import { Button } from '~/components/Button';
-import { AccountScreenNavigationProps, AppNavigationProps } from '~/navigation/props';
+import { AccountScreenNavigationProps } from '~/navigation/props';
 import { Ionicons } from '@expo/vector-icons';
-import { AppNavigation } from '~/navigation';
+// import { AppNavigation } from '~/navigation';
 import { UserInfoLine, UserInfoTable } from './components/UserInfo';
+import { darkColor } from '~/components/Styles';
 
 
 /**
@@ -31,7 +32,7 @@ export default function AccountScreen() {
     async function handleExit() {
         try {
             await signOut(auth);
-            AppNavigation.push('InitialScreen')
+            // AppNavigation.push('InitialScreen')
         } catch (error) {
             Alert.alert(
                 'Erro inesperado',
@@ -45,11 +46,10 @@ export default function AccountScreen() {
     function SettingsIcon() {
         return (
             <Ionicons
-                color='#4d4d4d'
-                name='cog-outline'
+                color={darkColor}
+                name='settings-outline'
                 onPress={() => navigation.navigate('SettingsScreen')}
-                size={10}
-                style={styles.settingsIcon}
+                size={30}
             />
         )
     }
@@ -57,7 +57,7 @@ export default function AccountScreen() {
     function ProfilePicture() {
         return (
             <View style={styles.profileContainer}>
-                <Ionicons name='person-circle' color='#4d4d4d' size={50} />
+                <Ionicons name='person-circle' color={darkColor} size={100} />
             </View>
         )
     }
@@ -81,16 +81,8 @@ export default function AccountScreen() {
      * */
     return (
         <SafeAreaView style={styles.container}>
-            <SettingsIcon />
-            <ProfilePicture />
 
-            <UserInfoTable>
-                <UserInfoLine name={'Nome'} value={'Nome'} />
-                <UserInfoLine name={'Email'} value={'Email'} />
-                <UserInfoLine name={'CNPJ'} value={'CNPJ'} />
-                <UserInfoLine name={'Senha'} value={'Senha'} />
-            </UserInfoTable>
-
+            <SettingsIcon/>
             <ExitAccountButton />
         </SafeAreaView>
     )
@@ -98,21 +90,11 @@ export default function AccountScreen() {
 
 const styles = StyleSheet.create({
     container: {
-        alignItems: 'center',
         flex: 1,
         gap: 20,
         margin: 20,
     },
     profileContainer: {
-        alignItems: 'center',
-        backgroundColor: '#9D9D9D',
-        borderRadius: 100,
-        justifyContent: 'center',
-        padding: 20,
-    },
-    settingsIcon: {
-        position: 'absolute',
-        right: 20,
-        top: 20,
+        alignItems:  'center'
     }
 })
