@@ -1,26 +1,15 @@
+import React from "react";
+
+/* COMPONENTS */
 import { Ionicons } from "@expo/vector-icons";
 import { StyleSheet, Text, View } from "react-native";
 import { darkColor } from "~/components/Styles";
+
 
 type UserInfo = {
     icon: any;
     name: string;
     value: any;
-}
-
-export type UserProps = {
-    name: string;
-    email: string;
-    cnpj: string;
-    senha: string;
-}
-
-export function UserInfoTable({ children }: any) {
-    return (
-        <View style={styles.infoListContainer}>
-            {children}
-        </View>
-    )
 }
 
 export function UserInfoLine({ icon, name, value }: UserInfo) {
@@ -36,16 +25,6 @@ export function UserInfoLine({ icon, name, value }: UserInfo) {
 }
 
 const styles = StyleSheet.create({
-    info: {
-        color: '#000',
-        fontSize: 16,
-    },
-    infoListContainer: {
-        backgroundColor: 'rgba(0, 0, 0, .2)',
-        borderRadius: 20,
-        gap: 25,
-        padding: 25,
-    },
     infoContainer: {
         alignItems: 'center',
         borderColor: 'rgba(0, 0, 0, .2)',

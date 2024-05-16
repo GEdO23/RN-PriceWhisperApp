@@ -21,7 +21,7 @@ export type RootStackParamList = {
  */
 export type RootBottomTabParamList = {
     SettingsScreen: undefined;
-    ProductsScreen: undefined;
+    ProductListScreen: undefined;
     ProductScreen: undefined;
     DashboardScreen: undefined;
     AccountScreen: undefined;
@@ -29,45 +29,17 @@ export type RootBottomTabParamList = {
 
 
 /**
- * Stack navigation props for the `InitialScreen`
- * @returns A type which has the `InitialScreen` navigation props
+ * Stack navigation props for the `App`
+ * @returns A type which has the `App` navigation props
  */
-export type InitialScreenNavigationProps = StackNavigationProp<RootStackParamList, 'InitialScreen'>;
-
-
-/**
- * Stack navigation props for the `SignupScreen`
- * @returns A type which has the `SignupScreen` navigation props
- */
-export type SignupScreenNavigationProps = StackNavigationProp<RootStackParamList, 'SignupScreen'>;
-
-
-/**
- * Stack navigation props for the `LoginScreen`
- * @returns A type which has the `LoginScreen` navigation props
- */
-export type LoginScreenNavigationProps = StackNavigationProp<RootStackParamList, 'LoginScreen'>;
-
-
-// /**
-//  * Stack navigation props for the `LoginScreen`
-//  * @returns A type which has the `LoginScreen` navigation props
-//  */
-// export type AppNavigationProps = StackNavigationProp<RootStackParamList, 'App'>;
+export type AppNavigationProps = StackNavigationProp<RootStackParamList, 'App'>;
 
 
 /**
  * Bottom tab navigation props for the `ProductsScreen`
  * @returns A type which has the `ProductsScreen` navigation props
  */
-export type ProductsScreenNavigationProps = BottomTabNavigationProp<RootBottomTabParamList, 'ProductsScreen'>;
-
-
-/**
- * Bottom tab navigation props for the `ProductsScreen`
- * @returns A type which has the `ProductsScreen` navigation props
- */
-export type ProductScreenNavigationProps = BottomTabNavigationProp<RootBottomTabParamList, 'ProductScreen'>;
+export type ProductListScreenNavigationProps = BottomTabNavigationProp<RootBottomTabParamList, 'ProductListScreen'>;
 
 
 /**

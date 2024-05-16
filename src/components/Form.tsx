@@ -136,7 +136,7 @@ export function ButtonList({ buttonList }: ButtonListProps) {
  * @param buttonList List of available buttons that the user may press
  * @returns The `Form` component
  */
-export function Form({ children }: any) {
+export default function Form({ children }: any) {
     return (
         <View style={styles.form}>
             {children}

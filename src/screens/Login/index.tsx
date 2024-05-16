@@ -1,65 +1,31 @@
-import { useState } from 'react'
+import React, { useContext } from 'react'
+
+/* NAVIGATION */
 import { useNavigation } from '@react-navigation/native';
+import { AppNavigationProps } from '~/navigation/props';
+
+/* COMPONENTS */
+import { SafeAreaView, StyleSheet } from 'react-native'
+import Form, { ButtonList, ButtonListProps, InputList, InputListProps } from '~/components/Form';
 import { LinkParam } from '~/components/Link';
-import { FIREBASE_AUTH } from 'utils/firebase';
-import { Alert, SafeAreaView, StyleSheet } from 'react-native'
-import { ButtonList, ButtonListProps, Form, InputList, InputListProps } from '~/components/Form';
-import { LoginScreenNavigationProps } from '~/navigation/props';
-import { User, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword } from 'firebase/auth';
 import { lightColor } from '~/components/Styles';
+
+/* CONTEXT */
+import { UserContext } from '~/provider/UserProvider';
 
 
 /**
- * The `LoginScreen` which allows the user to log in it's account #5
- * 
- * @requires `CRN`
- * @requires `password`
- * 
- * @returns The `LoginScreen`
+ * The login screen which allows the user to log in #5
+ * @returns The login screen JSX element
  */
 export default function LoginScreen() {
-    const navigation = useNavigation<LoginScreenNavigationProps>();
+    const navigation = useNavigation<AppNavigationProps>();
 
-    const auth = FIREBASE_AUTH
-
-    const [email, setEmail] = useState("");
-    const [senha, setSenha] = useState("");
-
-    /** Asynchronous function that handles the login */
-    async function handleLogin() {
-        try {
-            const result = await signInWithEmailAndPassword(auth, email, senha);
-            if (result) navigation.push('App');
-            else throw new Error("Erro no result")
-
-        } catch (error) {
-            console.log("Erro ao autenticar usuario: " + error);
-        }
-    }
-
-    /** Asynchronous function that handles the `forgotPassword` action */
-    async function handleForgotPassword() {
-        try {
-            if (email.length > 5) {
-                await sendPasswordResetEmail(auth, email);
-                Alert.alert(
-                    'Email de confirmação',
-                    'Um email de confirmação foi enviado a ' + email,
-                    [{ text: 'Ok' }]
-                )
-                console.log('Chegou')
-            } else {
-                Alert.alert(
-                    'Erro no envio!',
-                    'Favor informar para qual email vemos enviar o link de confirmação para resetar sua senha...',
-                    [{ text: 'Ok' }]
-                )
-                console.log('Não chegou')
-            }
-        } catch (error) {
-            console.log("Erro ao tentar processar request de forgotpassword: " + error)
-        }
-    }
+    const {
+        email, setEmail,
+        password, setPassword,
+        handleLogin, handleForgotPassword
+    } = useContext(UserContext)
 
     /** Data used for the login form */
     const loginForm: InputListProps & ButtonListProps & LinkParam = {
@@ -75,12 +41,12 @@ export default function LoginScreen() {
                 id: 2,
                 label: 'Senha',
                 placeholder: 'Insira sua senha',
-                value: senha,
-                setValue: setSenha,
+                value: password,
+                setValue: setPassword,
                 isSecured: true,
                 textBelow: {
                     text: 'Esqueceu sua senha?',
-                    onPress: () => handleForgotPassword()
+                    onPress: () => handleForgotPassword(email)
                 }
             }
         ],
@@ -88,7 +54,7 @@ export default function LoginScreen() {
             {
                 buttonId: 1,
                 title: 'Entrar',
-                onPress: () => handleLogin(),
+                onPress: () => handleLogin(email, password),
                 buttonStyle: {
                     background: '#EF4023',
                     border: 'transparent',

@@ -1,71 +1,49 @@
-import { useState } from 'react'
+import React, { useContext, useState } from 'react'
 
-// Navigation
+/* NAVIGATION */
 import { useNavigation } from '@react-navigation/native';
-import { SignupScreenNavigationProps } from '~/navigation/props';
+import { AppNavigationProps } from '~/navigation/props';
 
-// Components
-import { Alert, SafeAreaView, StyleSheet } from 'react-native'
-
-// Firebase
-import { ButtonList, ButtonListProps, Form, InputList, InputListProps } from '~/components/Form';
+/* COMPONENTS */
+import { SafeAreaView, StyleSheet } from 'react-native'
+import Form, { ButtonList, ButtonListProps, InputList, InputListProps } from '~/components/Form';
 import { LinkParam } from '~/components/Link';
-import { FIREBASE_AUTH, FIREBASE_DATABASE } from 'utils/firebase';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { doc, setDoc } from 'firebase/firestore';
+import { lightColor } from '~/components/Styles';
+
+/* CONTEXT */
+import { UserContext } from '~/provider/UserProvider';
 
 
 /**
- * The `SignupScreen` which allows the user to create a new account #4 #9
- * 
- * @requires `username`
- * @requires `email`
- * @requires `CRN`
- * @requires `password`
- * @requires `repeatPassword`
- * 
- * @returns The `SignupScreen`
+ * The sign up screen which allows the user to create a new account #4 #9
+ * @returns The sign up screen JSX element
  */
 export default function SignupScreen() {
-    const navigation = useNavigation<SignupScreenNavigationProps>();
+    const navigation = useNavigation<AppNavigationProps>();
 
-    const [nome, setNome] = useState("");
-    const [email, setEmail] = useState("");
-    const [cnpj, setCnpj] = useState("");
-    const [senha, setSenha] = useState("");
-    const [confirmSenha, setConfirmSenha] = useState("");
+    const {
+        name, setName,
+        email, setEmail,
+        password, setPassword,
+        crn, setCrn,
+        handleSignup
+    } = useContext(UserContext);
 
-    async function handleCadastro() {
-        createUserWithEmailAndPassword(FIREBASE_AUTH, email, senha).then(async cred => {
-            const docRef = doc(FIREBASE_DATABASE, 'usuarios', cred.user.uid)
-            await setDoc(docRef, {
-                nome: nome,
-                email: email,
-                cnpj: cnpj,
-                senha: senha,
-            }, { merge: true });
-        }).catch(error => {
-            console.log("Erro ao cadastrar: " + error);
-            Alert.alert('Erro', 'Erro no cadastro', [
-                { text: 'Tentar novamente', onPress: () => handleCadastro(), isPreferred: true },
-                { text: 'Ok' }
-            ])
-        })
-    }
+    const [confirmPassword, setConfirmPassword] = useState('');
 
     const cadastroForm: InputListProps & ButtonListProps & LinkParam = {
         inputList: [
-            { id: 1, label: 'Nome', placeholder: 'Insira seu nome', value: nome, setValue: setNome, isSecured: false, },
+            { id: 1, label: 'Nome', placeholder: 'Insira seu nome', value: name, setValue: setName, isSecured: false, },
             { id: 2, label: 'Email', placeholder: 'Insira seu email', value: email, setValue: setEmail, isSecured: false, },
-            { id: 3, label: 'CNPJ', placeholder: 'XX.XXX.XXX/XXXX-XX', value: cnpj, setValue: setCnpj, isSecured: true, },
-            { id: 4, label: 'Senha', placeholder: 'Insira sua senha', value: senha, setValue: setSenha, isSecured: true, },
-            { id: 5, label: 'Confirmar senha', placeholder: 'Repetir senha', value: confirmSenha, setValue: setConfirmSenha, isSecured: true, }
+            { id: 3, label: 'CNPJ', placeholder: 'XX.XXX.XXX/XXXX-XX', value: crn, setValue: setCrn, isSecured: true, },
+            { id: 4, label: 'Senha', placeholder: 'Insira sua senha', value: password, setValue: setPassword, isSecured: true, },
+            { id: 5, label: 'Confirmar senha', placeholder: 'Repetir senha', value: confirmPassword, setValue: setConfirmPassword, isSecured: true, }
         ],
         buttonList: [
             {
                 buttonId: 1,
                 title: 'Criar conta',
-                onPress: () => handleCadastro(),
+                onPress: () => handleSignup(name, email, password, crn),
                 buttonStyle: {
                     background: '#EF4023',
                     border: 'transparent',
@@ -93,7 +71,7 @@ export default function SignupScreen() {
 const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
-        backgroundColor: '#FFFFFF',
+        backgroundColor: lightColor,
         flex: 1,
         paddingBottom: 60,
         paddingHorizontal: 20,

@@ -15,7 +15,7 @@ export type ButtonProps = {
     buttonStyle?: ButtonStyle;
 } & TouchableOpacityProps;
 
-export const Button = forwardRef<TouchableOpacity, ButtonProps>(({ onPress, title, buttonStyle }, ref) => {
+const Button = forwardRef<TouchableOpacity, ButtonProps>(({ onPress, title, buttonStyle }, ref) => {
     
     const dfBackgroundColor: Colors = lightColor;
     const dfOutlineColor: Colors = 'transparent';
@@ -38,6 +38,8 @@ export const Button = forwardRef<TouchableOpacity, ButtonProps>(({ onPress, titl
         </TouchableOpacity>
     );
 });
+
+export default Button;
 
 const styles = StyleSheet.create({
     button: {

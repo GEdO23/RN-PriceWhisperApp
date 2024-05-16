@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from 'react'
-import { useNavigation } from '@react-navigation/native';
-import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
-import { Alert, ImageBackground, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { FIREBASE_AUTH, FIREBASE_DATABASE } from 'utils/firebase';
-import { AccountScreenNavigationProps, InitialScreenNavigationProps } from '~/navigation/props';
+import React, { useContext, useEffect } from 'react'
+
+/* COMPONENTS */
 import { Ionicons } from '@expo/vector-icons';
+import { ImageBackground, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { darkColor, lightColor } from '~/components/Styles';
 import { UserInfoLine } from './components/User';
-import { brandColor, darkColor, lightColor } from '~/components/Styles';
-import { doc, getDoc } from 'firebase/firestore';
+
+/* CONTEXT */
+import { UserContext } from '~/provider/UserProvider';
 
 
 /**
- * The `AccountScreen` which allows the user to edit it's account's information #25
+ * The account screen which allows the user to edit it's account's information #25
  * 
  * The user may edit:
  * - `Name` and `ProfilePicture` without restriction #32
@@ -20,49 +20,15 @@ import { doc, getDoc } from 'firebase/firestore';
  * 
  * The user may also exit it's account without restriction #29
  * 
- * @returns The `AccountScreen`
+ * @returns The account screen JSX element
  */
 export default function AccountScreen() {
-    const navigation = useNavigation<InitialScreenNavigationProps>();
-
-    const auth = getAuth();
-
-    const [user, setUser] = useState({
-        /** User name */
-        'nome': '',
-
-        /** User email*/
-        'email': '',
-
-        /** User CRN*/
-        'cnpj': '',
-
-        /** User password*/
-        'senha': '',
-    });
+    const { name, email, password, crn, handleDataCollection, handleLogout } = useContext(UserContext);
 
     /** Variable that contains the background image source for the profile display */
     const bg = { uri: 'https://static.vecteezy.com/system/resources/previews/000/680/551/original/glowing-orange-tech-arrows-concept.jpg' };
 
-    useEffect(() => {
-        // Collecting and updating user data #28
-        onAuthStateChanged(auth, (currentUser) => {
-            if (currentUser) {
-                const docRef = doc(FIREBASE_DATABASE, 'usuarios', currentUser.uid);
-                const docData = getDoc(docRef);
-                docData.then(doc => {
-                    const userData = doc.data();
-                    if (userData) setUser({ nome: userData.nome, cnpj: userData.cnpj, email: userData.email, senha: userData.senha });
-                })
-            }
-        })
-    })
-
-    /** Asynchronous function that handles the users request to sign out */
-    async function handleExit() {
-        await signOut(FIREBASE_AUTH);
-        navigation.navigate('InitialScreen');
-    }
+    useEffect(() => handleDataCollection(), [name, email, password, crn])
 
     /** 
      * TODO: Edit #30 #31 #32 
@@ -71,17 +37,17 @@ export default function AccountScreen() {
         <ScrollView fadingEdgeLength={200} style={styles.container}>
             <ImageBackground source={bg} resizeMode='cover' style={styles.profileContainer}>
                 <Ionicons name='person-circle' color={lightColor} size={150} />
-                <Text style={styles.profileName}>{user.nome}</Text>
+                <Text style={styles.profileName}>{name}</Text>
             </ImageBackground>
 
             <View style={styles.userContainer}>
                 <Text style={{ fontWeight: '700', fontSize: 20, color: darkColor }}>Detalhes da conta</Text>
 
-                <UserInfoLine icon='mail-outline' name='E-mail' value={user.email} />
-                <UserInfoLine icon='ribbon-outline' name='CNPJ' value={user.cnpj} />
-                <UserInfoLine icon='key-outline' name='Senha' value={user.senha} />
+                <UserInfoLine icon='mail-outline' name='E-mail' value={email} />
+                <UserInfoLine icon='ribbon-outline' name='CNPJ' value={crn} />
+                <UserInfoLine icon='key-outline' name='Senha' value={password} />
 
-                <TouchableOpacity onPress={() => handleExit()} style={styles.exitButton}>
+                <TouchableOpacity onPress={() => handleLogout()} style={styles.exitButton}>
                     <Ionicons name='exit-outline' color={'#f00'} size={25} />
                     <Text style={styles.exitButtonText}>Sair da conta</Text>
                 </TouchableOpacity>
