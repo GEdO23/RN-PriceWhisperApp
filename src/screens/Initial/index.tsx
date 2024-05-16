@@ -27,25 +27,8 @@ export default function InitialScreen() {
             </View>
 
             <View style={styles.buttonList}>
-                <Button
-                    title='Entrar'
-                    onPress={() => navigation.push('LoginScreen')}
-                    buttonStyle={{
-                        background: 'transparent',
-                        border: '#EF4023',
-                        textColor: '#EF4023'
-                    }}
-                />
-
-                <Button
-                    title='Criar conta'
-                    onPress={() => navigation.push('SignupScreen')}
-                    buttonStyle={{
-                        background: '#EF4023',
-                        border: 'transparent',
-                        textColor: '#FFFFFF'
-                    }}
-                />
+                <Button title='Entrar' onPress={() => navigation.push('LoginScreen')} buttonStyle={{ border: '#EF4023', textColor: '#EF4023' }} />
+                <Button title='Criar conta' onPress={() => navigation.push('SignupScreen')} buttonStyle={{ background: '#EF4023', textColor: '#FFFFFF' }} />
             </View>
         </SafeAreaView>
     )

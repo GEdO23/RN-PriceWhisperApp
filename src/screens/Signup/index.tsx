@@ -6,12 +6,14 @@ import { AppNavigationProps } from '~/navigation/props';
 
 /* COMPONENTS */
 import { SafeAreaView, StyleSheet } from 'react-native'
-import Form, { ButtonList, ButtonListProps, InputList, InputListProps } from '~/components/Form';
-import { LinkParam } from '~/components/Link';
+import Form, { InputList } from '~/components/Form';
+import { Link, LinkParam } from '~/components/Link';
 import { lightColor } from '~/components/Styles';
 
 /* CONTEXT */
 import { UserContext } from '~/provider/UserProvider';
+import { Input, SecureInput } from '~/components/Input';
+import Button from '~/components/Button';
 
 
 /**
@@ -31,38 +33,20 @@ export default function SignupScreen() {
 
     const [confirmPassword, setConfirmPassword] = useState('');
 
-    const cadastroForm: InputListProps & ButtonListProps & LinkParam = {
-        inputList: [
-            { id: 1, label: 'Nome', placeholder: 'Insira seu nome', value: name, setValue: setName, isSecured: false, },
-            { id: 2, label: 'Email', placeholder: 'Insira seu email', value: email, setValue: setEmail, isSecured: false, },
-            { id: 3, label: 'CNPJ', placeholder: 'XX.XXX.XXX/XXXX-XX', value: crn, setValue: setCrn, isSecured: true, },
-            { id: 4, label: 'Senha', placeholder: 'Insira sua senha', value: password, setValue: setPassword, isSecured: true, },
-            { id: 5, label: 'Confirmar senha', placeholder: 'Repetir senha', value: confirmPassword, setValue: setConfirmPassword, isSecured: true, }
-        ],
-        buttonList: [
-            {
-                buttonId: 1,
-                title: 'Criar conta',
-                onPress: () => handleSignup(name, email, password, crn),
-                buttonStyle: {
-                    background: '#EF4023',
-                    border: 'transparent',
-                    textColor: '#FFFFFF'
-                }
-            }
-        ],
-        link: {
-            firstText: 'Já possui uma conta?',
-            linkText: 'Entrar',
-            navigate: () => navigation.navigate('LoginScreen')
-        }
-    }
-
     return (
         <SafeAreaView style={styles.container}>
             <Form>
-                <InputList inputList={cadastroForm.inputList} link={cadastroForm.link} />
-                <ButtonList buttonList={cadastroForm.buttonList} />
+                <InputList>
+                    <Input label='Nome' placeholder='Insira seu nome' value={name} setValue={setName} />
+                    <Input label='Email' placeholder='example@domain.com' value={email} setValue={setEmail} />
+                    <SecureInput label='CNPJ' placeholder='xx.xxx.xxx/0001-xx' value={crn} setValue={setCrn} />
+                    <SecureInput label='Senha' placeholder='Insira uma senha forte' value={password} setValue={setPassword} />
+                    <SecureInput label='Confirmar senha' placeholder='Repeita sua senha' value={confirmPassword} setValue={setConfirmPassword} />
+
+                    <Link backText='Já possui uma conta?' linkText='Entrar' link={() => navigation.navigate('LoginScreen')} />
+                </InputList>
+
+                <Button title='Criar conta' onPress={() => handleSignup(name, email, password, crn)} buttonStyle={{ background: '#EF4023', textColor: '#FFFFFF' }} />
             </Form>
         </SafeAreaView>
     )
@@ -75,11 +59,5 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingBottom: 60,
         paddingHorizontal: 20,
-    },
-    title: {
-        fontSize: 28,
-        fontWeight: '700',
-        textAlign: 'center',
-        paddingVertical: 80,
     }
 })

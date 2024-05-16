@@ -1,9 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 
 /* COMPONENTS */
-import { Ionicons } from '@expo/vector-icons';
-import { ImageBackground, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { darkColor, lightColor } from '~/components/Styles';
+import { ScrollView, StyleSheet } from 'react-native';
 import { UserDisplayProfile, UserInfo, UserInfoLine } from './components/User';
 
 /* CONTEXT */

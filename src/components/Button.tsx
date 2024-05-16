@@ -26,7 +26,7 @@ export type ButtonProps = {
  */
 export default function Button({ onPress, title, buttonStyle }: ButtonProps) {
 
-    const dfBackgroundColor: Colors = lightColor;
+    const dfBackgroundColor: Colors = 'transparent';
     const dfOutlineColor: Colors = 'transparent';
     const dfTextColor: Colors = darkColor;
 
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     },
     exitButton: {
         alignItems: 'center',
-        borderColor: 'rgba(255, 0, 0, .2)',
+        borderColor: '#ff00003f',
         borderRadius: 10,
         borderWidth: 2,
         flexDirection: 'row',
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
         gap: 15,
     },
     exitButtonText: {
-        color: '#f00',
+        color: '#F00000',
         fontSize: 16,
         fontWeight: '700',
     }

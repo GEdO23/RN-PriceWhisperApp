@@ -6,12 +6,14 @@ import { AppNavigationProps } from '~/navigation/props';
 
 /* COMPONENTS */
 import { SafeAreaView, StyleSheet } from 'react-native'
-import Form, { ButtonList, ButtonListProps, InputList, InputListProps } from '~/components/Form';
-import { LinkParam } from '~/components/Link';
+import Form, { InputList } from '~/components/Form';
+import { Link } from '~/components/Link';
 import { lightColor } from '~/components/Styles';
 
 /* CONTEXT */
 import { UserContext } from '~/provider/UserProvider';
+import Button from '~/components/Button';
+import { Input, SecureInput } from '~/components/Input';
 
 
 /**
@@ -21,59 +23,21 @@ import { UserContext } from '~/provider/UserProvider';
 export default function LoginScreen() {
     const navigation = useNavigation<AppNavigationProps>();
 
-    const {
-        email, setEmail,
-        password, setPassword,
-        handleLogin, handleForgotPassword
-    } = useContext(UserContext)
-
-    /** Data used for the login form */
-    const loginForm: InputListProps & ButtonListProps & LinkParam = {
-        inputList: [
-            {
-                id: 1,
-                label: 'Email',
-                placeholder: 'Insira seu email',
-                value: email,
-                setValue: setEmail, isSecured: false
-            },
-            {
-                id: 2,
-                label: 'Senha',
-                placeholder: 'Insira sua senha',
-                value: password,
-                setValue: setPassword,
-                isSecured: true,
-                textBelow: {
-                    text: 'Esqueceu sua senha?',
-                    onPress: () => handleForgotPassword(email)
-                }
-            }
-        ],
-        buttonList: [
-            {
-                buttonId: 1,
-                title: 'Entrar',
-                onPress: () => handleLogin(email, password),
-                buttonStyle: {
-                    background: '#EF4023',
-                    border: 'transparent',
-                    textColor: '#FFFFFF'
-                }
-            }
-        ],
-        link: {
-            firstText: 'Não possui uma conta?',
-            linkText: 'Cadastre-se',
-            navigate: () => navigation.navigate('SignupScreen')
-        }
-    }
+    const { email, setEmail, password, setPassword, handleLogin, handleForgotPassword } = useContext(UserContext)
 
     return (
         <SafeAreaView style={styles.container} >
             <Form>
-                <InputList inputList={loginForm.inputList} link={loginForm.link} />
-                <ButtonList buttonList={loginForm.buttonList} />
+                <InputList>
+                    <Input label='Email' placeholder='example@domain.com' value={email} setValue={setEmail} />
+                    <SecureInput label='Senha' placeholder='Insira uma senha forte' value={password} setValue={setPassword} textBelow={{
+                        text: 'Esqueceu sua senha?', onPress: () => handleForgotPassword(email)
+                    }} />
+
+                    <Link backText='Não possui uma conta ainda?' linkText='Cadastre-se' link={() => navigation.navigate('SignupScreen')} />
+                </InputList>
+
+                <Button title='Entrar' onPress={() => handleLogin(email, password)} buttonStyle={{ background: '#EF4023', textColor: '#FFFFFF' }} />
             </Form>
         </SafeAreaView>
     )
