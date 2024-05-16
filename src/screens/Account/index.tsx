@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native';
-import { signOut } from 'firebase/auth';
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 import { Alert, ImageBackground, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { FIREBASE_AUTH } from 'utils/firebase';
+import { FIREBASE_AUTH, FIREBASE_DATABASE } from 'utils/firebase';
 import { AccountScreenNavigationProps, InitialScreenNavigationProps } from '~/navigation/props';
 import { Ionicons } from '@expo/vector-icons';
-import { UserInfoLine, UserInfoTable } from './components/User';
+import { UserInfoLine } from './components/User';
 import { brandColor, darkColor, lightColor } from '~/components/Styles';
+import { doc, getDoc } from 'firebase/firestore';
 
 
 /**
@@ -22,76 +23,68 @@ import { brandColor, darkColor, lightColor } from '~/components/Styles';
  * @returns The `AccountScreen`
  */
 export default function AccountScreen() {
-    const navigation = useNavigation<AccountScreenNavigationProps>();
-    const initialNavigation = useNavigation<InitialScreenNavigationProps>();
+    const navigation = useNavigation<InitialScreenNavigationProps>();
 
-    const auth = FIREBASE_AUTH;
+    const auth = getAuth();
 
+    const [user, setUser] = useState({
+        /** User name */
+        'nome': '',
+
+        /** User email*/
+        'email': '',
+
+        /** User CRN*/
+        'cnpj': '',
+
+        /** User password*/
+        'senha': '',
+    });
+
+    /** Variable that contains the background image source for the profile display */
+    const bg = { uri: 'https://static.vecteezy.com/system/resources/previews/000/680/551/original/glowing-orange-tech-arrows-concept.jpg' };
+
+    useEffect(() => {
+        // Collecting and updating user data #28
+        onAuthStateChanged(auth, (currentUser) => {
+            if (currentUser) {
+                const docRef = doc(FIREBASE_DATABASE, 'usuarios', currentUser.uid);
+                const docData = getDoc(docRef);
+                docData.then(doc => {
+                    const userData = doc.data();
+                    if (userData) setUser({ nome: userData.nome, cnpj: userData.cnpj, email: userData.email, senha: userData.senha });
+                })
+            }
+        })
+    })
+
+    /** Asynchronous function that handles the users request to sign out */
     async function handleExit() {
-        try {
-            await signOut(auth);
-            initialNavigation.navigate('InitialScreen');
-        } catch (error) {
-            Alert.alert(
-                'Erro inesperado',
-                'Um erro inesperado ocorreu ao tentar sair de sua conta.\nTente novamente mais tarde, ou entre em contato com omcorp.helpcenter@gmail.com.',
-                [{ text: 'Ok' }]
-            )
-            throw new Error('Um erro inesperado ocorreu ao tentar sair de sua conta.')
-        }
-    }
-
-    function SettingsIcon() {
-        return (
-            <Ionicons
-                color={darkColor}
-                name='settings-outline'
-                onPress={() => navigation.navigate('SettingsScreen')}
-                size={30}
-            />
-        )
-    }
-
-    function ProfilePicture() {
-        return (
-            <Ionicons name='person-circle' color={lightColor} size={150} />
-        )
-    }
-
-    function ExitAccountButton() {
-        return (
-            <TouchableOpacity onPress={() => handleExit()} style={styles.exitButton}>
-                <Ionicons name='exit-outline' color={'#f00'} size={25} />
-                <Text style={styles.exitButtonText}>Sair da conta</Text>
-            </TouchableOpacity>
-        )
-    }
-
-    const bg = {
-        source: { uri: 'https://static.vecteezy.com/system/resources/previews/000/680/551/original/glowing-orange-tech-arrows-concept.jpg'}
+        await signOut(FIREBASE_AUTH);
+        navigation.navigate('InitialScreen');
     }
 
     /** 
-     * TODO: Coletar e exibir dados do usuário 
-     * TODO: EDIT USER #30 #31 #32
+     * TODO: Edit #30 #31 #32 
      * */
     return (
         <ScrollView fadingEdgeLength={200} style={styles.container}>
-            {/* <SettingsIcon/> */}
-
-            <ImageBackground source={bg.source} resizeMode='cover' style={styles.profileContainer}>
-                <ProfilePicture />
-                <Text style={styles.profileName}>OM Corp.</Text>
+            <ImageBackground source={bg} resizeMode='cover' style={styles.profileContainer}>
+                <Ionicons name='person-circle' color={lightColor} size={150} />
+                <Text style={styles.profileName}>{user.nome}</Text>
             </ImageBackground>
 
             <View style={styles.userContainer}>
                 <Text style={{ fontWeight: '700', fontSize: 20, color: darkColor }}>Detalhes da conta</Text>
 
-                <UserInfoLine icon='mail-outline' name='E-mail' value='omcorp.helpcenter@gmail.com' />
-                <UserInfoLine icon='ribbon-outline' name='CNPJ' value='00.000.000/0000-00' />
-                <UserInfoLine icon='key-outline' name='Senha' value='******' />
+                <UserInfoLine icon='mail-outline' name='E-mail' value={user.email} />
+                <UserInfoLine icon='ribbon-outline' name='CNPJ' value={user.cnpj} />
+                <UserInfoLine icon='key-outline' name='Senha' value={user.senha} />
 
-                <ExitAccountButton />
+                <TouchableOpacity onPress={() => handleExit()} style={styles.exitButton}>
+                    <Ionicons name='exit-outline' color={'#f00'} size={25} />
+                    <Text style={styles.exitButtonText}>Sair da conta</Text>
+                </TouchableOpacity>
             </View>
         </ScrollView>
     )

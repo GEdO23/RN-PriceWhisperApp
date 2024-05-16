@@ -5,7 +5,14 @@ import { darkColor } from "~/components/Styles";
 type UserInfo = {
     icon: any;
     name: string;
-    value: string;
+    value: any;
+}
+
+export type UserProps = {
+    name: string;
+    email: string;
+    cnpj: string;
+    senha: string;
 }
 
 export function UserInfoTable({ children }: any) {

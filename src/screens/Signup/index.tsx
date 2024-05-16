@@ -40,7 +40,9 @@ export default function SignupScreen() {
             const docRef = doc(FIREBASE_DATABASE, 'usuarios', cred.user.uid)
             await setDoc(docRef, {
                 nome: nome,
+                email: email,
                 cnpj: cnpj,
+                senha: senha,
             }, { merge: true });
         }).catch(error => {
             console.log("Erro ao cadastrar: " + error);
