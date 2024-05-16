@@ -1,55 +1,65 @@
-import { useState } from 'react'
+import React, { useContext } from 'react'
+
+/* NAVIGATION */
 import { useNavigation } from '@react-navigation/native';
-import { SafeAreaView, StyleSheet, Text } from 'react-native'
-import { ButtonListProps, Form, InputListProps } from '~/components/Form';
-import { LoginScreenNavigationProps } from '~/navigation/props';
-import { FIREBASE_AUTH } from 'utils/firebase';
+import { AppNavigationProps } from '~/navigation/props';
+
+/* COMPONENTS */
+import { SafeAreaView, StyleSheet } from 'react-native'
+import Form, { ButtonList, ButtonListProps, InputList, InputListProps } from '~/components/Form';
 import { LinkParam } from '~/components/Link';
+import { lightColor } from '~/components/Styles';
+
+/* CONTEXT */
+import { UserContext } from '~/provider/UserProvider';
 
 
 /**
- * The `LoginScreen` which allows the user to log in it's account #5
- * 
- * @requires `CRN`
- * @requires `password`
- * 
- * @returns The `LoginScreen`
+ * The login screen which allows the user to log in #5
+ * @returns The login screen JSX element
  */
-export function LoginScreen() {
-    const navigation = useNavigation<LoginScreenNavigationProps>();
+export default function LoginScreen() {
+    const navigation = useNavigation<AppNavigationProps>();
 
-    const [cnpj, setCnpj] = useState("");
-    const [senha, setSenha] = useState("");
+    const {
+        email, setEmail,
+        password, setPassword,
+        handleLogin, handleForgotPassword
+    } = useContext(UserContext)
 
-    async function handleLogin() {
-
-    }
-
+    /** Data used for the login form */
     const loginForm: InputListProps & ButtonListProps & LinkParam = {
         inputList: [
             {
                 id: 1,
-                label: 'CNPJ',
-                placeholder: 'XX.XXX.XXX/XXXX-XX',
-                value: cnpj,
-                setValue: setCnpj,
-                isSecured: true,
+                label: 'Email',
+                placeholder: 'Insira seu email',
+                value: email,
+                setValue: setEmail, isSecured: false
             },
             {
                 id: 2,
                 label: 'Senha',
                 placeholder: 'Insira sua senha',
-                value: senha,
-                setValue: setSenha,
+                value: password,
+                setValue: setPassword,
                 isSecured: true,
-                textBelow: 'Esqueceu sua senha?'
+                textBelow: {
+                    text: 'Esqueceu sua senha?',
+                    onPress: () => handleForgotPassword(email)
+                }
             }
         ],
         buttonList: [
             {
-                id: 1,
+                buttonId: 1,
                 title: 'Entrar',
-                onPress: handleLogin
+                onPress: () => handleLogin(email, password),
+                buttonStyle: {
+                    background: '#EF4023',
+                    border: 'transparent',
+                    textColor: '#FFFFFF'
+                }
             }
         ],
         link: {
@@ -61,13 +71,10 @@ export function LoginScreen() {
 
     return (
         <SafeAreaView style={styles.container} >
-            <Text style={styles.title}>PriceWhisper</Text>
-            <Form
-                inputList={loginForm.inputList}
-                buttonList={loginForm.buttonList}
-                link={loginForm.link}
-            />
-
+            <Form>
+                <InputList inputList={loginForm.inputList} link={loginForm.link} />
+                <ButtonList buttonList={loginForm.buttonList} />
+            </Form>
         </SafeAreaView>
     )
 }
@@ -75,15 +82,9 @@ export function LoginScreen() {
 const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
-        backgroundColor: '#FFFFFF',
+        backgroundColor: lightColor,
         flex: 1,
         paddingBottom: 60,
         paddingHorizontal: 20,
-    },
-    title: {
-        fontSize: 28,
-        fontWeight: '700',
-        textAlign: 'center',
-        paddingVertical: 80,
     }
 })

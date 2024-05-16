@@ -1,6 +1,6 @@
 import { Text, View, StyleSheet } from 'react-native'
-import { Input, SecureInput } from './Input'
-import { Button } from './Button';
+import { Input, SecureInput, TextBelow } from './Input'
+import Button, { ButtonProps } from './Button';
 import { Link, LinkParam } from './Link';
 
 /**
@@ -36,7 +36,7 @@ export type InputListProps = {
         value: any;
         setValue: any;
         isSecured: boolean;
-        textBelow?: string;
+        textBelow?: TextBelow;
     }[];
 }
 
@@ -58,11 +58,9 @@ export type InputListProps = {
  * ]
  */
 export type ButtonListProps = {
-    buttonList: {
-        id: number;
-        title: string;
-        onPress: any;
-    }[];
+    buttonList: ({
+        buttonId: number;
+    } & ButtonProps)[];
 }
 
 
@@ -98,7 +96,7 @@ export function InputList({ inputList, link }: InputListProps & LinkParam) {
             }
             {
                 link ? (
-                    <Link link={link}/>
+                    <Link link={link} />
                 ) : (<></>)
             }
         </View>
@@ -116,9 +114,14 @@ export function ButtonList({ buttonList }: ButtonListProps) {
             {
                 buttonList.map((item) => (
                     <Button
-                        key={item.id}
+                        key={item.buttonId}
                         title={item.title}
                         onPress={item.onPress}
+                        buttonStyle={{
+                            background: item.buttonStyle?.background,
+                            border: item.buttonStyle?.border,
+                            textColor: item.buttonStyle?.textColor,
+                        }}
                     />
                 ))
             }
@@ -133,11 +136,10 @@ export function ButtonList({ buttonList }: ButtonListProps) {
  * @param buttonList List of available buttons that the user may press
  * @returns The `Form` component
  */
-export function Form({ inputList, buttonList, link }: InputListProps & ButtonListProps & LinkParam) {
+export default function Form({ children }: any) {
     return (
         <View style={styles.form}>
-            <InputList inputList={inputList} link={link} />
-            <ButtonList buttonList={buttonList} />
+            {children}
         </View>
     )
 }

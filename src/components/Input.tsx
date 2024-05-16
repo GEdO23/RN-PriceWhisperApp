@@ -3,23 +3,25 @@ import { StyleSheet, Text, TextInput, TextInputProps, TouchableOpacity, View } f
 import { useState } from 'react'
 import { Ionicons } from '@expo/vector-icons';
 
+export type TextBelow = {
+    text: string;
+    onPress?: any;
+}
+
 export interface InputProps extends TextInputProps {
     label: string;
     placeholder: string;
     value: any;
     setValue: any;
-    textBelow?: string | undefined;
+    textBelow?: TextBelow;
 }
 
-function TextBelow({ text }: any) {
-    if (text) {
-        return (
-            <TouchableOpacity>
-                <Text style={styles.linkText}>{text}</Text>
-            </TouchableOpacity>
-        )
-    }
-    return null
+function TextBelow({ text, onPress }: TextBelow) {
+    return (
+        <TouchableOpacity onPress={() => onPress}>
+            <Text style={styles.linkText}>{text}</Text>
+        </TouchableOpacity>
+    )
 }
 
 export function Input({ label, value, setValue, placeholder, textBelow }: InputProps) {
@@ -34,7 +36,12 @@ export function Input({ label, value, setValue, placeholder, textBelow }: InputP
                 onChangeText={(text) => setValue(text)}
                 style={styles.input}
             />
-            <TextBelow text={textBelow} />
+            {
+                textBelow ?
+                (
+                    <TextBelow text={textBelow.text} onPress={textBelow.onPress} />
+                ) : (<></>)
+            }
         </View>
     )
 }
@@ -46,7 +53,7 @@ export function SecureInput({ label, value, setValue, placeholder, textBelow }: 
         return showValue ?
             <Ionicons
                 size={20}
-                color="#000"
+                color="#000000"
                 name='eye'
                 onPress={() => setShowValue(!showValue)}
             /> :
@@ -72,7 +79,12 @@ export function SecureInput({ label, value, setValue, placeholder, textBelow }: 
                 />
                 <SecretIcon />
             </View>
-            <TextBelow text={textBelow} />
+            {
+                textBelow ?
+                (
+                    <TextBelow text={textBelow.text} onPress={textBelow.onPress} />
+                ) : (<></>)
+            }
         </View>
     )
 }

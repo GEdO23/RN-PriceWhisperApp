@@ -1,104 +1,54 @@
-import { useState } from 'react'
+import React, { useContext, useState } from 'react'
 
-// Navigation
+/* NAVIGATION */
 import { useNavigation } from '@react-navigation/native';
-import { SignupScreenNavigationProps } from '~/navigation/props';
+import { AppNavigationProps } from '~/navigation/props';
 
-// Components
-import { SafeAreaView, StyleSheet, Text } from 'react-native'
-
-// Firebase
-import { FIREBASE_DATABASE } from 'utils/firebase';
-import { addDoc, collection } from 'firebase/firestore';
-import { ButtonListProps, Form, InputListProps } from '~/components/Form';
+/* COMPONENTS */
+import { SafeAreaView, StyleSheet } from 'react-native'
+import Form, { ButtonList, ButtonListProps, InputList, InputListProps } from '~/components/Form';
 import { LinkParam } from '~/components/Link';
+import { lightColor } from '~/components/Styles';
+
+/* CONTEXT */
+import { UserContext } from '~/provider/UserProvider';
 
 
 /**
- * The `SignupScreen` which allows the user to create a new account #4 #9
- * 
- * @requires `username`
- * @requires `email`
- * @requires `CRN`
- * @requires `password`
- * @requires `repeatPassword`
- * 
- * @returns The `SignupScreen`
+ * The sign up screen which allows the user to create a new account #4 #9
+ * @returns The sign up screen JSX element
  */
-export function SignupScreen() {
-    const navigation = useNavigation<SignupScreenNavigationProps>();
+export default function SignupScreen() {
+    const navigation = useNavigation<AppNavigationProps>();
 
-    const [nome, setNome] = useState("");
-    const [email, setEmail] = useState("");
-    const [cnpj, setCnpj] = useState("");
-    const [senha, setSenha] = useState("");
-    const [confirmSenha, setConfirmSenha] = useState("");
+    const {
+        name, setName,
+        email, setEmail,
+        password, setPassword,
+        crn, setCrn,
+        handleSignup
+    } = useContext(UserContext);
 
-    async function handleCadastro() {
-        try {
-            await addDoc(collection(FIREBASE_DATABASE, 'usuarios'), {
-                nome: nome,
-                email: email,
-                cnpj: cnpj,
-                senha: senha,
-                foto: 'assets/favicon.png',
-                timestamp: new Date(),
-            });
-            navigation.push('App')
-
-        } catch (error) {
-            console.log("Erro ao cadastrar: " + error);
-        }
-    }
+    const [confirmPassword, setConfirmPassword] = useState('');
 
     const cadastroForm: InputListProps & ButtonListProps & LinkParam = {
         inputList: [
-            {
-                id: 1,
-                label: 'Nome',
-                placeholder: 'Insira seu nome',
-                value: nome,
-                setValue: setNome,
-                isSecured: false,
-            },
-            {
-                id: 2,
-                label: 'Email',
-                placeholder: 'Insira seu email',
-                value: email,
-                setValue: setEmail,
-                isSecured: false,
-            },
-            {
-                id: 3,
-                label: 'CNPJ',
-                placeholder: 'XX.XXX.XXX/XXXX-XX',
-                value: cnpj,
-                setValue: setCnpj,
-                isSecured: true,
-            },
-            {
-                id: 4,
-                label: 'Senha',
-                placeholder: 'Insira sua senha',
-                value: senha,
-                setValue: setSenha,
-                isSecured: true,
-            },
-            {
-                id: 5,
-                label: 'Confirmar senha',
-                placeholder: 'Repetir senha',
-                value: confirmSenha,
-                setValue: setConfirmSenha,
-                isSecured: true,
-            }
+            { id: 1, label: 'Nome', placeholder: 'Insira seu nome', value: name, setValue: setName, isSecured: false, },
+            { id: 2, label: 'Email', placeholder: 'Insira seu email', value: email, setValue: setEmail, isSecured: false, },
+            { id: 3, label: 'CNPJ', placeholder: 'XX.XXX.XXX/XXXX-XX', value: crn, setValue: setCrn, isSecured: true, },
+            { id: 4, label: 'Senha', placeholder: 'Insira sua senha', value: password, setValue: setPassword, isSecured: true, },
+            { id: 5, label: 'Confirmar senha', placeholder: 'Repetir senha', value: confirmPassword, setValue: setConfirmPassword, isSecured: true, }
         ],
         buttonList: [
             {
-                id: 1,
+                buttonId: 1,
                 title: 'Criar conta',
-                onPress: handleCadastro,
+                onPress: () => handleSignup(name, email, password, crn),
+                buttonStyle: {
+                    background: '#EF4023',
+                    border: 'transparent',
+                    textColor: '#FFFFFF'
+                }
             }
         ],
         link: {
@@ -110,13 +60,10 @@ export function SignupScreen() {
 
     return (
         <SafeAreaView style={styles.container}>
-            <Text style={styles.title}>PriceWhisper</Text>
-
-            <Form
-                inputList={cadastroForm.inputList}
-                buttonList={cadastroForm.buttonList}
-                link={cadastroForm.link}
-            />
+            <Form>
+                <InputList inputList={cadastroForm.inputList} link={cadastroForm.link} />
+                <ButtonList buttonList={cadastroForm.buttonList} />
+            </Form>
         </SafeAreaView>
     )
 }
@@ -124,7 +71,7 @@ export function SignupScreen() {
 const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
-        backgroundColor: '#FFFFFF',
+        backgroundColor: lightColor,
         flex: 1,
         paddingBottom: 60,
         paddingHorizontal: 20,

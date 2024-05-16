@@ -1,6 +1,11 @@
+import React from "react";
+
+/* NAVIGATION */
 import { useNavigation } from "@react-navigation/native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { SettingsScreenNavigationProps } from "~/navigation/props";
+
+/* COMPONENTS */
+import { SafeAreaView } from "react-native";
 
 
 /**
@@ -13,7 +18,7 @@ import { SettingsScreenNavigationProps } from "~/navigation/props";
  * 
  * @returns The `SettingsScreen`
  */
-export function SettingsScreen() {
+export default function SettingsScreen() {
     const navigation = useNavigation<SettingsScreenNavigationProps>();
 
     return (

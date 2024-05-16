@@ -1,6 +1,11 @@
+import React from "react";
+
+/* NAVIGATION */
 import { useNavigation } from "@react-navigation/native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { DashboardScreenNavigationProps } from "~/navigation/props";
+
+/* COMPONENTS */
+import { SafeAreaView } from "react-native";
 
 
 /**
@@ -12,7 +17,7 @@ import { DashboardScreenNavigationProps } from "~/navigation/props";
  * 
  * @returns The `DashboardScreen`
  */
-export function DashboardScreen() {
+export default function DashboardScreen() {
     const navigation = useNavigation<DashboardScreenNavigationProps>();
 
     return (
