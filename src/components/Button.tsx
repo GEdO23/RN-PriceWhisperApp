@@ -1,6 +1,9 @@
-import { forwardRef } from 'react';
+import React, { forwardRef } from 'react';
+
+/* COMPONENTS */
 import { StyleSheet, Text, TouchableOpacity, TouchableOpacityProps } from 'react-native';
 import { Colors, darkColor, lightColor } from './Styles';
+import { Ionicons } from '@expo/vector-icons';
 
 
 type ButtonStyle = {
@@ -15,8 +18,14 @@ export type ButtonProps = {
     buttonStyle?: ButtonStyle;
 } & TouchableOpacityProps;
 
-const Button = forwardRef<TouchableOpacity, ButtonProps>(({ onPress, title, buttonStyle }, ref) => {
-    
+/**
+ * @param onPress Function that is activated by pressing the button
+ * @param title Text displayed in the exit button
+ * @param buttonStyle Button style
+ * @returns `TouchableOpacity` JSX element that contains a text
+ */
+export default function Button({ onPress, title, buttonStyle }: ButtonProps) {
+
     const dfBackgroundColor: Colors = lightColor;
     const dfOutlineColor: Colors = 'transparent';
     const dfTextColor: Colors = darkColor;
@@ -33,13 +42,26 @@ const Button = forwardRef<TouchableOpacity, ButtonProps>(({ onPress, title, butt
     }
 
     return (
-        <TouchableOpacity ref={ref} style={[styles.button, getButtonStyle(buttonStyle?.background, buttonStyle?.border)]} onPress={onPress}>
+        <TouchableOpacity style={[styles.button, getButtonStyle(buttonStyle?.background, buttonStyle?.border)]} onPress={onPress}>
             <Text style={[styles.buttonText, getTextColor(buttonStyle?.textColor)]}>{title}</Text>
         </TouchableOpacity>
     );
-});
+};
 
-export default Button;
+
+/**
+ * @param handleExit Function that handles the exit request
+ * @param text Text displayed in the exit button
+ * @returns `TouchableOpacity` JSX element that contains an icon and a text
+ */
+export function ExitButton({ handleExit, text }: { handleExit: () => void; text: string; }) {
+    return (
+        <TouchableOpacity onPress={handleExit} style={styles.exitButton}>
+            <Ionicons name='exit-outline' color='#f00000' size={25} />
+            <Text style={styles.exitButtonText}>{text}</Text>
+        </TouchableOpacity>
+    )
+}
 
 const styles = StyleSheet.create({
     button: {
@@ -57,5 +79,20 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: '500',
         textAlign: 'center',
+    },
+    exitButton: {
+        alignItems: 'center',
+        borderColor: 'rgba(255, 0, 0, .2)',
+        borderRadius: 10,
+        borderWidth: 2,
+        flexDirection: 'row',
+        padding: 20,
+        height: 85,
+        gap: 15,
+    },
+    exitButtonText: {
+        color: '#f00',
+        fontSize: 16,
+        fontWeight: '700',
     }
 });

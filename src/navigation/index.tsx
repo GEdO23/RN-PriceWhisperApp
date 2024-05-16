@@ -85,11 +85,11 @@ export const RootStack = () => {
     return (
         <NavigationContainer>
             <UserProvider>
-                <Stack.Navigator initialRouteName="InitialScreen" screenOptions={StackConfig}>
-                    <Stack.Screen name="InitialScreen" component={InitialScreen} />
+                <Stack.Navigator initialRouteName="InitialScreen">
+                    <Stack.Screen name="InitialScreen" component={InitialScreen} options={StackConfig} />
                     <Stack.Screen name="SignupScreen" component={SignupScreen} options={{ header: AuthHeader }} />
                     <Stack.Screen name="LoginScreen" component={LoginScreen} options={{ header: AuthHeader }} />
-                    <Stack.Screen name="App" component={RootTab} />
+                    <Stack.Screen name="App" component={RootTab} options={StackConfig} />
                 </Stack.Navigator>
             </UserProvider>
         </NavigationContainer>

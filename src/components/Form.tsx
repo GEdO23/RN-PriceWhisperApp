@@ -1,6 +1,6 @@
 import { Text, View, StyleSheet } from 'react-native'
 import { Input, SecureInput, TextBelow } from './Input'
-import { Button, ButtonProps } from './Button';
+import Button, { ButtonProps } from './Button';
 import { Link, LinkParam } from './Link';
 
 /**
