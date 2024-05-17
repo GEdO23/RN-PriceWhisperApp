@@ -7,7 +7,7 @@ import { AppNavigationProps } from '~/navigation/props';
 /* COMPONENTS */
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import Button from '~/components/Button';
-import { lightColor } from '~/components/Styles';
+import { Color } from '~/components/Styles';
 
 
 /**
@@ -27,8 +27,8 @@ export default function InitialScreen() {
             </View>
 
             <View style={styles.buttonList}>
-                <Button title='Entrar' onPress={() => navigation.push('LoginScreen')} buttonStyle={{ border: '#EF4023', textColor: '#EF4023' }} />
-                <Button title='Criar conta' onPress={() => navigation.push('SignupScreen')} buttonStyle={{ background: '#EF4023', textColor: '#FFFFFF' }} />
+                <Button title='Entrar' onPress={() => navigation.push('LoginScreen')} buttonStyle={{ border: Color.BRAND, textColor: Color.BRAND }} />
+                <Button title='Criar conta' onPress={() => navigation.push('SignupScreen')} buttonStyle={{ background: Color.BRAND, textColor: Color.PRIMARY }} />
             </View>
         </SafeAreaView>
     )
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         paddingVertical: 100,
         justifyContent: 'space-between',
-        backgroundColor: lightColor
+        backgroundColor: Color.PRIMARY
     },
     title: {
         fontSize: 28,
