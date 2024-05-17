@@ -2,14 +2,14 @@ import React, { forwardRef } from 'react';
 
 /* COMPONENTS */
 import { StyleSheet, Text, TouchableOpacity, TouchableOpacityProps } from 'react-native';
-import { Colors, darkColor, lightColor } from './Styles';
 import { Ionicons } from '@expo/vector-icons';
+import { Color, ColorType } from './Styles';
 
 
 type ButtonStyle = {
-    background?: Colors;
-    border?: Colors;
-    textColor?: Colors;
+    background?: ColorType;
+    border?: ColorType;
+    textColor?: ColorType;
 }
 
 export type ButtonProps = {
@@ -26,19 +26,15 @@ export type ButtonProps = {
  */
 export default function Button({ onPress, title, buttonStyle }: ButtonProps) {
 
-    const dfBackgroundColor: Colors = 'transparent';
-    const dfOutlineColor: Colors = 'transparent';
-    const dfTextColor: Colors = darkColor;
-
-    const getButtonStyle = (bg?: Colors, outline?: Colors): {} => {
+    const getButtonStyle = (bg?: ColorType, outline?: ColorType): {} => {
         return {
-            backgroundColor: bg ? bg : dfBackgroundColor,
-            borderColor: outline ? outline : dfOutlineColor,
+            backgroundColor: bg ? bg : Color.TRANSPARENT,
+            borderColor: outline ? outline : Color.TRANSPARENT,
         }
     }
 
-    const getTextColor = (color?: Colors): {} => {
-        return { color: color ? color : dfTextColor }
+    const getTextColor = (color?: ColorType): {} => {
+        return { color: color ? color : Color.SECONDARY }
     }
 
     return (
@@ -57,7 +53,7 @@ export default function Button({ onPress, title, buttonStyle }: ButtonProps) {
 export function ExitButton({ handleExit, text }: { handleExit: () => void; text: string; }) {
     return (
         <TouchableOpacity onPress={handleExit} style={styles.exitButton}>
-            <Ionicons name='exit-outline' color='#f00000' size={25} />
+            <Ionicons name='exit-outline' color={Color.Semantic.RED} size={25} />
             <Text style={styles.exitButtonText}>{text}</Text>
         </TouchableOpacity>
     )
@@ -66,7 +62,6 @@ export function ExitButton({ handleExit, text }: { handleExit: () => void; text:
 const styles = StyleSheet.create({
     button: {
         alignItems: 'center',
-        borderColor: 'transparent',
         borderRadius: 5,
         borderStyle: 'solid',
         borderWidth: 2,
@@ -82,7 +77,7 @@ const styles = StyleSheet.create({
     },
     exitButton: {
         alignItems: 'center',
-        borderColor: '#ff00003f',
+        borderColor: Color.Semantic.RED,
         borderRadius: 10,
         borderWidth: 2,
         flexDirection: 'row',
@@ -91,7 +86,7 @@ const styles = StyleSheet.create({
         gap: 15,
     },
     exitButtonText: {
-        color: '#F00000',
+        color: Color.Semantic.RED,
         fontSize: 16,
         fontWeight: '700',
     }

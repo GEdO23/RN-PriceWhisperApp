@@ -7,13 +7,13 @@ import { AppNavigationProps } from '~/navigation/props';
 /* COMPONENTS */
 import { SafeAreaView, StyleSheet } from 'react-native'
 import Form, { InputList } from '~/components/Form';
-import { Link } from '~/components/Link';
-import { lightColor } from '~/components/Styles';
+import Input, { SecureInput } from '~/components/Input';
+import Link from '~/components/Link';
+import Button from '~/components/Button';
+import { Color } from '~/components/Styles';
 
 /* CONTEXT */
 import { UserContext } from '~/provider/UserProvider';
-import Button from '~/components/Button';
-import { Input, SecureInput } from '~/components/Input';
 
 
 /**
@@ -37,7 +37,7 @@ export default function LoginScreen() {
                     <Link backText='Não possui uma conta ainda?' linkText='Cadastre-se' link={() => navigation.navigate('SignupScreen')} />
                 </InputList>
 
-                <Button title='Entrar' onPress={() => handleLogin(email, password)} buttonStyle={{ background: '#EF4023', textColor: '#FFFFFF' }} />
+                <Button title='Entrar' onPress={() => handleLogin(email, password)} buttonStyle={{ background: Color.BRAND, textColor: Color.PRIMARY}} />
             </Form>
         </SafeAreaView>
     )
@@ -46,7 +46,7 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
-        backgroundColor: lightColor,
+        backgroundColor: Color.PRIMARY,
         flex: 1,
         paddingBottom: 60,
         paddingHorizontal: 20,

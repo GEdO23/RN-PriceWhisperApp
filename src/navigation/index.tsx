@@ -8,8 +8,8 @@ import { RootBottomTabParamList, RootStackParamList } from './props';
 
 /* COMPONENTS */
 import { Ionicons } from '@expo/vector-icons';
-import { brandColor, darkColor } from '~/components/Styles';
 import { AuthHeader } from '~/components/Header';
+import { Color } from '~/components/Styles';
 
 /* PROVIDERS */
 import UserProvider from '~/provider/UserProvider';
@@ -33,8 +33,8 @@ const StackConfig: StackNavigationOptions = { headerShown: false, }
 const BottomTabConfig: BottomTabNavigationOptions = {
     headerShown: false,
     tabBarShowLabel: false,
-    tabBarActiveTintColor: brandColor,
-    tabBarInactiveTintColor: darkColor,
+    tabBarActiveTintColor: Color.BRAND,
+    tabBarInactiveTintColor: Color.SECONDARY,
     tabBarIcon: ({ focused, color, size }) => {
         if (focused) return <Ionicons name='ellipse' color={color} size={size} />
         return <Ionicons name='ellipse-outline' color={color} size={size} />

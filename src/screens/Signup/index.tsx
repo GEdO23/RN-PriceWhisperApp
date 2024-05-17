@@ -7,13 +7,13 @@ import { AppNavigationProps } from '~/navigation/props';
 /* COMPONENTS */
 import { SafeAreaView, StyleSheet } from 'react-native'
 import Form, { InputList } from '~/components/Form';
-import { Link, LinkParam } from '~/components/Link';
+import Input, { SecureInput } from '~/components/Input';
+import Link from '~/components/Link';
+import Button from '~/components/Button';
 import { lightColor } from '~/components/Styles';
 
 /* CONTEXT */
 import { UserContext } from '~/provider/UserProvider';
-import { Input, SecureInput } from '~/components/Input';
-import Button from '~/components/Button';
 
 
 /**
