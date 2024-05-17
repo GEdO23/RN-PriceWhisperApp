@@ -1,31 +1,21 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
-import { brandColor } from './Styles';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Color } from './Styles';
 
 export type LinkParam = {
-    link?: {
-        firstText: string;
-        linkText: string;
-        navigate: any;
-    }
+    backText: string;
+    linkText: string;
+    link: any;
 }
 
 
-export function Link({ link }: LinkParam) {
+export default function Link({ backText, linkText, link }: LinkParam) {
     return (
         <View style={styles.container}>
-            {
-                link ? (
-                    <>
-                        <Text>{link.firstText}</Text>
-                        <TouchableOpacity onPress={link.navigate}>
-                            <Text style={styles.linkText}>{link.linkText}</Text>
-                        </TouchableOpacity>
-                    </>
-                ) : (
-                    <Text>Link not found</Text>
-                )
-            }
+            <Text>{backText}</Text>
+            <TouchableOpacity onPress={link}>
+                <Text style={styles.linkText}>{linkText}</Text>
+            </TouchableOpacity>
         </View>
     )
 }
@@ -36,7 +26,7 @@ const styles = StyleSheet.create({
         gap: 5
     },
     linkText: {
-        color: brandColor,
+        color: Color.BRAND,
         fontWeight: '600'
     }
 })

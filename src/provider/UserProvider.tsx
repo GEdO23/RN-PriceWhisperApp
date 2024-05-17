@@ -14,35 +14,31 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 
 
 export const UserContext = createContext({
-    /** User name */
     name: "",
     /** 
      * `function` that modifies the user `name` 
-     * @param value The new user name which will replace the old one
+     * @param value The new name which will replace the old one
      * */
     setName: (value: string) => { },
 
-    /** User email */
     email: "",
     /** 
      * `function` that modifies the user `email` 
-     * @param value The new user email which will replace the old one
+     * @param value The new email which will replace the old one
      * */
     setEmail: (value: string) => { },
-
-    /** User password */
+    
     password: "",
     /** 
      * `function` that modifies the user `password` 
-     * @param value The new user password which will replace the old one
+     * @param value The new password which will replace the old one
      * */
     setPassword: (value: string) => { },
 
-    /** User CRN */
     crn: "",
     /** 
      * `function` that modifies the user `crn` 
-     * @param value The new Company Registration Number which will replace the old one
+     * @param value The new crn which will replace the old one
      * */
     setCrn: (value: string) => { },
 
@@ -82,31 +78,45 @@ export const UserContext = createContext({
 });
 
 
-const UserProvider = ({ children }: { children: any }) => {
+export default function UserProvider({ children }: { children: any }) {
     const navigation = useNavigation<AppNavigationProps>();
 
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [crn, setCrn] = useState('')
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [crn, setCrn] = useState('');
 
+    const UsuariosDoc = (uid: string) => doc(firestore, 'usuarios', uid);
 
     const handleSignup = async (name: string, email: string, password: string, crn: string) => {
-        await createUserWithEmailAndPassword(auth, email, password)
-            .then(cred => {
-                const docRef = doc(firestore, 'usuarios', cred.user.uid);
 
-                setDoc(docRef, { name, email, crn, password });
 
-                Alert.alert('Cadastrado com sucesso!', 'Realize login para entrar na sua conta')
-            })
-            .catch(error => {
-                console.log('Erro ao cadastrar usuario: ' + error);
-                Alert.alert('Erro ao cadastrar usuario', 'Ocorreu um erro ao tentar cadastrar usuario', [
-                    { text: 'Ok' },
-                    { text: 'Tentar novamente', onPress: () => handleSignup(name, email, password, crn) }
-                ])
-            })
+        // TODO: Validation
+        // const isEveryInputFilled = name.trim() !== '' && email.trim() !== '' && password.trim() !== '' && crn.trim() !== '';
+
+        // const isNameValid = '';
+        // const isCrnValid = await fetch(`https://receitaws.com.br/v1/cnpj/${crn}`)
+        //     .then(response => response.json())
+        //     .then(value => value.status === 'OK')
+        //     .catch(error => console.log(error));
+
+        // if (!isEveryInputFilled) return Alert.alert('Erro!', 'Favor preencher todos os campos antes de enviar');
+        // if (!isCrnValid) return Alert.alert('CNPJ Inválido', 'O Cnpj enviado não existe');
+
+        // await createUserWithEmailAndPassword(auth, email, password)
+        //     .then((cred) => setDoc(UsuariosDoc(cred.user.uid), { name, email, crn, password }))
+        //     .then(() => {
+        //         Alert.alert('Cadastrado com sucesso!', 'Realize login para entrar na sua conta')
+        //         navigation.navigate('LoginScreen');
+        //     })
+        //     .catch((error) => {
+        //         console.log('Erro ao cadastrar usuario: ' + error);
+        //         Alert.alert(
+        //             'Erro no envio!',
+        //             `Ocorreu um erro ao tentar criar sua conta.\n
+        //         Tente novamente mais tarde, ou entre em contato com omcorp.helpcenter@gmail.com`
+        //         );
+        //     });
 
         setName('');
         setEmail('');
@@ -216,5 +226,3 @@ const UserProvider = ({ children }: { children: any }) => {
         </UserContext.Provider>
     )
 }
-
-export default UserProvider;

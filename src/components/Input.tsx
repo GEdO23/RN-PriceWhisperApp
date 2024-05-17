@@ -24,7 +24,7 @@ function TextBelow({ text, onPress }: TextBelow) {
     )
 }
 
-export function Input({ label, value, setValue, placeholder, textBelow }: InputProps) {
+export default function Input({ label, value, setValue, placeholder, textBelow }: InputProps) {
 
     return (
         <View style={styles.inputContainer}>

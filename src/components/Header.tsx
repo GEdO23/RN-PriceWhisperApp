@@ -1,6 +1,6 @@
-import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { lightColor } from './Styles'
+import { StyleSheet, Text, View } from 'react-native'
+import { Color } from './Styles'
 
 export function AuthHeader() {
     return (
@@ -12,7 +12,7 @@ export function AuthHeader() {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: lightColor,
+        backgroundColor: Color.PRIMARY,
         paddingVertical: 80,
     },
     title: {
