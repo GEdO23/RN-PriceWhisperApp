@@ -1,12 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import { ProductItemProps } from '../../components/ProductItem';
+import { ProductProps } from '..'
 
-export type ProductProps = {
-    code: string;
-    desc: string;
-    stock: number;
-} & ProductItemProps;
 
 export default function Product({ data }: { data: ProductProps }) {
     return (

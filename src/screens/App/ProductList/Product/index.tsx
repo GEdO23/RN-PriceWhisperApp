@@ -7,7 +7,7 @@ import { NativeStackScreenProps } from 'react-native-screens/lib/typescript/nati
 /* COMPONENTES */
 import { SafeAreaView, StyleSheet } from 'react-native'
 import Loading from '~/components/Loading'
-import Product, { ProductProps } from './components/Product'
+import Product from './components/Product'
 
 /* FIREBASE */
 import { doc, getDoc } from 'firebase/firestore'
@@ -15,6 +15,16 @@ import { firestore } from 'utils/firebase'
 
 
 type Props = NativeStackScreenProps<ProductStackParamList, 'ProductScreen'>;
+
+export type ProductProps = {
+    id: string;
+    name: string;
+    price: number;
+    desc: string;
+    code?: string;
+    stock?: number;
+    urlImage?: string;
+}
 
 
 const ProductDetailScreen: React.FC<Props> = ({ route }) => {

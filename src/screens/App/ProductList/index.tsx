@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { FlatList, SafeAreaView, StyleSheet } from "react-native";
 import Loading from "~/components/Loading";
 import ProductItem from "./components/ProductItem";
-import { ProductProps } from "./Product/components/Product";
+import { ProductProps } from "./Product";
 import ProductButtonList from "./components/ProductButtonList";
 
 /* FIREBASE */
@@ -41,7 +41,7 @@ export default function ProductListScreen() {
                 data={products}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) => (
-                    <ProductItem id={item.id} name={item.name} desc={item.desc} price={item.price} urlImage="https://static.itdg.com.br/images/360-240/8d5ffb7df41dfd990ce1a20b1c45c36f/shutterstock-184374716-1-.jpg" />
+                    <ProductItem id={item.id} name={item.name} desc={item.desc} price={item.price} size="sm" urlImage="https://static.itdg.com.br/images/360-240/8d5ffb7df41dfd990ce1a20b1c45c36f/shutterstock-184374716-1-.jpg" />
                 )}
             />
             <ProductButtonList activeId={activeButtonId} setActiveId={setActiveButtonId} />
