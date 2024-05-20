@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react"
+import React, { createContext, useEffect, useState } from "react"
 
 /* NAVIGATION */
 import { useNavigation } from "@react-navigation/native";
@@ -14,6 +14,7 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 
 
 export const UserContext = createContext({
+    uid: "",
     name: "",
     /** 
      * `function` that modifies the user `name` 
@@ -27,7 +28,7 @@ export const UserContext = createContext({
      * @param value The new email which will replace the old one
      * */
     setEmail: (value: string) => { },
-    
+
     password: "",
     /** 
      * `function` that modifies the user `password` 
@@ -74,13 +75,14 @@ export const UserContext = createContext({
     /**
      * `void` `function` that handles the collection and updating of user data
      */
-    handleDataCollection: () => { },
+    handleUserDataCollection: () => { },
 });
 
 
 export default function UserProvider({ children }: { children: any }) {
     const navigation = useNavigation<AppNavigationProps>();
 
+    const [uid, setUid] = useState('');
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -206,12 +208,23 @@ export default function UserProvider({ children }: { children: any }) {
     }
 
 
+    useEffect(() => {
+      const unsubscribe = onAuthStateChanged(auth, (user) => {
+        if (user) {
+            setUid(user.uid);
+        } else {
+            setUid('');
+        }
+      })
+    
+      return () => unsubscribe();
+    }, [])
+    
+
+
     return (
         <UserContext.Provider value={{
-            name: name,
-            email: email,
-            password: password,
-            crn: crn,
+            uid, name, email, password, crn,
             setName: (value) => setName(value),
             setEmail: (value) => setEmail(value),
             setPassword: (value) => setPassword(value),
@@ -220,7 +233,7 @@ export default function UserProvider({ children }: { children: any }) {
             handleLogin: (email, password) => handleLogin(email, password),
             handleForgotPassword: (email) => handleForgotPassword(email),
             handleLogout: () => handleLogout(),
-            handleDataCollection: () => handleDataCollection(),
+            handleUserDataCollection: () => handleDataCollection(),
         }}>
             {children}
         </UserContext.Provider>

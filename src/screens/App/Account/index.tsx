@@ -22,11 +22,9 @@ import { ExitButton } from '~/components/Button';
  * @returns The account screen JSX element
  */
 export default function AccountScreen() {
-    const { name, email, password, crn, handleDataCollection, handleLogout } = useContext(UserContext);
+    const { name, email, password, crn, handleUserDataCollection, handleLogout } = useContext(UserContext);
 
-    useEffect(() => {
-        handleDataCollection(), [name, email, password, crn]
-    })
+    useEffect(() => handleUserDataCollection(), [name, email, password, crn])
 
     // TODO: Edit #30 #31 #32 
     return (
