@@ -16,8 +16,8 @@ const styles = StyleSheet.create({
         paddingVertical: 80,
     },
     title: {
-        fontSize: 28,
-        fontWeight: '700',
-        textAlign: 'center'
+        ...MyStyleSheet.Container.CENTER,
+        ...MyStyleSheet.Text.title,
+        color: MyStyleSheet.Color.SECONDARY,
     }
 })

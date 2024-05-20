@@ -12,7 +12,7 @@ export type LinkParam = {
 export default function Link({ backText, linkText, link }: LinkParam) {
     return (
         <View style={styles.container}>
-            <Text>{backText}</Text>
+            <Text style={styles.text}>{backText}</Text>
             <TouchableOpacity onPress={link}>
                 <Text style={styles.linkText}>{linkText}</Text>
             </TouchableOpacity>
@@ -25,7 +25,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         gap: 5
     },
+    text: {
+        ...MyStyleSheet.Text.base,
+        color: MyStyleSheet.Color.SECONDARY,
+    },
     linkText: {
+        ...MyStyleSheet.Text.link,
         color: MyStyleSheet.Color.BRAND,
         fontWeight: '600'
     }

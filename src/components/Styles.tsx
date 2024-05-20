@@ -27,10 +27,6 @@ module MyStyleSheet {
     };
 
     export module Color {
-        export const PRIMARY = '#FFFFFF';
-        export const SECONDARY = '#000000';
-        export const BRAND = '#EF4023';
-        export const TRANSPARENT = 'transparent';
         export const WHITE = '#FFFFFF';
         export const GRAY = '#3a3a3a';
         export const BLACK = '#191925';
@@ -41,6 +37,11 @@ module MyStyleSheet {
         export const BLUE = '#2185D0';
         export const PURPLE = '#A333C8';
         export const PINK = '#E03997';
+        
+        export const BRAND = '#EF4023';
+        export const PRIMARY = BLACK;
+        export const SECONDARY = WHITE;
+        export const TRANSPARENT = 'transparent';
     };
 
     export module Text {

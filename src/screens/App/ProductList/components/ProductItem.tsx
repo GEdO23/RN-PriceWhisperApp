@@ -58,7 +58,7 @@ const SmallSizeStyles = StyleSheet.create({
     },
     itemImage: {
         aspectRatio: 1,
-        backgroundColor: '#CCC',
+        backgroundColor: MyStyleSheet.Color.GRAY,
         borderRadius: 10,
         display: 'none',
         width: 40,

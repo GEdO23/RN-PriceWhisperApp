@@ -28,6 +28,10 @@ export function Form({ children }: any) {
 }
 
 
+/**
+ * Generic modal component
+ * @returns A modal JSX element
+ */
 export function ModalContainer({ children }: any) {
     return (
         <View style={styles.modal}>

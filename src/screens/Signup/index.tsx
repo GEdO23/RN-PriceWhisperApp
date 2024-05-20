@@ -46,7 +46,7 @@ export default function SignupScreen() {
                     <Link backText='Já possui uma conta?' linkText='Entrar' link={() => navigation.navigate('LoginScreen')} />
                 </InputList>
 
-                <Button title='Criar conta' onPress={() => handleSignup(name, email, password, crn)} buttonStyle={{ background: '#EF4023', textColor: '#FFFFFF' }} />
+                <Button title='Criar conta' onPress={() => handleSignup(name, email, password, crn)} buttonStyle={{ background: MyStyleSheet.Color.BRAND, textColor: MyStyleSheet.Color.PRIMARY }} />
             </Form>
         </SafeAreaView>
     )

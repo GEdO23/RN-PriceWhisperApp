@@ -27,6 +27,7 @@ export default function Input({ label, value, setValue, placeholder }: InputProp
                 value={value}
                 onChangeText={(text) => setValue(text)}
                 style={styles.input}
+                placeholderTextColor={MyStyleSheet.Color.SECONDARY}
             />
         </View>
     )
@@ -62,6 +63,7 @@ export function SecureInput({ label, value, setValue, placeholder }: InputProps)
                     value={value}
                     onChangeText={(text) => setValue(text)}
                     style={styles.textInput}
+                    placeholderTextColor={MyStyleSheet.Color.SECONDARY}
                 />
                 <SecretIcon />
             </View>
@@ -81,11 +83,11 @@ const styles = StyleSheet.create({
         gap: 10,
     },
     label: {
+        color: MyStyleSheet.Color.SECONDARY,
         fontWeight: '600',
-        color: MyStyleSheet.Color.SECONDARY
     },
     textInput: {
+        color: MyStyleSheet.Color.SECONDARY,
         flex: 1,
-        color: MyStyleSheet.Color.SECONDARY
     }
 })
