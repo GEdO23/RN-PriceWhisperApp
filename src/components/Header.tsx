@@ -12,6 +12,8 @@ export function AuthHeader() {
 
 const styles = StyleSheet.create({
     container: {
+        alignItems: 'center',
         paddingVertical: 80,
+        justifyContent: 'center',
     },
 })

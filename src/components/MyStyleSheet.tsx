@@ -28,6 +28,11 @@ module MyStyleSheet {
             fontWeight: '400',
         };
 
+        export const STRONG: TextStyle = {
+            ...BASE,
+            fontWeight: '700',
+        }
+
         export const LINK: TextStyle = {
             ...BASE,
             color: Color.GRAY,
