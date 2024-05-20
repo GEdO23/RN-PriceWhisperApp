@@ -1,8 +1,8 @@
 import { TextStyle, ViewStyle } from "react-native";
 
 export module Color {
-    export const PRIMARY = Color.Semantic.WHITE;
-    export const SECONDARY = Color.Semantic.BLACK;
+    export const PRIMARY = '#FFFFFF';
+    export const SECONDARY = '#000000';
     export const BRAND = '#EF4023';
     export const TRANSPARENT = 'transparent';
 
