@@ -21,10 +21,19 @@ export type RootStackParamList = {
  */
 export type RootBottomTabParamList = {
     SettingsScreen: undefined;
-    ProductListScreen: undefined;
-    ProductScreen: undefined;
+    ProductsScreen: undefined;
     DashboardScreen: undefined;
     AccountScreen: undefined;
+}
+
+
+/**
+ * Parameter list of the product screens in `Stack` navigation
+ * @returns A type which has the `Stack` product screens parameters
+ */
+export type ProductStackParamList = {
+    ProductListScreen: undefined;
+    ProductScreen: { id: string };
 }
 
 
@@ -39,7 +48,7 @@ export type AppNavigationProps = StackNavigationProp<RootStackParamList, 'App'>;
  * Bottom tab navigation props for the `ProductsScreen`
  * @returns A type which has the `ProductsScreen` navigation props
  */
-export type ProductListScreenNavigationProps = BottomTabNavigationProp<RootBottomTabParamList, 'ProductListScreen'>;
+export type ProductsScreenNavigationProps = StackNavigationProp<ProductStackParamList, 'ProductListScreen'>;
 
 
 /**

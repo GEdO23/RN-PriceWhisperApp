@@ -1,23 +1,19 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import { Color } from './Styles'
+import MyStyleSheet from './MyStyleSheet'
 
 export function AuthHeader() {
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>PriceWhisper</Text>
+            <Text style={MyStyleSheet.Text.TITLE}>PriceWhisper</Text>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: Color.PRIMARY,
+        alignItems: 'center',
         paddingVertical: 80,
+        justifyContent: 'center',
     },
-    title: {
-        fontSize: 28,
-        fontWeight: '700',
-        textAlign: 'center'
-    }
 })

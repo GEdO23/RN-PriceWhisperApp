@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react"
+import React, { createContext, useEffect, useState } from "react"
 
 /* NAVIGATION */
 import { useNavigation } from "@react-navigation/native";
@@ -14,6 +14,7 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 
 
 export const UserContext = createContext({
+    uid: "",
     name: "",
     /** 
      * `function` that modifies the user `name` 
@@ -27,7 +28,7 @@ export const UserContext = createContext({
      * @param value The new email which will replace the old one
      * */
     setEmail: (value: string) => { },
-    
+
     password: "",
     /** 
      * `function` that modifies the user `password` 
@@ -62,7 +63,7 @@ export const UserContext = createContext({
      * Asynchronous `Promise<void>` `function` that handles the forgot password request
      * @param email The user email address for sending the password change email
      *  */
-    handleForgotPassword: (email: string) => { },
+    handleForgotPassword: (email: string, setEmail: (value: string) => void) => { },
 
     /**
      * Asynchronous `Promise<void>` `function` that handles the sign out request.
@@ -74,13 +75,14 @@ export const UserContext = createContext({
     /**
      * `void` `function` that handles the collection and updating of user data
      */
-    handleDataCollection: () => { },
+    handleUserDataCollection: () => { },
 });
 
 
 export default function UserProvider({ children }: { children: any }) {
     const navigation = useNavigation<AppNavigationProps>();
 
+    const [uid, setUid] = useState('');
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -103,20 +105,20 @@ export default function UserProvider({ children }: { children: any }) {
         // if (!isEveryInputFilled) return Alert.alert('Erro!', 'Favor preencher todos os campos antes de enviar');
         // if (!isCrnValid) return Alert.alert('CNPJ Inválido', 'O Cnpj enviado não existe');
 
-        // await createUserWithEmailAndPassword(auth, email, password)
-        //     .then((cred) => setDoc(UsuariosDoc(cred.user.uid), { name, email, crn, password }))
-        //     .then(() => {
-        //         Alert.alert('Cadastrado com sucesso!', 'Realize login para entrar na sua conta')
-        //         navigation.navigate('LoginScreen');
-        //     })
-        //     .catch((error) => {
-        //         console.log('Erro ao cadastrar usuario: ' + error);
-        //         Alert.alert(
-        //             'Erro no envio!',
-        //             `Ocorreu um erro ao tentar criar sua conta.\n
-        //         Tente novamente mais tarde, ou entre em contato com omcorp.helpcenter@gmail.com`
-        //         );
-        //     });
+        await createUserWithEmailAndPassword(auth, email, password)
+            .then((cred) => setDoc(UsuariosDoc(cred.user.uid), { name: name, email: email, crn: crn, password: password }))
+            .then(() => {
+                Alert.alert('Cadastrado com sucesso!', 'Realize login para entrar na sua conta')
+                navigation.navigate('LoginScreen');
+            })
+            .catch((error) => {
+                console.log(`Email: ${email} Password: ${password}`);
+                console.log('Erro ao cadastrar usuario: ' + error);
+                Alert.alert(
+                    'Erro no envio!',
+                    `Ocorreu um erro ao tentar criar sua conta.\n\nTente novamente mais tarde, ou entre em contato com omcorp.helpcenter@gmail.com`
+                );
+            });
 
         setName('');
         setEmail('');
@@ -140,19 +142,16 @@ export default function UserProvider({ children }: { children: any }) {
                 }
             )
             .catch(error => {
-
                 console.log('Erro ao tentar entrar na conta: ' + error);
-                Alert.alert('Ooops', 'Ocorreu um erro ao tentar entrar em sua conta\nFavor validar se seus dados estão corretos', [
-                    { text: 'Ok' },
-                    { text: 'Tentar novamente', onPress: () => handleLogin(email, password) }
-                ])
+                Alert.alert('Ooops', 'Ocorreu um erro ao tentar entrar em sua conta\nFavor validar se seus dados estão corretos');
                 setEmail('');
                 setPassword('');
             })
     }
 
 
-    const handleForgotPassword = async (email: string) => {
+    const handleForgotPassword = async (email: string, setEmail: (value: string) => void) => {
+
         await sendPasswordResetEmail(auth, email)
             .then(
                 // Success
@@ -161,10 +160,7 @@ export default function UserProvider({ children }: { children: any }) {
                 },
                 // Failure
                 (reason) => {
-                    Alert.alert('Erro no envio!', reason, [
-                        { text: 'Tentar novamente', onPress: () => handleForgotPassword(email) },
-                        { text: 'Ok' },
-                    ])
+                    Alert.alert('Erro no envio!', reason);
                 })
 
             .catch(error => {
@@ -206,21 +202,32 @@ export default function UserProvider({ children }: { children: any }) {
     }
 
 
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUid(user.uid);
+            } else {
+                setUid('');
+            }
+        })
+
+        return () => unsubscribe();
+    }, [])
+
+
+
     return (
         <UserContext.Provider value={{
-            name: name,
-            email: email,
-            password: password,
-            crn: crn,
+            uid, name, email, password, crn,
             setName: (value) => setName(value),
             setEmail: (value) => setEmail(value),
             setPassword: (value) => setPassword(value),
             setCrn: (value) => setCrn(value),
             handleSignup: (name, email, password, crn) => handleSignup(name, email, password, crn),
             handleLogin: (email, password) => handleLogin(email, password),
-            handleForgotPassword: (email) => handleForgotPassword(email),
+            handleForgotPassword: (email: string, setEmail: (value: string) => void) => handleForgotPassword(email, setEmail),
             handleLogout: () => handleLogout(),
-            handleDataCollection: () => handleDataCollection(),
+            handleUserDataCollection: () => handleDataCollection(),
         }}>
             {children}
         </UserContext.Provider>

@@ -6,11 +6,11 @@ import { AppNavigationProps } from '~/navigation/props';
 
 /* COMPONENTS */
 import { SafeAreaView, StyleSheet } from 'react-native'
-import Form, { InputList } from '~/components/Form';
-import Input, { SecureInput } from '~/components/Input';
+import { Form, InputList } from '~/components/Container';
+import Input from '~/components/Input';
 import Link from '~/components/Link';
 import Button from '~/components/Button';
-import { Color } from '~/components/Styles';
+import MyStyleSheet from '~/components/MyStyleSheet';
 
 /* CONTEXT */
 import { UserContext } from '~/provider/UserProvider';
@@ -23,13 +23,7 @@ import { UserContext } from '~/provider/UserProvider';
 export default function SignupScreen() {
     const navigation = useNavigation<AppNavigationProps>();
 
-    const {
-        name, setName,
-        email, setEmail,
-        password, setPassword,
-        crn, setCrn,
-        handleSignup
-    } = useContext(UserContext);
+    const { name, setName, email, setEmail, password, setPassword, crn, setCrn, handleSignup } = useContext(UserContext);
 
     const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -39,14 +33,14 @@ export default function SignupScreen() {
                 <InputList>
                     <Input label='Nome' placeholder='Insira seu nome' value={name} setValue={setName} />
                     <Input label='Email' placeholder='example@domain.com' value={email} setValue={setEmail} />
-                    <SecureInput label='CNPJ' placeholder='xx.xxx.xxx/0001-xx' value={crn} setValue={setCrn} />
-                    <SecureInput label='Senha' placeholder='Insira uma senha forte' value={password} setValue={setPassword} />
-                    <SecureInput label='Confirmar senha' placeholder='Repeita sua senha' value={confirmPassword} setValue={setConfirmPassword} />
+                    <Input label='CNPJ' placeholder='xx.xxx.xxx/xxxx-xx' value={crn} setValue={setCrn} isSecure />
+                    <Input label='Senha' placeholder='Insira uma senha forte' value={password} setValue={setPassword} isSecure />
+                    <Input label='Confirmar senha' placeholder='Repita sua senha' value={confirmPassword} setValue={setConfirmPassword} isSecure />
 
                     <Link backText='Já possui uma conta?' linkText='Entrar' link={() => navigation.navigate('LoginScreen')} />
                 </InputList>
 
-                <Button title='Criar conta' onPress={() => handleSignup(name, email, password, crn)} buttonStyle={{ background: '#EF4023', textColor: '#FFFFFF' }} />
+                <Button title='Criar conta' onPress={() => handleSignup(name, email, password, crn)} buttonStyle={{ background: MyStyleSheet.Color.BRAND, textColor: MyStyleSheet.Color.PRIMARY }} />
             </Form>
         </SafeAreaView>
     )
@@ -54,10 +48,7 @@ export default function SignupScreen() {
 
 const styles = StyleSheet.create({
     container: {
-        alignItems: 'center',
-        backgroundColor: Color.PRIMARY,
-        flex: 1,
-        paddingBottom: 60,
-        paddingHorizontal: 20,
+        ...MyStyleSheet.Container.BASE,
+        paddingTop: 0,
     }
 })
