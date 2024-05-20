@@ -9,7 +9,7 @@ import { auth, firestore } from "utils/firebase";
 import { addDoc, collection, doc, getDoc, setDoc } from "firebase/firestore";
 import { UserContext } from "./UserProvider";
 import { Alert } from "react-native";
-import { ProductProps } from "~/screens/App/ProductList/Product/components/Product";
+import { ProductProps } from "~/screens/App/ProductList/Product";
 
 
 export const ProductsContext = createContext({
