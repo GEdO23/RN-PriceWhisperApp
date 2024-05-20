@@ -5,7 +5,7 @@ import { Color } from './Styles';
 export function BackButton({ onPress }: { onPress: () => void }) {
     return (
         <View style={styles.backButton}>
-            <Feather name="chevron-left" size={16} color={Color.BRAND} onPress={onPress} />
+            <Feather name="chevron-left" size={16} color={MyStyleSheet.Color.BRAND} onPress={onPress} />
         </View>
     );
 };

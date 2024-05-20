@@ -2,7 +2,7 @@ import React from 'react'
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { ProductsScreenNavigationProps } from '~/navigation/props'
-import { Color } from '~/components/Styles'
+import MyStyleSheet from '~/components/Styles'
 import { ProductProps } from '../Product'
 
 
@@ -31,7 +31,7 @@ export default function ProductItem({ name, price, desc, urlImage, id, size }: P
 const SmallSizeStyles = StyleSheet.create({
     container: {
         alignItems: 'center',
-        backgroundColor: Color.PRIMARY,
+        backgroundColor: MyStyleSheet.Color.PRIMARY,
         borderRadius: 10,
         elevation: 5,
         flexDirection: 'row',

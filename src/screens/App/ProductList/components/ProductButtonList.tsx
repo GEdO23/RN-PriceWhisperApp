@@ -1,7 +1,7 @@
 import React from 'react'
 import { Pressable, StyleSheet, View } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
-import { Color } from '~/components/Styles';
+import MyStyleSheet from '~/components/Styles';
 
 
 export type ProductButtonsProps = {
@@ -19,7 +19,7 @@ export default function ProductButtonList({ activeId, setActiveId }: ProductButt
             <Pressable style={id === activeId ? styles.active : styles.productButton} onPress={() => {
                 setActiveId(id);
             }}>
-                <Ionicons name='add-outline' size={buttonSize} color={id === activeId ? Color.PRIMARY : Color.SECONDARY} />
+                <Ionicons name='add-outline' size={buttonSize} color={id === activeId ? MyStyleSheet.Color.PRIMARY : MyStyleSheet.Color.SECONDARY} />
             </Pressable>
         )
     }
@@ -29,7 +29,7 @@ export default function ProductButtonList({ activeId, setActiveId }: ProductButt
             <Pressable style={id === activeId ? styles.active : styles.productButton} onPress={() => {
                 setActiveId(id);
             }}>
-                <Ionicons name='server-outline' size={buttonSize} color={id === activeId ? Color.PRIMARY : Color.SECONDARY} />
+                <Ionicons name='server-outline' size={buttonSize} color={id === activeId ? MyStyleSheet.Color.PRIMARY : MyStyleSheet.Color.SECONDARY} />
             </Pressable>
         )
     }
@@ -39,7 +39,7 @@ export default function ProductButtonList({ activeId, setActiveId }: ProductButt
             <Pressable style={id === activeId ? styles.active : styles.productButton} onPress={() => {
                 setActiveId(id);
             }}>
-                <Ionicons name='podium-outline' size={buttonSize} color={id === activeId ? Color.PRIMARY : Color.SECONDARY} />
+                <Ionicons name='podium-outline' size={buttonSize} color={id === activeId ? MyStyleSheet.Color.PRIMARY : MyStyleSheet.Color.SECONDARY} />
             </Pressable>
         )
     }
@@ -49,7 +49,7 @@ export default function ProductButtonList({ activeId, setActiveId }: ProductButt
             <Pressable style={id === activeId ? styles.active : styles.productButton} onPress={() => {
                 setActiveId(id);
             }}>
-                <Ionicons name='pricetags-outline' size={buttonSize} color={id === activeId ? Color.PRIMARY : Color.SECONDARY} />
+                <Ionicons name='pricetags-outline' size={buttonSize} color={id === activeId ? MyStyleSheet.Color.PRIMARY : MyStyleSheet.Color.SECONDARY} />
             </Pressable>
         )
     }
@@ -70,8 +70,8 @@ const styles = StyleSheet.create({
     productButton: {
         alignItems: 'center',
         aspectRatio: 1,
-        backgroundColor: Color.PRIMARY,
-        borderColor: Color.SECONDARY,
+        backgroundColor: MyStyleSheet.Color.PRIMARY,
+        borderColor: MyStyleSheet.Color.SECONDARY,
         borderRadius: 200,
         borderWidth: 1,
         elevation: 2,
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     active: {
         alignItems: 'center',
         aspectRatio: 1,
-        backgroundColor: Color.BRAND,
+        backgroundColor: MyStyleSheet.Color.BRAND,
         borderRadius: 200,
         elevation: 2,
         justifyContent: 'center',

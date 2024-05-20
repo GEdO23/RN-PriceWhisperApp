@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { Color } from './Styles';
+import MyStyleSheet from './Styles';
 
 export type LinkParam = {
     backText: string;
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
         gap: 5
     },
     linkText: {
-        color: Color.BRAND,
+        color: MyStyleSheet.Color.BRAND,
         fontWeight: '600'
     }
 })

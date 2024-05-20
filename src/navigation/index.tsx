@@ -9,7 +9,6 @@ import { ProductStackParamList, RootBottomTabParamList, RootStackParamList } fro
 /* COMPONENTS */
 import { Ionicons } from '@expo/vector-icons';
 import { AuthHeader } from '~/components/Header';
-import { Color } from '~/components/Styles';
 
 /* PROVIDERS */
 import UserProvider from '~/provider/UserProvider';
@@ -23,15 +22,16 @@ import ProductListScreen from '~/screens/App/ProductList';
 import DashboardScreen from '~/screens/App/Dashboard';
 import AccountScreen from '~/screens/App/Account';
 import ProductDetailScreen from '~/screens/App/ProductList/Product';
+import MyStyleSheet from '~/components/Styles';
 
 
 const MyTheme: Theme = {
     ...DefaultTheme,
     colors: {
         ...DefaultTheme.colors,
-        background: Color.PRIMARY,
-        primary: Color.BRAND,
-        text: Color.SECONDARY,
+        background: MyStyleSheet.Color.PRIMARY,
+        primary: MyStyleSheet.Color.BRAND,
+        text: MyStyleSheet.Color.SECONDARY,
     }
 }
 
@@ -111,7 +111,7 @@ export const RootStack = () => {
     return (
         <NavigationContainer theme={MyTheme}>
             <UserProvider>
-                <Stack.Navigator initialRouteName="App">
+                <Stack.Navigator initialRouteName="InitialScreen">
                     <Stack.Screen name="InitialScreen" component={InitialScreen} options={{ headerShown: false, }} />
                     <Stack.Screen name="SignupScreen" component={SignupScreen} options={{ header: AuthHeader }} />
                     <Stack.Screen name="LoginScreen" component={LoginScreen} options={{ header: AuthHeader }} />

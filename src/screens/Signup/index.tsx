@@ -10,7 +10,7 @@ import Form, { InputList } from '~/components/Form';
 import Input, { SecureInput } from '~/components/Input';
 import Link from '~/components/Link';
 import Button from '~/components/Button';
-import { Color } from '~/components/Styles';
+import MyStyleSheet from '~/components/Styles';
 
 /* CONTEXT */
 import { UserContext } from '~/provider/UserProvider';
@@ -55,7 +55,7 @@ export default function SignupScreen() {
 const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
-        backgroundColor: Color.PRIMARY,
+        backgroundColor: MyStyleSheet.Color.PRIMARY,
         flex: 1,
         paddingBottom: 60,
         paddingHorizontal: 20,

@@ -63,7 +63,7 @@ export const UserContext = createContext({
      * Asynchronous `Promise<void>` `function` that handles the forgot password request
      * @param email The user email address for sending the password change email
      *  */
-    handleForgotPassword: (email: string) => { },
+    handleForgotPassword: (setShowModal: (value: boolean) => void) => { },
 
     /**
      * Asynchronous `Promise<void>` `function` that handles the sign out request.
@@ -105,20 +105,20 @@ export default function UserProvider({ children }: { children: any }) {
         // if (!isEveryInputFilled) return Alert.alert('Erro!', 'Favor preencher todos os campos antes de enviar');
         // if (!isCrnValid) return Alert.alert('CNPJ Inválido', 'O Cnpj enviado não existe');
 
-        // await createUserWithEmailAndPassword(auth, email, password)
-        //     .then((cred) => setDoc(UsuariosDoc(cred.user.uid), { name, email, crn, password }))
-        //     .then(() => {
-        //         Alert.alert('Cadastrado com sucesso!', 'Realize login para entrar na sua conta')
-        //         navigation.navigate('LoginScreen');
-        //     })
-        //     .catch((error) => {
-        //         console.log('Erro ao cadastrar usuario: ' + error);
-        //         Alert.alert(
-        //             'Erro no envio!',
-        //             `Ocorreu um erro ao tentar criar sua conta.\n
-        //         Tente novamente mais tarde, ou entre em contato com omcorp.helpcenter@gmail.com`
-        //         );
-        //     });
+        await createUserWithEmailAndPassword(auth, email, password)
+            .then((cred) => setDoc(UsuariosDoc(cred.user.uid), { name, email, crn, password }))
+            .then(() => {
+                Alert.alert('Cadastrado com sucesso!', 'Realize login para entrar na sua conta')
+                navigation.navigate('LoginScreen');
+            })
+            .catch((error) => {
+                console.log('Erro ao cadastrar usuario: ' + error);
+                Alert.alert(
+                    'Erro no envio!',
+                    `Ocorreu um erro ao tentar criar sua conta.\n
+                Tente novamente mais tarde, ou entre em contato com omcorp.helpcenter@gmail.com`
+                );
+            });
 
         setName('');
         setEmail('');
@@ -142,38 +142,37 @@ export default function UserProvider({ children }: { children: any }) {
                 }
             )
             .catch(error => {
-
                 console.log('Erro ao tentar entrar na conta: ' + error);
-                Alert.alert('Ooops', 'Ocorreu um erro ao tentar entrar em sua conta\nFavor validar se seus dados estão corretos', [
-                    { text: 'Ok' },
-                    { text: 'Tentar novamente', onPress: () => handleLogin(email, password) }
-                ])
+                Alert.alert('Ooops', 'Ocorreu um erro ao tentar entrar em sua conta\nFavor validar se seus dados estão corretos');
                 setEmail('');
                 setPassword('');
             })
     }
 
 
-    const handleForgotPassword = async (email: string) => {
-        await sendPasswordResetEmail(auth, email)
-            .then(
-                // Success
-                () => {
-                    Alert.alert('Email de confirmação', 'Um email de confirmação foi enviado a ' + email)
-                },
-                // Failure
-                (reason) => {
-                    Alert.alert('Erro no envio!', reason, [
-                        { text: 'Tentar novamente', onPress: () => handleForgotPassword(email) },
-                        { text: 'Ok' },
-                    ])
-                })
+    const handleForgotPassword = async (setShowModal: (value: boolean) => void) => {
 
-            .catch(error => {
-                console.log("Erro ao tentar processar request de forgotpassword: " + error)
+        setShowModal(true);
 
-                Alert.alert('Erro no envio!', 'Alguma coisa deu errado...')
-            });
+        // await sendPasswordResetEmail(auth, email)
+        //     .then(
+        //         // Success
+        //         () => {
+        //             Alert.alert('Email de confirmação', 'Um email de confirmação foi enviado a ' + email)
+        //         },
+        //         // Failure
+        //         (reason) => {
+        //             Alert.alert('Erro no envio!', reason, [
+        //                 { text: 'Tentar novamente', onPress: () => handleForgotPassword(email, setEmail) },
+        //                 { text: 'Ok' },
+        //             ])
+        //         })
+
+        //     .catch(error => {
+        //         console.log("Erro ao tentar processar request de forgotpassword: " + error)
+
+        //         Alert.alert('Erro no envio!', 'Alguma coisa deu errado...')
+        //     });
     }
 
 
@@ -209,17 +208,17 @@ export default function UserProvider({ children }: { children: any }) {
 
 
     useEffect(() => {
-      const unsubscribe = onAuthStateChanged(auth, (user) => {
-        if (user) {
-            setUid(user.uid);
-        } else {
-            setUid('');
-        }
-      })
-    
-      return () => unsubscribe();
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUid(user.uid);
+            } else {
+                setUid('');
+            }
+        })
+
+        return () => unsubscribe();
     }, [])
-    
+
 
 
     return (
@@ -231,7 +230,7 @@ export default function UserProvider({ children }: { children: any }) {
             setCrn: (value) => setCrn(value),
             handleSignup: (name, email, password, crn) => handleSignup(name, email, password, crn),
             handleLogin: (email, password) => handleLogin(email, password),
-            handleForgotPassword: (email) => handleForgotPassword(email),
+            handleForgotPassword: (setShowModal: (value: boolean) => void) => handleForgotPassword(setShowModal),
             handleLogout: () => handleLogout(),
             handleUserDataCollection: () => handleDataCollection(),
         }}>

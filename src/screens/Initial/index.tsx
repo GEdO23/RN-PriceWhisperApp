@@ -7,7 +7,7 @@ import { AppNavigationProps } from '~/navigation/props';
 /* COMPONENTS */
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import Button from '~/components/Button';
-import { Color } from '~/components/Styles';
+import MyStyleSheet from '~/components/Styles';
 
 
 /**
@@ -27,8 +27,8 @@ export default function InitialScreen() {
             </View>
 
             <View style={styles.buttonList}>
-                <Button title='Entrar' onPress={() => navigation.push('LoginScreen')} buttonStyle={{ border: Color.BRAND, textColor: Color.BRAND }} />
-                <Button title='Criar conta' onPress={() => navigation.push('SignupScreen')} buttonStyle={{ background: Color.BRAND, textColor: Color.PRIMARY }} />
+                <Button title='Entrar' onPress={() => navigation.push('LoginScreen')} buttonStyle={{ border: MyStyleSheet.Color.BRAND, textColor: MyStyleSheet.Color.BRAND }} />
+                <Button title='Criar conta' onPress={() => navigation.push('SignupScreen')} buttonStyle={{ background: MyStyleSheet.Color.BRAND, textColor: MyStyleSheet.Color.PRIMARY }} />
             </View>
         </SafeAreaView>
     )
@@ -41,11 +41,10 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         paddingVertical: 100,
         justifyContent: 'space-between',
-        backgroundColor: Color.PRIMARY
+        backgroundColor: MyStyleSheet.Color.PRIMARY
     },
     title: {
-        fontSize: 28,
-        fontWeight: '700',
+        ...MyStyleSheet.Text.title,
         textAlign: 'center'
     },
     titleContainer: {

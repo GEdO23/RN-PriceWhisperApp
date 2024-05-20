@@ -2,6 +2,7 @@
 import { StyleSheet, Text, TextInput, TextInputProps, TouchableOpacity, View } from 'react-native'
 import { useState } from 'react'
 import { Ionicons } from '@expo/vector-icons';
+import MyStyleSheet from './Styles';
 
 export type TextBelow = {
     text: string;
@@ -13,18 +14,9 @@ export interface InputProps extends TextInputProps {
     placeholder: string;
     value: any;
     setValue: any;
-    textBelow?: TextBelow;
 }
 
-function TextBelow({ text, onPress }: TextBelow) {
-    return (
-        <TouchableOpacity onPress={() => onPress}>
-            <Text style={styles.linkText}>{text}</Text>
-        </TouchableOpacity>
-    )
-}
-
-export default function Input({ label, value, setValue, placeholder, textBelow }: InputProps) {
+export default function Input({ label, value, setValue, placeholder }: InputProps) {
 
     return (
         <View style={styles.inputContainer}>
@@ -36,30 +28,24 @@ export default function Input({ label, value, setValue, placeholder, textBelow }
                 onChangeText={(text) => setValue(text)}
                 style={styles.input}
             />
-            {
-                textBelow ?
-                (
-                    <TextBelow text={textBelow.text} onPress={textBelow.onPress} />
-                ) : (<></>)
-            }
         </View>
     )
 }
 
-export function SecureInput({ label, value, setValue, placeholder, textBelow }: InputProps) {
+export function SecureInput({ label, value, setValue, placeholder }: InputProps) {
     const [showValue, setShowValue] = useState(false);
 
     function SecretIcon() {
         return showValue ?
             <Ionicons
                 size={20}
-                color="#000000"
+                color={MyStyleSheet.Color.SECONDARY}
                 name='eye'
                 onPress={() => setShowValue(!showValue)}
             /> :
             <Ionicons
                 size={20}
-                color="#9D9D9D"
+                color={MyStyleSheet.Color.GRAY}
                 name='eye-off'
                 onPress={() => setShowValue(!showValue)}
             />
@@ -79,19 +65,13 @@ export function SecureInput({ label, value, setValue, placeholder, textBelow }: 
                 />
                 <SecretIcon />
             </View>
-            {
-                textBelow ?
-                (
-                    <TextBelow text={textBelow.text} onPress={textBelow.onPress} />
-                ) : (<></>)
-            }
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     input: {
-        borderBottomColor: '#9D9D9D',
+        borderBottomColor: MyStyleSheet.Color.GRAY,
         borderBottomWidth: 1,
         paddingVertical: 5,
         flexDirection: 'row',
@@ -102,12 +82,10 @@ const styles = StyleSheet.create({
     },
     label: {
         fontWeight: '600',
+        color: MyStyleSheet.Color.SECONDARY
     },
     textInput: {
-        flex: 1
-    },
-    linkText: {
-        color: '#9D9D9D',
-        fontWeight: '600'
+        flex: 1,
+        color: MyStyleSheet.Color.SECONDARY
     }
 })

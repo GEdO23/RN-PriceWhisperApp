@@ -5,7 +5,7 @@ import { Color } from './Styles'
 export default function Loading() {
     return (
         <>
-            <ActivityIndicator size={50} color={Color.BRAND} />
+            <ActivityIndicator size={50} color={MyStyleSheet.Color.BRAND} />
             <Text>Carregando...</Text>
         </>
     )

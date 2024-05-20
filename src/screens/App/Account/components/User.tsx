@@ -3,7 +3,7 @@ import React from "react";
 /* COMPONENTS */
 import { Ionicons } from "@expo/vector-icons";
 import { ImageBackground, StyleSheet, Text, View } from "react-native";
-import { Color } from "~/components/Styles";
+import MyStyleSheet from "~/components/Styles";
 
 
 /** 
@@ -17,7 +17,7 @@ export function UserDisplayProfile({ name }: { name: string; }) {
 
     return (
         <ImageBackground source={bg} resizeMode='cover' style={styles.profileContainer}>
-            <Ionicons name='person-circle' color={Color.PRIMARY} size={150} />
+            <Ionicons name='person-circle' color={MyStyleSheet.Color.PRIMARY} size={150} />
             <Text style={styles.profileName}>{name}</Text>
         </ImageBackground>
     )
@@ -48,7 +48,7 @@ export function UserInfo({ title, children }: { title: string; children: any; })
 export function UserInfoLine({ icon, name, value }: { icon?: any; name: string; value: any; }) {
     return (
         <View style={styles.infoLineContainer}>
-            <Ionicons name={icon} color={Color.SECONDARY} size={25} />
+            <Ionicons name={icon} color={MyStyleSheet.Color.SECONDARY} size={25} />
             <View>
                 <Text style={styles.infoName}>{name}</Text>
                 <Text style={styles.infoValue}>{value}</Text>
@@ -74,12 +74,12 @@ const styles = StyleSheet.create({
         gap: 15,
     },
     infoName: {
-        color: Color.SECONDARY,
+        color: MyStyleSheet.Color.SECONDARY,
         fontSize: 16,
         fontWeight: '700',
     },
     infoTitle: {
-        color: Color.SECONDARY,
+        color: MyStyleSheet.Color.SECONDARY,
         fontSize: 20,
         fontWeight: '700',
     },
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     },
     profileName: {
         fontSize: 20,
-        color: Color.PRIMARY,
+        color: MyStyleSheet.Color.PRIMARY,
         fontWeight: '600'
     },
 })

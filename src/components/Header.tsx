@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import { Color } from './Styles'
+import MyStyleSheet from './Styles'
 
 export function AuthHeader() {
     return (
@@ -12,7 +12,7 @@ export function AuthHeader() {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: Color.PRIMARY,
+        backgroundColor: MyStyleSheet.Color.PRIMARY,
         paddingVertical: 80,
     },
     title: {
