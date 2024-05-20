@@ -63,7 +63,7 @@ export const UserContext = createContext({
      * Asynchronous `Promise<void>` `function` that handles the forgot password request
      * @param email The user email address for sending the password change email
      *  */
-    handleForgotPassword: (setShowModal: (value: boolean) => void) => { },
+    handleForgotPassword: (email: string, setEmail: (value: string) => void) => { },
 
     /**
      * Asynchronous `Promise<void>` `function` that handles the sign out request.
@@ -106,17 +106,17 @@ export default function UserProvider({ children }: { children: any }) {
         // if (!isCrnValid) return Alert.alert('CNPJ Inválido', 'O Cnpj enviado não existe');
 
         await createUserWithEmailAndPassword(auth, email, password)
-            .then((cred) => setDoc(UsuariosDoc(cred.user.uid), { name, email, crn, password }))
+            .then((cred) => setDoc(UsuariosDoc(cred.user.uid), { name: name, email: email, crn: crn, password: password }))
             .then(() => {
                 Alert.alert('Cadastrado com sucesso!', 'Realize login para entrar na sua conta')
                 navigation.navigate('LoginScreen');
             })
             .catch((error) => {
+                console.log(`Email: ${email} Password: ${password}`);
                 console.log('Erro ao cadastrar usuario: ' + error);
                 Alert.alert(
                     'Erro no envio!',
-                    `Ocorreu um erro ao tentar criar sua conta.\n
-                Tente novamente mais tarde, ou entre em contato com omcorp.helpcenter@gmail.com`
+                    `Ocorreu um erro ao tentar criar sua conta.\n\nTente novamente mais tarde, ou entre em contato com omcorp.helpcenter@gmail.com`
                 );
             });
 
@@ -150,29 +150,24 @@ export default function UserProvider({ children }: { children: any }) {
     }
 
 
-    const handleForgotPassword = async (setShowModal: (value: boolean) => void) => {
+    const handleForgotPassword = async (email: string, setEmail: (value: string) => void) => {
 
-        setShowModal(true);
+        await sendPasswordResetEmail(auth, email)
+            .then(
+                // Success
+                () => {
+                    Alert.alert('Email de confirmação', 'Um email de confirmação foi enviado a ' + email)
+                },
+                // Failure
+                (reason) => {
+                    Alert.alert('Erro no envio!', reason);
+                })
 
-        // await sendPasswordResetEmail(auth, email)
-        //     .then(
-        //         // Success
-        //         () => {
-        //             Alert.alert('Email de confirmação', 'Um email de confirmação foi enviado a ' + email)
-        //         },
-        //         // Failure
-        //         (reason) => {
-        //             Alert.alert('Erro no envio!', reason, [
-        //                 { text: 'Tentar novamente', onPress: () => handleForgotPassword(email, setEmail) },
-        //                 { text: 'Ok' },
-        //             ])
-        //         })
+            .catch(error => {
+                console.log("Erro ao tentar processar request de forgotpassword: " + error)
 
-        //     .catch(error => {
-        //         console.log("Erro ao tentar processar request de forgotpassword: " + error)
-
-        //         Alert.alert('Erro no envio!', 'Alguma coisa deu errado...')
-        //     });
+                Alert.alert('Erro no envio!', 'Alguma coisa deu errado...')
+            });
     }
 
 
@@ -230,7 +225,7 @@ export default function UserProvider({ children }: { children: any }) {
             setCrn: (value) => setCrn(value),
             handleSignup: (name, email, password, crn) => handleSignup(name, email, password, crn),
             handleLogin: (email, password) => handleLogin(email, password),
-            handleForgotPassword: (setShowModal: (value: boolean) => void) => handleForgotPassword(setShowModal),
+            handleForgotPassword: (email: string, setEmail: (value: string) => void) => handleForgotPassword(email, setEmail),
             handleLogout: () => handleLogout(),
             handleUserDataCollection: () => handleDataCollection(),
         }}>

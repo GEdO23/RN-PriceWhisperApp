@@ -7,7 +7,7 @@ import { AppNavigationProps } from '~/navigation/props';
 /* COMPONENTS */
 import { Alert, Modal, SafeAreaView, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { Form, InputList } from '~/components/Container';
-import Input, { SecureInput } from '~/components/Input';
+import Input from '~/components/Input';
 import Link from '~/components/Link';
 import Button from '~/components/Button';
 import MyStyleSheet from '~/components/MyStyleSheet';
@@ -33,8 +33,8 @@ export default function LoginScreen() {
             <Form>
                 <InputList>
                     <Input label='Email' placeholder='example@domain.com' value={email} setValue={setEmail} />
-                    <SecureInput label='Senha' placeholder='Insira uma senha forte' value={password} setValue={setPassword} />
-                    <TouchableOpacity onPress={() => handleForgotPassword(setShowForgotPasswordModal)}>
+                    <Input label='Senha' placeholder='Insira uma senha forte' value={password} setValue={setPassword} isSecure />
+                    <TouchableOpacity onPress={() => setShowForgotPasswordModal(true)}>
                         <Text style={MyStyleSheet.Text.LINK}>Esqueceu sua senha?</Text>
                     </TouchableOpacity>
 
@@ -44,7 +44,7 @@ export default function LoginScreen() {
                 <Button title='Entrar' onPress={() => handleLogin(email, password)} buttonStyle={{ background: MyStyleSheet.Color.BRAND, textColor: MyStyleSheet.Color.PRIMARY }} />
             </Form>
             <Modal visible={showForgotPasswordModal} transparent>
-                <ForgotPasswordModal setShowModal={setShowForgotPasswordModal}/>
+                <ForgotPasswordModal setShowModal={setShowForgotPasswordModal} />
             </Modal>
         </SafeAreaView>
     )

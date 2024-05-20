@@ -7,7 +7,7 @@ import { AppNavigationProps } from '~/navigation/props';
 /* COMPONENTS */
 import { SafeAreaView, StyleSheet } from 'react-native'
 import { Form, InputList } from '~/components/Container';
-import Input, { SecureInput } from '~/components/Input';
+import Input from '~/components/Input';
 import Link from '~/components/Link';
 import Button from '~/components/Button';
 import MyStyleSheet from '~/components/MyStyleSheet';
@@ -33,9 +33,9 @@ export default function SignupScreen() {
                 <InputList>
                     <Input label='Nome' placeholder='Insira seu nome' value={name} setValue={setName} />
                     <Input label='Email' placeholder='example@domain.com' value={email} setValue={setEmail} />
-                    <SecureInput label='CNPJ' placeholder='xx.xxx.xxx/0001-xx' value={crn} setValue={setCrn} />
-                    <SecureInput label='Senha' placeholder='Insira uma senha forte' value={password} setValue={setPassword} />
-                    <SecureInput label='Confirmar senha' placeholder='Repeita sua senha' value={confirmPassword} setValue={setConfirmPassword} />
+                    <Input label='CNPJ' placeholder='xx.xxx.xxx/xxxx-xx' value={crn} setValue={setCrn} isSecure />
+                    <Input label='Senha' placeholder='Insira uma senha forte' value={password} setValue={setPassword} isSecure />
+                    <Input label='Confirmar senha' placeholder='Repita sua senha' value={confirmPassword} setValue={setConfirmPassword} isSecure />
 
                     <Link backText='Já possui uma conta?' linkText='Entrar' link={() => navigation.navigate('LoginScreen')} />
                 </InputList>

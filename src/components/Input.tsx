@@ -14,27 +14,11 @@ export interface InputProps extends TextInputProps {
     placeholder: string;
     value: any;
     setValue: any;
+    isSecure?: boolean;
 }
 
-export default function Input({ label, value, setValue, placeholder }: InputProps) {
-
-    return (
-        <View style={styles.inputContainer}>
-            <Text style={styles.label}>{label}</Text>
-            <TextInput
-                placeholder={placeholder}
-                spellCheck={false}
-                value={value}
-                onChangeText={(text) => setValue(text)}
-                style={styles.input}
-                placeholderTextColor={MyStyleSheet.Color.SECONDARY}
-            />
-        </View>
-    )
-}
-
-export function SecureInput({ label, value, setValue, placeholder }: InputProps) {
-    const [showValue, setShowValue] = useState(false);
+export default function Input({ label = 'Label', value, setValue, placeholder = 'placeholder', isSecure = false }: InputProps) {
+    const [showValue, setShowValue] = useState(isSecure);
 
     function SecretIcon() {
         return showValue ?
@@ -54,40 +38,25 @@ export function SecureInput({ label, value, setValue, placeholder }: InputProps)
 
     return (
         <View style={styles.inputContainer}>
-            <Text style={styles.label}>{label}</Text>
-            <View style={styles.input}>
+            <Text style={MyStyleSheet.Text.LABEL}>{label}</Text>
+            <View style={MyStyleSheet.Container.INPUT}>
                 <TextInput
-                    placeholder={placeholder}
-                    secureTextEntry={!showValue}
                     spellCheck={false}
+                    placeholder={placeholder}
+                    placeholderTextColor={MyStyleSheet.Color.GRAY}
+                    style={MyStyleSheet.Text.INPUT}
+                    secureTextEntry={showValue}
                     value={value}
                     onChangeText={(text) => setValue(text)}
-                    style={styles.textInput}
-                    placeholderTextColor={MyStyleSheet.Color.SECONDARY}
                 />
-                <SecretIcon />
+                {isSecure ? <SecretIcon /> : <></>}
             </View>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-    input: {
-        borderBottomColor: MyStyleSheet.Color.GRAY,
-        borderBottomWidth: 1,
-        paddingVertical: 5,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-    },
     inputContainer: {
         gap: 10,
-    },
-    label: {
-        color: MyStyleSheet.Color.SECONDARY,
-        fontWeight: '600',
-    },
-    textInput: {
-        color: MyStyleSheet.Color.SECONDARY,
-        flex: 1,
     }
 })
