@@ -22,7 +22,7 @@ import ProductListScreen from '~/screens/App/ProductList';
 import DashboardScreen from '~/screens/App/Dashboard';
 import AccountScreen from '~/screens/App/Account';
 import ProductDetailScreen from '~/screens/App/ProductList/Product';
-import MyStyleSheet from '~/components/Styles';
+import MyStyleSheet from '~/components/MyStyleSheet';
 
 
 const MyTheme: Theme = {

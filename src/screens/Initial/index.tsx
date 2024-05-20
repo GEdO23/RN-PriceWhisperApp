@@ -7,7 +7,7 @@ import { AppNavigationProps } from '~/navigation/props';
 /* COMPONENTS */
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import Button from '~/components/Button';
-import MyStyleSheet from '~/components/Styles';
+import MyStyleSheet from '~/components/MyStyleSheet';
 
 
 /**
@@ -23,7 +23,7 @@ export default function InitialScreen() {
     return (
         <SafeAreaView style={styles.container}>
             <View style={MyStyleSheet.Container.CENTER}>
-                <Text style={MyStyleSheet.Text.title}>PriceWhisper</Text>
+                <Text style={MyStyleSheet.Text.TITLE}>PriceWhisper</Text>
             </View>
 
             <View style={styles.buttonList}>

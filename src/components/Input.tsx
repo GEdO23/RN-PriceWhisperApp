@@ -2,7 +2,7 @@
 import { StyleSheet, Text, TextInput, TextInputProps, TouchableOpacity, View } from 'react-native'
 import { useState } from 'react'
 import { Ionicons } from '@expo/vector-icons';
-import MyStyleSheet from './Styles';
+import MyStyleSheet from './MyStyleSheet';
 
 export type TextBelow = {
     text: string;

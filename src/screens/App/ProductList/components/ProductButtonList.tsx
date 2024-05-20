@@ -1,7 +1,7 @@
 import React from 'react'
 import { Pressable, StyleSheet, View } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
-import MyStyleSheet from '~/components/Styles';
+import MyStyleSheet from '~/components/MyStyleSheet';
 
 
 export type ProductButtonsProps = {

@@ -1,6 +1,6 @@
 import React from 'react'
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native'
-import MyStyleSheet from './Styles'
+import MyStyleSheet from './MyStyleSheet'
 
 export default function Loading() {
     return (

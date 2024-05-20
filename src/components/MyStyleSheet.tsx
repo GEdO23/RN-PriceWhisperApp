@@ -45,15 +45,21 @@ module MyStyleSheet {
     };
 
     export module Text {
-        export const base: TextStyle = defaultTextStyle;
+        export const BASE: TextStyle = defaultTextStyle;
 
-        export const link: TextStyle = {
+        export const LINK: TextStyle = {
             ...defaultTextStyle,
             color: Color.GRAY,
             fontWeight: '600',
         }
 
-        export const title: TextStyle = {
+        export const SUBTITLE: TextStyle = {
+            ...defaultTextStyle,
+            fontSize: 20,
+            fontWeight: '700',
+        }
+
+        export const TITLE: TextStyle = {
             ...defaultTextStyle,
             fontSize: 28,
             fontWeight: '700',

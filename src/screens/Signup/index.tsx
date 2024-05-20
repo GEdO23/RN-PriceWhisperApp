@@ -10,7 +10,7 @@ import { Form, InputList } from '~/components/Container';
 import Input, { SecureInput } from '~/components/Input';
 import Link from '~/components/Link';
 import Button from '~/components/Button';
-import MyStyleSheet from '~/components/Styles';
+import MyStyleSheet from '~/components/MyStyleSheet';
 
 /* CONTEXT */
 import { UserContext } from '~/provider/UserProvider';

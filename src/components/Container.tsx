@@ -1,5 +1,5 @@
 import { View, StyleSheet } from 'react-native'
-import MyStyleSheet from './Styles'
+import MyStyleSheet from './MyStyleSheet'
 
 
 /**
@@ -34,8 +34,10 @@ export function Form({ children }: any) {
  */
 export function ModalContainer({ children }: any) {
     return (
-        <View style={styles.modal}>
-            {children}
+        <View style={styles.modalContainer}>
+            <View style={styles.modal}>
+                {children}
+            </View>
         </View>
     )
 }
@@ -50,6 +52,10 @@ const styles = StyleSheet.create({
     inputList: {
         gap: 20,
         marginBottom: 50,
+    },
+    modalContainer: {
+        ...MyStyleSheet.Container.CENTER,
+        backgroundColor: 'rgba(0, 0, 0, .5)',
     },
     modal: {
         backgroundColor: MyStyleSheet.Color.PRIMARY,

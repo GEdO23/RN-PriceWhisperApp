@@ -3,7 +3,7 @@ import React from "react";
 /* COMPONENTS */
 import { Ionicons } from "@expo/vector-icons";
 import { ImageBackground, StyleSheet, Text, View } from "react-native";
-import MyStyleSheet from "~/components/Styles";
+import MyStyleSheet from "~/components/MyStyleSheet";
 
 
 /** 

@@ -3,7 +3,7 @@ import React, { forwardRef } from 'react';
 /* COMPONENTS */
 import { StyleSheet, Text, TouchableOpacity, TouchableOpacityProps } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import MyStyleSheet, { ColorType } from './Styles';
+import MyStyleSheet, { ColorType } from './MyStyleSheet';
 
 
 type ButtonStyle = {
