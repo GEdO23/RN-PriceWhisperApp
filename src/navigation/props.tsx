@@ -1,6 +1,5 @@
 import { StackNavigationProp } from "@react-navigation/stack";
 import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
-import { ProductProps } from "~/screens/App/ProductList/Product/components/Product";
 
 
 /**
