@@ -1,18 +1,19 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import Button from '~/components/Button'
 import { ModalContainer } from '~/components/Container'
 import Input from '~/components/Input'
 import MyStyleSheet from '~/components/MyStyleSheet'
+import { UserContext } from '~/provider/UserProvider'
 
 type ForgotPasswordProps = {
-    email: string;
-    setEmail: (value: string) => void;
     setShowModal: (value: boolean) => void;
 }
 
-export default function ForgotPasswordModal({ email, setEmail, setShowModal }: ForgotPasswordProps) {
+export default function ForgotPasswordModal({ setShowModal }: ForgotPasswordProps) {
+    const { email, setEmail, handleForgotPassword } = useContext(UserContext)
+
     return (
         <ModalContainer>
             <View style={styles.textContainer}>
@@ -26,7 +27,7 @@ export default function ForgotPasswordModal({ email, setEmail, setShowModal }: F
 
             <View style={styles.buttonListContainer}>
                 <Button title='Cancelar' onPress={() => setShowModal(false)} buttonStyle={{ border: MyStyleSheet.Color.GRAY, textColor: MyStyleSheet.Color.GRAY, style: { flex: 1, } }} />
-                <Button title='Enviar' buttonStyle={{ border: MyStyleSheet.Color.BRAND, textColor: MyStyleSheet.Color.BRAND, style: { flex: 1, } }} />
+                <Button title='Enviar' onPress={() => handleForgotPassword(setShowModal)} buttonStyle={{ border: MyStyleSheet.Color.BRAND, textColor: MyStyleSheet.Color.BRAND, style: { flex: 1, } }} />
             </View>
         </ModalContainer>
     )

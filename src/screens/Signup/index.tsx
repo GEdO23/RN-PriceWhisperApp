@@ -23,13 +23,7 @@ import { UserContext } from '~/provider/UserProvider';
 export default function SignupScreen() {
     const navigation = useNavigation<AppNavigationProps>();
 
-    const {
-        name, setName,
-        email, setEmail,
-        password, setPassword,
-        crn, setCrn,
-        handleSignup
-    } = useContext(UserContext);
+    const { name, setName, email, setEmail, password, setPassword, crn, setCrn, handleSignup } = useContext(UserContext);
 
     const [confirmPassword, setConfirmPassword] = useState('');
 

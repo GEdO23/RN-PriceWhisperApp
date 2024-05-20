@@ -44,7 +44,7 @@ export default function LoginScreen() {
                 <Button title='Entrar' onPress={() => handleLogin(email, password)} buttonStyle={{ background: MyStyleSheet.Color.BRAND, textColor: MyStyleSheet.Color.PRIMARY }} />
             </Form>
             <Modal visible={showForgotPasswordModal} transparent>
-                <ForgotPasswordModal email={email} setEmail={setEmail} setShowModal={setShowForgotPasswordModal}/>
+                <ForgotPasswordModal setShowModal={setShowForgotPasswordModal}/>
             </Modal>
         </SafeAreaView>
     )
