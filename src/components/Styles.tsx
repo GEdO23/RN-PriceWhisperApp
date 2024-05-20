@@ -9,13 +9,17 @@ const defaultTextStyle: TextStyle = {
 
 const defaultContainerStyle: ViewStyle = {
     flex: 1,
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingBottom: 20,
+    paddingTop: 20,
 }
 
 
 module MyStyleSheet {
     export module Container {
-        export const base: ViewStyle = defaultContainerStyle;
-        export const center: ViewStyle = {
+        export const BASE: ViewStyle = defaultContainerStyle;
+        export const CENTER: ViewStyle = {
             ...defaultContainerStyle,
             alignItems: 'center',
             justifyContent: 'center',
@@ -41,6 +45,12 @@ module MyStyleSheet {
 
     export module Text {
         export const base: TextStyle = defaultTextStyle;
+
+        export const link: TextStyle = {
+            ...defaultTextStyle,
+            color: Color.GRAY,
+            fontWeight: '600',
+        }
 
         export const title: TextStyle = {
             ...defaultTextStyle,

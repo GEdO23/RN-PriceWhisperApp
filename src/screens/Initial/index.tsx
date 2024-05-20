@@ -22,8 +22,8 @@ export default function InitialScreen() {
 
     return (
         <SafeAreaView style={styles.container}>
-            <View style={styles.titleContainer}>
-                <Text style={styles.title}>PriceWhisper</Text>
+            <View style={MyStyleSheet.Container.CENTER}>
+                <Text style={MyStyleSheet.Text.title}>PriceWhisper</Text>
             </View>
 
             <View style={styles.buttonList}>
@@ -36,20 +36,10 @@ export default function InitialScreen() {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        ...MyStyleSheet.Container.BASE,
         gap: 20,
-        paddingHorizontal: 20,
-        paddingVertical: 100,
+        paddingBottom: 50,
         justifyContent: 'space-between',
-        backgroundColor: MyStyleSheet.Color.PRIMARY
-    },
-    title: {
-        ...MyStyleSheet.Text.title,
-        textAlign: 'center'
-    },
-    titleContainer: {
-        flex: 1,
-        justifyContent: 'center'
     },
     buttonList: {
         gap: 20

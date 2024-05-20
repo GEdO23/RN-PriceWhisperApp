@@ -1,11 +1,12 @@
 import { View, StyleSheet } from 'react-native'
+import MyStyleSheet from './Styles'
 
 
 /**
  * Container for `Input` or `SecureInput` inside a form
  * @returns A `container` JSX element that contains `Input` JSX elements
  */
-export function InputList({children}: {children: any}) {
+export function InputList({ children }: { children: any }) {
     return (
         <View style={styles.inputList}>
             {children}
@@ -18,13 +19,23 @@ export function InputList({children}: {children: any}) {
  * Generic form component
  * @returns A form JSX element
  */
-export default function Form({ children }: any) {
+export function Form({ children }: any) {
     return (
         <View style={styles.form}>
             {children}
         </View>
     )
 }
+
+
+export function ModalContainer({ children }: any) {
+    return (
+        <View style={styles.modal}>
+            {children}
+        </View>
+    )
+}
+
 
 const styles = StyleSheet.create({
     form: {
@@ -35,5 +46,13 @@ const styles = StyleSheet.create({
     inputList: {
         gap: 20,
         marginBottom: 50,
-    }
+    },
+    modal: {
+        backgroundColor: MyStyleSheet.Color.PRIMARY,
+        borderRadius: 10,
+        paddingHorizontal: 20,
+        paddingVertical: 50,
+        marginHorizontal: 10,
+        gap: 25,
+    },
 })

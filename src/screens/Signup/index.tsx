@@ -6,7 +6,7 @@ import { AppNavigationProps } from '~/navigation/props';
 
 /* COMPONENTS */
 import { SafeAreaView, StyleSheet } from 'react-native'
-import Form, { InputList } from '~/components/Form';
+import { Form, InputList } from '~/components/Container';
 import Input, { SecureInput } from '~/components/Input';
 import Link from '~/components/Link';
 import Button from '~/components/Button';
@@ -54,10 +54,7 @@ export default function SignupScreen() {
 
 const styles = StyleSheet.create({
     container: {
-        alignItems: 'center',
-        backgroundColor: MyStyleSheet.Color.PRIMARY,
-        flex: 1,
-        paddingBottom: 60,
-        paddingHorizontal: 20,
+        ...MyStyleSheet.Container.BASE,
+        paddingTop: 0,
     }
 })

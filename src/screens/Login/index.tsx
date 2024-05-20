@@ -6,7 +6,7 @@ import { AppNavigationProps } from '~/navigation/props';
 
 /* COMPONENTS */
 import { Alert, Modal, SafeAreaView, StyleSheet, Text, TouchableOpacity } from 'react-native'
-import Form, { InputList } from '~/components/Form';
+import { Form, InputList } from '~/components/Container';
 import Input, { SecureInput } from '~/components/Input';
 import Link from '~/components/Link';
 import Button from '~/components/Button';
@@ -29,13 +29,13 @@ export default function LoginScreen() {
     const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
 
     return (
-        <SafeAreaView style={styles.container} >
+        <SafeAreaView style={MyStyleSheet.Container.BASE} >
             <Form>
                 <InputList>
                     <Input label='Email' placeholder='example@domain.com' value={email} setValue={setEmail} />
                     <SecureInput label='Senha' placeholder='Insira uma senha forte' value={password} setValue={setPassword} />
                     <TouchableOpacity onPress={() => handleForgotPassword(setShowForgotPasswordModal)}>
-                        <Text style={styles.linkText}>Esqueceu sua senha?</Text>
+                        <Text style={MyStyleSheet.Text.link}>Esqueceu sua senha?</Text>
                     </TouchableOpacity>
 
                     <Link backText='Não possui uma conta ainda?' linkText='Cadastre-se' link={() => navigation.navigate('SignupScreen')} />
@@ -50,16 +50,4 @@ export default function LoginScreen() {
     )
 }
 
-const styles = StyleSheet.create({
-    container: {
-        alignItems: 'center',
-        backgroundColor: MyStyleSheet.Color.PRIMARY,
-        flex: 1,
-        paddingBottom: 60,
-        paddingHorizontal: 20,
-    },
-    linkText: {
-        color: '#9D9D9D',
-        fontWeight: '600'
-    }
-})
+const styles = StyleSheet.create({})

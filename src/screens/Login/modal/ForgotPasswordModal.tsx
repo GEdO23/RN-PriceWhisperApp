@@ -2,6 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import Button from '~/components/Button'
+import { ModalContainer } from '~/components/Container'
 import Input from '~/components/Input'
 import MyStyleSheet from '~/components/Styles'
 
@@ -14,7 +15,7 @@ type ForgotPasswordProps = {
 export default function ForgotPasswordModal({ email, setEmail, setShowModal }: ForgotPasswordProps) {
     return (
         <View style={styles.container}>
-            <View style={styles.modalContainer}>
+            <ModalContainer>
                 <View style={styles.textContainer}>
                     <Text style={styles.title}>Esqueceu sua senha?</Text>
                     <Text style={styles.desc}>Informe seu email para que possa alterar sua senha!</Text>
@@ -28,7 +29,7 @@ export default function ForgotPasswordModal({ email, setEmail, setShowModal }: F
                     <Button title='Cancelar' onPress={() => setShowModal(false)} buttonStyle={{ border: MyStyleSheet.Color.GRAY, textColor: MyStyleSheet.Color.GRAY, style: { flex: 1, } }} />
                     <Button title='Enviar' buttonStyle={{ border: MyStyleSheet.Color.BRAND, textColor: MyStyleSheet.Color.BRAND, style: { flex: 1, } }} />
                 </View>
-            </View>
+            </ModalContainer>
         </View>
     )
 }
@@ -42,14 +43,6 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         paddingHorizontal: 10,
-    },
-    modalContainer: {
-        backgroundColor: MyStyleSheet.Color.PRIMARY,
-        borderRadius: 10,
-        paddingHorizontal: 20,
-        paddingVertical: 50,
-        marginHorizontal: 10,
-        gap: 25,
     },
     buttonListContainer: {
         flexDirection: 'row',
