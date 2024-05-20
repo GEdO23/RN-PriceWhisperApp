@@ -5,6 +5,7 @@ import { FlatList, SafeAreaView, StyleSheet } from "react-native";
 import Loading from "~/components/Loading";
 import ProductItem from "./components/ProductItem";
 import { ProductProps } from "./Product/components/Product";
+import ProductButtonList from "./components/ProductButtonList";
 
 /* FIREBASE */
 import { collection, getDocs } from "firebase/firestore";
@@ -13,6 +14,7 @@ import { firestore } from "utils/firebase";
 
 export default function ProductListScreen() {
     const [products, setProducts] = useState<ProductProps[] | null>(null);
+    const [activeButtonId, setActiveButtonId] = useState('1');
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -42,6 +44,7 @@ export default function ProductListScreen() {
                     <ProductItem id={item.id} name={item.name} desc={item.desc} price={item.price} urlImage="https://static.itdg.com.br/images/360-240/8d5ffb7df41dfd990ce1a20b1c45c36f/shutterstock-184374716-1-.jpg" />
                 )}
             />
+            <ProductButtonList activeId={activeButtonId} setActiveId={setActiveButtonId} />
         </SafeAreaView>
     )
 }
